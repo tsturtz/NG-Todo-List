@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="todoApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Angular To-Do App</title>
+
+    <!-- Angular Material style sheet -->
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+
+    <!-- Angular Material icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- To-Do Styles -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Angular.js Libraries -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
+    <!-- Angular Material Library -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+    <!-- To-Do App -->
+    <script src="app.js"></script>
+
+</head>
+<body ng-cloak layout="column">
+<md-toolbar layout="row" class="md-toolbar-tools">
+
+    <h1>To Do App</h1>
+
+</md-toolbar md-is-locked-open="true" class="md-whiteframe-4dp">
+
+<div flex layout="row">
+
+    <md-sidebar layout="column" layout-align="center center" flex="20">
+        <md-input-container class="md-icon-float md-block">
+            <label>Username</label>
+            <input type="text" ng-model="user.name"></input>
+        </md-input-container class="md-icon-float md-block">
+        <md-input-container class="md-icon-float md-block">
+            <label>Password</label>
+            <input type="text" ng-model="user.password"></input>
+        </md-input-container>
+        <md-input-container class="md-icon-float md-block">
+            <md-button md-no-ink class="md-raised md-primary">
+                <md-icon md-font-set="material-icons md-36">account_circle</md-icon> Log in
+            </md-button>
+        </md-input-container>
+    </md-sidebar>
+
+    <md-content layout="row" layout-align="center center" flex="80">
+        <div flex="80" class="content-area" layout="column" layout-align="center start">
+            <md-card class="task" layout="column" layout-align="center start"></md-card>
+            <md-card class="task" layout="column" layout-align="center start"></md-card>
+            <md-card class="task" layout="column" layout-align="center start"></md-card>
+        </div>
+    </md-content>
+
+</div>
+
+</body>
+</html>
