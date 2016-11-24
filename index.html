@@ -28,36 +28,58 @@
 
 </head>
 <body ng-cloak layout="column">
-<md-toolbar layout="row" class="md-toolbar-tools">
 
+<md-toolbar layout="row" class="md-toolbar-tools md-whiteframe-4dp" md-is-locked-open="true">
     <h1>To Do App</h1>
-
-</md-toolbar md-is-locked-open="true" class="md-whiteframe-4dp">
+</md-toolbar>
 
 <div flex layout="row">
 
-    <md-sidebar layout="column" layout-align="center center" flex="20">
+    <md-sidebar layout="column" layout-align="center center" flex="20" md-is-locked-open="true">
+        <!-- ng-controller="loginCtrl as lc" -->
         <md-input-container class="md-icon-float md-block">
-            <label>Username</label>
-            <input type="text" ng-model="user.name"></input>
-        </md-input-container class="md-icon-float md-block">
-        <md-input-container class="md-icon-float md-block">
-            <label>Password</label>
-            <input type="text" ng-model="user.password"></input>
+            <label for="username">Username</label>
+            <input type="text" ng-model="lc.user.name" id="username">
         </md-input-container>
         <md-input-container class="md-icon-float md-block">
-            <md-button md-no-ink class="md-raised md-primary">
-                <md-icon md-font-set="material-icons md-36">account_circle</md-icon> Log in
+            <label for="password">Password</label>
+            <input type="text" ng-model="lc.user.password" id="password">
+        </md-input-container>
+        <md-input-container class="md-icon-float md-block">
+            <md-button md-no-ink class="md-raised md-accent">
+                <md-icon md-font-set="material-icons md-24">account_circle</md-icon>
+                Log in
             </md-button>
         </md-input-container>
     </md-sidebar>
 
-    <md-content layout="row" layout-align="center center" flex="80">
-        <div flex="80" class="content-area" layout="column" layout-align="center start">
-            <md-card class="task" layout="column" layout-align="center start"></md-card>
-            <md-card class="task" layout="column" layout-align="center start"></md-card>
-            <md-card class="task" layout="column" layout-align="center start"></md-card>
+    <md-content layout="row" layout-align="center start" flex="80" ng-controller="taskCtrl as tc">
+
+        <div flex="100" class="content-area" layout="column" layout-align="center center" layout-padding>
+            <md-card class="card-width" layout="row" layout-padding>
+                <md-input-container layout="row" flex md-no-float class="md-block">
+                    <input type="text" ng-model="tc.task" placeholder="Add a task...">
+                </md-input-container>
+                <md-input-container flexmd-no-float class="md-block">
+                    <md-datepicker ng-model="tc.date" name="dateField"></md-datepicker>
+                </md-input-container>
+                <md-button md-no-ink class="md-button-raised md-primary" ng-click="tc.addTask()">
+                    <md-icon md-font-set="material-icons md-24">add</md-icon> Add
+                </md-button>
+            </md-card>
+            <md-card ng-repeat="item in tc.tasks track by $index" class="card-width" layout="row" layout-padding>
+                <md-input-container layout="row" flex md-no-float class="md-block">
+                    <input type="text"> {{ tc.item.task }}
+                </md-input-container>
+                <md-input-container flexmd-no-float class="md-block">
+                    <md-datepicker ng-model="tc.date" name="dateField"></md-datepicker>
+                </md-input-container>
+                <md-button md-no-ink class="md-button-raised md-primary">
+                    <md-icon md-font-set="material-icons md-24">delete</md-icon> Delete
+                </md-button>
+            </md-card>
         </div>
+
     </md-content>
 
 </div>
