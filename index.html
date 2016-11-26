@@ -29,66 +29,90 @@
 </head>
 <body ng-cloak layout="column">
 
-<md-toolbar layout="row" class="md-toolbar-tools md-whiteframe-4dp" md-is-locked-open="true">
-    <h1>To Do App</h1>
-</md-toolbar>
+<div id="sideNavContainer" ng-controller="todoCtrl as tc" layout-fill layout="column">
 
-<div flex layout="row">
+    <md-toolbar layout="row" class="md-whiteframe-4dp md-accent md-medium-tall" md-theme="add">
 
-    <md-sidebar layout="column" layout-align="center center" flex="20" md-is-locked-open="true"
-                ng-controller="loginCtrl as lc">
-        <md-input-container class="md-icon-float md-block">
+        <md-button ng-click="tc.openLeftMenu()" flex="10">
+            <md-icon md-font-set="material-icons">account_circle</md-icon>
+            Login
+        </md-button>
+
+        <div layout="row" layout-padding flex>
+            <md-input-container flex>
+                <label for="add-todo"> Add a task...</label>
+                <input id="add-todo" type="text" ng-model="tc.todo.task">
+            </md-input-container>
+        </div>
+
+        <md-button ng-click="tc.addTask()">
+            <md-icon md-font-set="material-icons">add</md-icon>
+        </md-button>
+
+    </md-toolbar>
+
+    <md-sidenav md-component-id="left" class="md-sidenav-left" layout="column" layout-align="center center">
+
+        <md-input-container>
             <label for="username">Username</label>
-            <input type="text" ng-model="lc.user.name" id="username">
+            <input type="text" ng-model="tc.user.name" id="username">
         </md-input-container>
-        <md-input-container class="md-icon-float md-block">
+        <md-input-container>
             <label for="password">Password</label>
-            <input type="text" ng-model="lc.user.password" id="password">
+            <input type="text" ng-model="tc.user.password" id="password">
         </md-input-container>
-        <md-input-container class="md-icon-float md-block">
+        <md-input-container>
             <md-button md-no-ink class="md-raised md-primary">
-                <md-icon md-font-set="material-icons md-24">account_circle</md-icon>
+                <md-icon md-font-set="material-icons">account_circle</md-icon>
                 Log in
             </md-button>
         </md-input-container>
-    </md-sidebar>
 
-    <md-content layout="row" layout-align="center start" flex="80" ng-controller="taskCtrl as tc">
+    </md-sidenav>
 
-        <div flex="100" class="content-area" layout="column" layout-align="center center" layout-padding>
-            <md-card class="card-width" layout="row" layout-padding>
-                <md-input-container layout="row" flex>
-                    <input type="text" ng-model="tc.task" placeholder="Add a task...">
-                </md-input-container>
-                <md-input-container layout="row">
-                    <md-datepicker ng-model="tc.date" name="dateField"></md-datepicker>
-                </md-input-container>
-                <md-button class="md-fab md-primary" ng-click="tc.addTask()">
-                    <md-icon md-font-set="material-icons md-24">add</md-icon>
-                </md-button>
-            </md-card>
+    <md-content layout="row" layout-align="center start" flex>
 
-            <!-- to-dos -->
+        <div flex="100" layout="column" layout-padding>
 
-            <md-card ng-repeat="item in tc.todos | orderBy: 'todos.completed' : true" class="card-width" layout="row" layout-padding>
-                <md-input-container layout="row">
-                    <md-checkbox md-no-ink class="md-primary" ng-model="todos.completed"></md-checkbox>
-                </md-input-container>
-                <md-input-container layout="row" flex>
-                    <label ng-bind="item.task"></label>
-                </md-input-container>
-                <md-input-container layout="row">
-                    <p ng-bind="item.date"></p>
-                </md-input-container>
-                <md-button class="md-fab md-accent" ng-click="tc.deleteTask()">
-                    <md-icon md-font-set="material-icons md-24">delete</md-icon>
-                </md-button>
-            </md-card>
+            <!-- LIST -->
+
+            <md-list layout="column">
+                <md-list-item ng-repeat="todo in tc.todos">
+                    <div flex="10"></div>
+                    <div layout="row" layout-align="center end" flex>
+                        <md-checkbox ng-model="todo.completed" class="md-primary"></md-checkbox>
+                        <p flex>{{todo.task}}</p>
+                        <!--<md-input-container class="datepick">
+                        <md-datepicker placeholder="Complete by" ng-model="todo.date" md-open-on-focus></md-datepicker>
+                        </md-input-container>-->
+                        <md-button class="md-fab md-primary md-mini" ng-click="tc.editTask()">
+                            <md-icon md-font-set="material-icons">date_range</md-icon>
+                            <md-tooltip md-direction="top">
+                                Edit Date
+                            </md-tooltip>
+                        </md-button>
+                        <md-button class="md-fab md-accent md-mini" ng-click="tc.editTask()">
+                            <md-icon md-font-set="material-icons">edit</md-icon>
+                            <md-tooltip md-direction="top">
+                                Edit To-Do
+                            </md-tooltip>
+                        </md-button>
+                        <md-button class="md-fab md-warn md-mini" ng-click="tc.deleteTask($index)">
+                            <md-icon md-font-set="material-icons">delete</md-icon>
+                            <md-tooltip md-direction="top">
+                                Delete To-Do
+                            </md-tooltip>
+                        </md-button>
+                    </div>
+                    <md-divider ng-if="!$last"></md-divider>
+                    <div flex="10"></div>
+                </md-list-item>
+            </md-list>
+
         </div>
 
     </md-content>
 
 </div>
-
 </body>
 </html>
