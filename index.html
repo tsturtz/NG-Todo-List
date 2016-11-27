@@ -56,6 +56,7 @@
 
     <md-sidenav md-component-id="left" class="md-sidenav-left" layout="column" layout-align="center center">
 
+        <div id="nav-login" layout="column" layout-align="center center" flex="80">
         <md-input-container>
             <label for="username">Username</label>
             <input type="text" ng-model="tc.user.name" id="username">
@@ -65,11 +66,18 @@
             <input type="text" ng-model="tc.user.password" id="password">
         </md-input-container>
         <md-input-container>
-            <md-button md-no-ink class="md-raised md-primary">
+            <md-button class="md-raised md-primary">
                 <md-icon md-font-set="material-icons">account_circle</md-icon>
                 Log in
             </md-button>
         </md-input-container>
+        </div>
+
+        <div id="nav-close">
+            <md-button ng-click="tc.openLeftMenu()">
+                Close
+            </md-button>
+        </div>
 
     </md-sidenav>
 
@@ -81,7 +89,7 @@
 
             <md-list layout="column">
                 <md-list-item ng-class="{'todo-checked': todo.checked}" ng-repeat="todo in tc.todos | orderBy: 'todo-checked' : true" ng-init="todo.checked = false">
-                    <div flex="10"></div>
+                    <div flex="20"></div>
                     <div class="todo-row" layout="row" layout-align="center end" flex>
                         <md-checkbox ng-model="todo.checked" class="md-primary"></md-checkbox>
                         <p flex>{{todo.task}}</p>
@@ -108,7 +116,7 @@
                         </md-button>
                     </div>
                     <md-divider ng-if="!$last"></md-divider>
-                    <div flex="10"></div>
+                    <div flex="20"></div>
                 </md-list-item>
             </md-list>
 
