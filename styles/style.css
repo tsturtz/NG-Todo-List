@@ -12,3 +12,13 @@ md-tooltip .md-content {
 .datepick {
     margin: 0 !important;
 }
+
+.todo-checked {
+    background-color: rgba(0,0,0,.1);
+}
+
+.todo-checked p {
+    /*text-decoration: line-through;*/
+    font-style: italic;
+    color: rgb(92,107,192);
+}
