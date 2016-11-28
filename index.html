@@ -34,43 +34,49 @@
 
 <div id="sideNavContainer" ng-controller="todoCtrl as tc" layout-fill layout="column">
 
-    <md-toolbar layout="row" class="md-whiteframe-4dp md-accent md-medium-tall" md-theme="add">
+    <md-toolbar layout="row" md-whiteframe="8" class="md-accent" md-theme="add" layout-padding>
 
-        <md-button ng-click="tc.openLeftMenu()" flex="10">
-            <md-icon md-font-set="material-icons">account_circle</md-icon>
-            Login
-        </md-button>
+        <div layout="row" flex="20">
+            <md-button ng-click="tc.openLeftMenu()" flex="10">
+                <md-icon md-font-set="material-icons">account_circle</md-icon>
+                Login
+            </md-button>
+        </div>
 
-        <div layout="row" layout-padding flex>
+        <div layout="row" flex>
             <md-input-container flex>
                 <label for="add-todo"> Add a task...</label>
-                <input id="add-todo" type="text" ng-model="tc.todo.task">
+                <input id="add-todo" type="text" ng-model="tc.todo.task" ng-keyup="$event.keyCode == 13 && (tc.todo.task && tc.addTodo())">
             </md-input-container>
         </div>
 
-        <md-button ng-click="tc.addTodo()">
-            <md-icon md-font-set="material-icons">add</md-icon>
-        </md-button>
+        <div layout="row">
+            <md-button class="md-fab" ng-click="tc.addTodo()" ng-disabled="!tc.todo.task">
+                <md-icon md-font-set="material-icons">add</md-icon>
+            </md-button>
+        </div>
+
+        <span flex="20"></span>
 
     </md-toolbar>
 
     <md-sidenav md-component-id="left" class="md-sidenav-left" layout="column" layout-align="center center">
 
         <div id="nav-login" layout="column" layout-align="center center" flex="80">
-        <md-input-container>
-            <label for="username">Username</label>
-            <input type="text" ng-model="tc.user.name" id="username">
-        </md-input-container>
-        <md-input-container>
-            <label for="password">Password</label>
-            <input type="text" ng-model="tc.user.password" id="password">
-        </md-input-container>
-        <md-input-container>
-            <md-button class="md-raised md-primary">
-                <md-icon md-font-set="material-icons">account_circle</md-icon>
-                Log in
-            </md-button>
-        </md-input-container>
+            <md-input-container>
+                <label for="username">Username</label>
+                <input type="text" ng-model="tc.user.name" id="username">
+            </md-input-container>
+            <md-input-container>
+                <label for="password">Password</label>
+                <input type="text" ng-model="tc.user.password" id="password">
+            </md-input-container>
+            <md-input-container>
+                <md-button class="md-raised md-primary">
+                    <md-icon md-font-set="material-icons">account_circle</md-icon>
+                    Log in
+                </md-button>
+            </md-input-container>
         </div>
 
         <div id="nav-close">
@@ -88,7 +94,9 @@
             <!-- LIST -->
 
             <md-list layout="column">
-                <md-list-item ng-class="{'todo-checked': todo.checked}" ng-repeat="todo in tc.todos | orderBy: 'todo-checked' : true" ng-init="todo.checked = false">
+                <md-list-item ng-class="{'todo-checked': todo.checked}"
+                              ng-repeat="todo in tc.todos | orderBy: 'todo-checked' : true"
+                              ng-init="todo.checked = false">
                     <div flex="20"></div>
                     <div class="todo-row" layout="row" layout-align="center end" flex>
                         <md-checkbox ng-model="todo.checked" class="md-primary"></md-checkbox>
@@ -102,13 +110,15 @@
                                 Add/Edit Date
                             </md-tooltip>
                         </md-button>
-                        <md-button class="md-fab md-accent md-mini" ng-class="{'md-primary': todo.checked}" ng-click="tc.editTodo()">
+                        <md-button class="md-fab md-accent md-mini" ng-class="{'md-primary': todo.checked}"
+                                   ng-click="tc.editTodo()">
                             <md-icon md-font-set="material-icons">edit</md-icon>
                             <md-tooltip md-direction="top">
                                 Edit To-Do
                             </md-tooltip>
                         </md-button>
-                        <md-button class="md-fab md-warn md-mini" ng-class="{'md-primary': todo.checked}" ng-click="tc.deleteTodo(todo)">
+                        <md-button class="md-fab md-warn md-mini" ng-class="{'md-primary': todo.checked}"
+                                   ng-click="tc.deleteTodo(todo)">
                             <md-icon md-font-set="material-icons">delete</md-icon>
                             <md-tooltip md-direction="top">
                                 Delete To-Do
