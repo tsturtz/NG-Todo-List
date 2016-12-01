@@ -1,5 +1,4 @@
 function listCtrl (todoService) {
-    // Create a reference to this service
     var self = this;
 
     self.todos = [];
@@ -39,7 +38,8 @@ function listCtrl (todoService) {
 
 angular.module('todoApp')
 
-.component('list', {
-    templateUrl: './app/components/list.html',
-    controllerAs: lc
-});
+    .component('list', {
+        templateUrl: './app/components/list.html',
+        controller: listCtrl,
+        controllerAs: 'lc'
+    });

@@ -32,6 +32,7 @@
     <script src="app/services/todoService.js"></script>
     <!--Components-->
     <script src="app/components/list.js"></script>
+    <script src="app/components/test.js"></script>
 
 </head>
 <body ng-cloak layout="column">
@@ -96,6 +97,40 @@
         <div flex="100" layout="column" layout-padding>
 
             <!-- LIST -->
+
+            <md-list layout="column">
+                <md-list-item ng-class="{'todo-checked': todo.checked}"
+                              ng-repeat="todo in tc.todos | orderBy: 'todo-checked' : true"
+                              ng-init="todo.checked = false">
+                    <div flex="20"></div>
+                    <div class="todo-row" layout="row" layout-align="center end" flex>
+                        <md-checkbox ng-model="todo.checked" class="md-primary"></md-checkbox>
+                        <p flex>{{todo.task}}</p>
+                        <md-button class="md-fab md-primary md-mini" ng-click="tc.setDateTodo()">
+                            <md-icon md-font-set="material-icons">date_range</md-icon>
+                            <md-tooltip md-direction="top">
+                                Add/Edit Date
+                            </md-tooltip>
+                        </md-button>
+                        <md-button class="md-fab md-accent md-mini" ng-class="{'md-primary': todo.checked}"
+                                   ng-click="tc.editTodo()">
+                            <md-icon md-font-set="material-icons">edit</md-icon>
+                            <md-tooltip md-direction="top">
+                                Edit To-Do
+                            </md-tooltip>
+                        </md-button>
+                        <md-button class="md-fab md-warn md-mini" ng-class="{'md-primary': todo.checked}"
+                                   ng-click="tc.deleteTodo(todo)">
+                            <md-icon md-font-set="material-icons">delete</md-icon>
+                            <md-tooltip md-direction="top">
+                                Delete To-Do
+                            </md-tooltip>
+                        </md-button>
+                    </div>
+                    <md-divider ng-if="!$last"></md-divider>
+                    <div flex="20"></div>
+                </md-list-item>
+            </md-list>
 
             <list></list>
 

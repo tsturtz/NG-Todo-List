@@ -6,9 +6,6 @@
         <div class="todo-row" layout="row" layout-align="center end" flex>
             <md-checkbox ng-model="todo.checked" class="md-primary"></md-checkbox>
             <p flex>{{todo.task}}</p>
-            <!--<md-input-container class="datepick">
-            <md-datepicker placeholder="Complete by" ng-model="todo.date" md-open-on-focus></md-datepicker>
-            </md-input-container>-->
             <md-button class="md-fab md-primary md-mini" ng-click="lc.setDateTodo()">
                 <md-icon md-font-set="material-icons">date_range</md-icon>
                 <md-tooltip md-direction="top">
