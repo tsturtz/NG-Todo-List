@@ -5,29 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Angular To-Do App</title>
 
-    <!-- Angular Material Style Sheets -->
+    <!--Angular Material Style Sheets-->
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-    <!-- To-Do Style Sheet -->
+    <!--To-Do Style Sheet-->
     <link rel="stylesheet" href="styles/style.css">
 
-    <!-- Angular.js Libraries -->
+    <!--Angular.js Libraries-->
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
 
-    <!-- Angular Material Library -->
+    <!--Angular Material Library-->
     <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
 
-    <!-- Firebase Database -->
+    <!--Firebase Database-->
     <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
 
-    <!-- To-Do App -->
+    <!--To-Do App-->
     <script src="app/app.js"></script>
+    <!--Controller-->
     <script src="app/controllers/todoCtrl.js"></script>
+    <!--Services-->
     <script src="app/services/todoService.js"></script>
+    <!--Components-->
+    <script src="app/components/list.js"></script>
 
 </head>
 <body ng-cloak layout="column">
@@ -93,47 +97,14 @@
 
             <!-- LIST -->
 
-            <md-list layout="column">
-                <md-list-item ng-class="{'todo-checked': todo.checked}"
-                              ng-repeat="todo in tc.todos | orderBy: 'todo-checked' : true"
-                              ng-init="todo.checked = false">
-                    <div flex="20"></div>
-                    <div class="todo-row" layout="row" layout-align="center end" flex>
-                        <md-checkbox ng-model="todo.checked" class="md-primary"></md-checkbox>
-                        <p flex>{{todo.task}}</p>
-                        <!--<md-input-container class="datepick">
-                        <md-datepicker placeholder="Complete by" ng-model="todo.date" md-open-on-focus></md-datepicker>
-                        </md-input-container>-->
-                        <md-button class="md-fab md-primary md-mini" ng-click="tc.setDateTodo()">
-                            <md-icon md-font-set="material-icons">date_range</md-icon>
-                            <md-tooltip md-direction="top">
-                                Add/Edit Date
-                            </md-tooltip>
-                        </md-button>
-                        <md-button class="md-fab md-accent md-mini" ng-class="{'md-primary': todo.checked}"
-                                   ng-click="tc.editTodo()">
-                            <md-icon md-font-set="material-icons">edit</md-icon>
-                            <md-tooltip md-direction="top">
-                                Edit To-Do
-                            </md-tooltip>
-                        </md-button>
-                        <md-button class="md-fab md-warn md-mini" ng-class="{'md-primary': todo.checked}"
-                                   ng-click="tc.deleteTodo(todo)">
-                            <md-icon md-font-set="material-icons">delete</md-icon>
-                            <md-tooltip md-direction="top">
-                                Delete To-Do
-                            </md-tooltip>
-                        </md-button>
-                    </div>
-                    <md-divider ng-if="!$last"></md-divider>
-                    <div flex="20"></div>
-                </md-list-item>
-            </md-list>
+            <list></list>
 
         </div>
 
     </md-content>
-    <!--{{tc.todos}}-->
+
+
+
 </div>
 </body>
 </html>
