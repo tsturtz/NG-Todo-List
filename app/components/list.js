@@ -12,6 +12,22 @@ function listCtrl (todoService) {
             function (snapshot) {
                 console.warn('fail: ', snapshot);
             });
+
+    self.deleteTodo = function (todo) {
+        console.log('delete task clicked');
+        var idx = self.todos.indexOf(todo);
+        self.todos.splice(idx, 1);
+        console.log(self.todos.indexOf(todo));
+    };
+
+    self.editTodo = function () {
+        console.log('edit task clicked');
+    };
+
+    self.setDateTodo = function () {
+        console.log('date edit clicked');
+    };
+
 }
 
 angular.module('todoApp')

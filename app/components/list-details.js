@@ -1,27 +1,18 @@
-function detailsCtrl (todoService) {
+function detailsCtrl () {
     var self = this;
 
-    self.deleteTodo = function (todo) {
-        console.log('delete task clicked');
-        // Before deleting, get the index of the to-do associated with the delete button that has been clicked.
-        self.todos.splice(self.todos.indexOf(todo), 1);
-    };
-
-    self.editTodo = function () {
-        console.log('edit task clicked');
-    };
-
-    self.setDateTodo = function () {
-        console.log('date edit clicked');
+    self.deleteTodo = function () {
+        self.onDelete({todo: self.todo});
     };
 }
 
 angular.module('todoApp')
 
-    .component('listDetails', {
+    .component('tdListDetails', {
         templateUrl: './app/components/list-details.html',
         controller: detailsCtrl,
         bindings: {
-            listDetails: '<'
+            todo: '<',
+            onDelete: '&'
         }
     });

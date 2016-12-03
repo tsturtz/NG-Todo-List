@@ -2,7 +2,7 @@
     <div flex="20"></div>
     <div class="todo-row" layout="row" layout-align="center end" flex>
         <md-checkbox ng-model="todo.todo.checked" class="md-primary"></md-checkbox>
-        <p flex>{{todo.task}}</p>
+        <p flex>{{$ctrl.todo.task}}</p>
         <md-button class="md-fab md-primary md-mini" ng-click="$ctrl.todo.setDateTodo()">
             <md-icon md-font-set="material-icons">date_range</md-icon>
             <md-tooltip md-direction="top">
@@ -10,14 +10,14 @@
             </md-tooltip>
         </md-button>
         <md-button class="md-fab md-accent md-mini" ng-class="{'md-primary': todo.details.checked}"
-                   ng-click="$ctrl.todo.editTodo()">git
+                   ng-click="$ctrl.todo.editTodo()">
             <md-icon md-font-set="material-icons">edit</md-icon>
             <md-tooltip md-direction="top">
                 Edit To-Do
             </md-tooltip>
         </md-button>
         <md-button class="md-fab md-warn md-mini" ng-class="{'md-primary': todo.todo.checked}"
-                   ng-click="$ctrl.todo.deleteTodo(todo)">
+                   ng-click="$ctrl.deleteTodo(todo)">
             <md-icon md-font-set="material-icons">delete</md-icon>
             <md-tooltip md-direction="top">
                 Delete To-Do
