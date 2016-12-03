@@ -18,10 +18,10 @@ function detailsCtrl (todoService) {
 
 angular.module('todoApp')
 
-    .component('details', {
+    .component('listDetails', {
         templateUrl: './app/components/list-details.html',
         controller: detailsCtrl,
         bindings: {
-            details: '<'
+            listDetails: '<'
         }
     });

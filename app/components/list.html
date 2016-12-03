@@ -1,5 +1,5 @@
 <md-list layout="column">
-    <details ng-class="{'todo-checked': todo.checked}"
+    <list-details ng-class="{'todo-checked': todo.checked}"
                   ng-repeat="todo in $ctrl.todos | orderBy: 'todo-checked' : true"
-                  ng-init="todo.checked = false" details="todo"></details>
+                  ng-init="todo.checked = false" list-details="todo"></list-details>
 </md-list>

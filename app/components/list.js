@@ -16,7 +16,7 @@ function listCtrl (todoService) {
 
 angular.module('todoApp')
 
-    .component('list', {
+    .component('tdList', {
         templateUrl: './app/components/list.html',
         controller: listCtrl
     });
