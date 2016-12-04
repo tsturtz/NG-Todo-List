@@ -33,6 +33,7 @@
     <!--Components-->
     <script src="app/components/list.js"></script>
     <script src="app/components/list-details.js"></script>
+    <script src="app/components/add-form.js"></script>
 
 </head>
 <body ng-cloak layout="column">
@@ -48,18 +49,8 @@
             </md-button>
         </div>
 
-        <div layout="row" flex>
-            <md-input-container flex>
-                <label for="add-todo"> Add a task...</label>
-                <input id="add-todo" type="text" ng-model="tc.todo.task" ng-keyup="$event.keyCode == 13 && (tc.todo.task && tc.addTodo())">
-            </md-input-container>
-        </div>
-
-        <div layout="row">
-            <md-button class="md-fab" ng-click="tc.addTodo()" ng-disabled="!tc.todo.task">
-                <md-icon md-font-set="material-icons">add</md-icon>
-            </md-button>
-        </div>
+        <!--add-form component-->
+        <td-form flex></td-form>
 
         <span flex="20"></span>
 
@@ -96,6 +87,7 @@
 
         <div flex="100" layout="column" layout-padding>
 
+            <!--list component-->
             <td-list></td-list>
 
         </div>

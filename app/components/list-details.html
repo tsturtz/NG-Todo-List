@@ -1,23 +1,23 @@
 <md-list-item>
     <div flex="20"></div>
     <div class="todo-row" layout="row" layout-align="center end" flex>
-        <md-checkbox ng-model="todo.todo.checked" class="md-primary"></md-checkbox>
+        <md-checkbox ng-model="$ctrl.todo.checked" class="md-primary"></md-checkbox>
         <p flex>{{$ctrl.todo.task}}</p>
-        <md-button class="md-fab md-primary md-mini" ng-click="$ctrl.todo.setDateTodo()">
+        <md-button class="md-fab md-primary md-mini" ng-click="$ctrl.setDate()">
             <md-icon md-font-set="material-icons">date_range</md-icon>
             <md-tooltip md-direction="top">
                 Add/Edit Date
             </md-tooltip>
         </md-button>
         <md-button class="md-fab md-accent md-mini" ng-class="{'md-primary': todo.details.checked}"
-                   ng-click="$ctrl.todo.editTodo()">
+                   ng-click="$ctrl.edit()">
             <md-icon md-font-set="material-icons">edit</md-icon>
             <md-tooltip md-direction="top">
                 Edit To-Do
             </md-tooltip>
         </md-button>
-        <md-button class="md-fab md-warn md-mini" ng-class="{'md-primary': todo.todo.checked}"
-                   ng-click="$ctrl.deleteTodo(todo)">
+        <md-button class="md-fab md-warn md-mini" ng-class="{'md-primary': $ctrl.todo.checked}"
+                   ng-click="$ctrl.delete()">
             <md-icon md-font-set="material-icons">delete</md-icon>
             <md-tooltip md-direction="top">
                 Delete To-Do

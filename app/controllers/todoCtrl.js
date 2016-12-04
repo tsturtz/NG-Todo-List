@@ -12,10 +12,4 @@ angular.module('todoApp')
             $mdSidenav('left').toggle();
         };
 
-        self.addTodo = function () {
-            console.log('add task clicked');
-            self.todos.push(self.todo);
-            self.todo = {};
-        };
-
     });

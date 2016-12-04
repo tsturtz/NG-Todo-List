@@ -1,8 +1,12 @@
 function detailsCtrl () {
     var self = this;
 
-    self.deleteTodo = function () {
+    self.delete = function () {
         self.onDelete({todo: self.todo});
+    };
+
+    self.edit = function () {
+        self.onEdit({todo: self.todo});
     };
 }
 
@@ -13,6 +17,8 @@ angular.module('todoApp')
         controller: detailsCtrl,
         bindings: {
             todo: '<',
-            onDelete: '&'
+            onDelete: '&',
+            onEdit: '&',
+            setDate: '&'
         }
     });
