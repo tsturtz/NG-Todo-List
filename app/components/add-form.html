@@ -1,10 +1,10 @@
 <div layout="row">
     <md-input-container flex>
         <label for="add-todo"> Add a task...</label>
-        <input id="add-todo" type="text" ng-model="$ctrl.todo.task" ng-keyup="$ctrl.$event.keyCode == 13 && ($ctrl.todo.task && $ctrl.addTodo())">
+        <input id="add-todo" type="text" ng-model="$ctrl.todo.task"><!-- ng-keyup="$ctrl.$event.keyCode == 13 && ($ctrl.todo.task && $ctrl.addTodo())">-->
     </md-input-container>
 
-    <md-button class="md-fab" ng-click="$ctrl.addTodo()" ng-disabled="!$ctrl.todo.task">
+    <md-button class="md-fab md-accent md-hue-3" ng-click="$ctrl.add(todo)" ng-disabled="!$ctrl.todo.task">
         <md-icon md-font-set="material-icons">add</md-icon>
     </md-button>
 </div>

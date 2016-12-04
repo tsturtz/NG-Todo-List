@@ -41,4 +41,5 @@ angular.module('todoApp', ['ngMaterial'])
             .dark();
         $mdThemingProvider.theme('add')
             .primaryPalette('white')
+            .accentPalette('teal', {'default': '500'})
     });

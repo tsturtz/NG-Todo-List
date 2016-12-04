@@ -27,30 +27,28 @@
     <!--To-Do App-->
     <script src="app/app.js"></script>
     <!--Controller-->
-    <script src="app/controllers/todoCtrl.js"></script>
+    <script src="app/controllers/rootCtrl.js"></script>
     <!--Services-->
     <script src="app/services/todoService.js"></script>
     <!--Components-->
-    <script src="app/components/list.js"></script>
-    <script src="app/components/list-details.js"></script>
-    <script src="app/components/add-form.js"></script>
+    <script src="app/components/components.js"></script>
 
 </head>
 <body ng-cloak layout="column">
 
-<div id="sideNavContainer" ng-controller="todoCtrl as tc" layout-fill layout="column">
+<div id="sideNavContainer" ng-controller="rootCtrl as root" layout-fill layout="column">
 
-    <md-toolbar layout="row" md-whiteframe="8" class="md-accent" md-theme="add" layout-padding>
+    <md-toolbar layout="row" md-whiteframe="8" class="md-accent md-medium-tall" md-theme="add" layout-padding>
 
         <div layout="row" flex="20">
-            <md-button ng-click="tc.openLeftMenu()" flex="10">
+            <md-button ng-click="root.openLeftMenu()" flex="10">
                 <md-icon md-font-set="material-icons">account_circle</md-icon>
                 Login
             </md-button>
         </div>
 
-        <!--add-form component-->
-        <td-form flex></td-form>
+        <!--tdForm component-->
+        <td-form flex todos="root.todos"></td-form>
 
         <span flex="20"></span>
 
@@ -61,11 +59,11 @@
         <div id="nav-login" layout="column" layout-align="center center" flex="80">
             <md-input-container>
                 <label for="username">Username</label>
-                <input type="text" ng-model="tc.user.name" id="username">
+                <input type="text" id="username">
             </md-input-container>
             <md-input-container>
                 <label for="password">Password</label>
-                <input type="text" ng-model="tc.user.password" id="password">
+                <input type="text" id="password">
             </md-input-container>
             <md-input-container>
                 <md-button class="md-raised md-primary">
@@ -76,7 +74,7 @@
         </div>
 
         <div id="nav-close">
-            <md-button ng-click="tc.openLeftMenu()">
+            <md-button ng-click="root.openLeftMenu()">
                 Close
             </md-button>
         </div>
@@ -87,8 +85,12 @@
 
         <div flex="100" layout="column" layout-padding>
 
-            <!--list component-->
-            <td-list></td-list>
+            <div layout="row" layout-sm="column" layout-align="space-around center">
+                <md-progress-circular md-mode="indeterminate" ng-if="root.activated" class="md-primary" md-diameter="50"></md-progress-circular>
+            </div>
+
+            <!--tdList component-->
+            <td-list todos="root.todos"></td-list>
 
         </div>
 
