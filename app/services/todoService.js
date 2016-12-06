@@ -33,6 +33,11 @@ angular.module('todoApp')
                 defer.resolve(snapshot.val());
             });
             return defer.promise;
-        }
+        };
+
+        self.addTodo = function (todo) {
+            console.log('tpdo passed into service: ', todo);
+            //self.todos.push(todo);
+        };
 
     });

@@ -8,10 +8,10 @@ angular.module('todoApp')
 
         var self = this;
 
-        self.todos = [];
-
         //initiate preloader
         self.activated = true;
+
+        self.todos = [];
 
         todoService.getTodos()
             .then(
@@ -25,11 +25,13 @@ angular.module('todoApp')
                     console.warn('fail: ', snapshot);
                 });
 
-        self.addTodo = function (todo) {
+
+
+/*        self.addTodo = function (todo) {
             console.log('add task clicked');
             self.todos.push(self.todo);
             self.todo = {};
-        };
+        };*/
 
         self.openLeftMenu = function () {
             $mdSidenav('left').toggle();

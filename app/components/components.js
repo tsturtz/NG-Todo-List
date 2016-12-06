@@ -23,7 +23,8 @@ angular.module('todoApp')
         templateUrl: './app/components/add-form.html',
         controller: formCtrl,
         bindings: {
-            todos: '='
+            todo: '<',
+            onAdd: '&'
         }
     });
 
@@ -34,12 +35,30 @@ angular.module('todoApp')
 function listCtrl (todoService) {
     var self = this;
 
+    self.todos = [];
+
+    //initiate preloader
+    self.activated = true;
+
+    todoService.getTodos()
+        .then(
+            function (snapshot) {
+                self.todos = snapshot;
+                console.log('todos array after successful data call: ', self.todos);
+                //turn off preloader
+                self.activated = false;
+            },
+            function (snapshot) {
+                console.warn('fail: ', snapshot);
+            });
+
     self.setDateTodo = function () {
         console.log('date edit clicked');
     };
 
     self.editTodo = function () {
         console.log('edit task clicked');
+
     };
 
     self.deleteTodo = function (todo) {
@@ -47,6 +66,12 @@ function listCtrl (todoService) {
         console.log(self.todos.indexOf(todo));
         var idx = self.todos.indexOf(todo);
         self.todos.splice(idx, 1);
+    };
+
+    self.addTodo = function (todo) {
+        console.log('add task clicked');
+        self.todos.push(self.todo);
+        self.todo = {};
     };
 
 }
@@ -71,9 +96,8 @@ function detailsCtrl () {
 function formCtrl () {
     var self = this;
 
-    self.add = function () {
-        //self.onAdd({todo: self.todo});
-        //self.todo = {};
+    self.addItem = function () {
+        self.onAdd({todo: self.todo});
     };
 
     //self.tdList.addTodo(this);
