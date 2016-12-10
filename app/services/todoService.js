@@ -36,8 +36,14 @@ angular.module('todoApp')
         };
 
         self.addTodo = function (todo) {
-            console.log('tpdo passed into service: ', todo);
-            //self.todos.push(todo);
+            var defer = $q.defer();
+            console.log('todo passed into service: ', todo);
+            fb.ref('todos').once('value', function(snapshot) {
+                console.log('snapshot from service: ', snapshot.val());
+                fb.ref('todos/' + snapshot.val().length).set(todo);
+                defer.resolve(snapshot.val());
+            });
+            return defer.promise;
         };
 
     });

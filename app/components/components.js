@@ -46,6 +46,7 @@ function listCtrl (todoService) {
                 self.todos = snapshot;
                 console.log('todos array after successful data call: ', self.todos);
                 //turn off preloader
+                console.info('SWITCH TO ANGULAR FIRE - REFER TO DOCUMENTATION AND SCOTT\'S REPO - https://github.com/Learning-Fuze/c11_tdl');
                 self.activated = false;
             },
             function (snapshot) {
@@ -70,7 +71,15 @@ function listCtrl (todoService) {
 
     self.addTodo = function (todo) {
         console.log('add task clicked');
-        self.todos.push(self.todo);
+        todoService.addTodo(todo)
+            .then(
+                function (snapshot) {
+                    self.todos = snapshot;
+                    self.todo = {};
+                },
+                function (snapshot) {
+                    console.warn('fail: ', snapshot);
+                });
         self.todo = {};
     };
 
@@ -93,12 +102,12 @@ function detailsCtrl () {
 /****************************************************************************************
  * td-form controller
  ****************************************************************************************/
-function formCtrl () {
+function formCtrl (todoService) {
     var self = this;
 
-    self.addItem = function () {
-        self.onAdd({todo: self.todo});
-    };
+    self.addItem = function (todo) {
+        console.log(todo);
+        console.log('addItem function called');
 
-    //self.tdList.addTodo(this);
+    };
 }
