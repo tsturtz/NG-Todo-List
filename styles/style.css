@@ -45,9 +45,13 @@ md-tooltip .md-content {
 
 /*Sorting animations*/
 .ng-move {
-    -webkit-transition: all ease-in .7s;
-    transition: all ease-in .7s;
+    -webkit-transition: all ease-in-out .7s;
+    transition: all ease-in-out .7s;
     opacity: 0;
+}
+.ng-move-stagger {
+    transition-delay: 0.3s;
+    animation-delay: 0.3s;
 }
 .ng-move.ng-move-active {
     opacity: 1;

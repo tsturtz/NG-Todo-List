@@ -1,7 +1,3 @@
-/**
- * To-Do Service
- */
-
 angular.module('todoApp')
 
     .service('todoService', function ($firebaseArray, $q) {
@@ -20,18 +16,15 @@ angular.module('todoApp')
         };
         firebase.initializeApp(config);
 
-        // Create a reference to Firebase Database
-        var fb = firebase.database();
-
         // Create a reference to this service
-        var self = this;
+        var svc = this;
 
-        self.getTodos = function(where){
+        svc.getTodos = function(where){
             var ref = firebase.database().ref().child(where);
             return $firebaseArray(ref);
         };
 
-        self.addTodo = function (todo) {
+        svc.addTodo = function (todo) {
             var defer = $q.defer();
             console.log('todo passed into service: ', todo);
             fb.ref('todos').once('value', function(snapshot) {

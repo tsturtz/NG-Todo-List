@@ -43,15 +43,15 @@
 
     <md-toolbar layout="row" md-whiteframe="8" class="md-accent md-medium-tall" md-theme="add" layout-padding>
 
-        <div layout="row" flex="20">
-            <md-button ng-click="root.openLeftMenu()" flex="10">
+        <span layout="row" flex="20">
+            <md-button ng-click="root.openLeftMenu()">
                 <md-icon md-font-set="material-icons">account_circle</md-icon>
                 Login
             </md-button>
-        </div>
+        </span>
 
         <!--tdForm component-->
-        <td-form flex></td-form>
+        <td-form flex todos="root.todos"></td-form>
 
         <span flex="20"></span>
 

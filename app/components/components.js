@@ -23,6 +23,7 @@ angular.module('todoApp')
         templateUrl: './app/components/add-form.html',
         controller: formCtrl,
         bindings: {
+            todos: '<',
             todo: '<',
             onAdd: '&'
         }
@@ -45,13 +46,14 @@ function listCtrl (todoService) {
     };
 
     self.deleteTodo = function (todo) {
-        console.log(todo);
-        console.log(self.todos.indexOf(todo));
-        var idx = self.todos.indexOf(todo);
-        self.todos.splice(idx, 1);
+        self.todos.$remove(todo).then(function(ref){
+            console.log('Item removed. Firebase reference: ', ref);
+        }, function(err){
+            console.warn('Error removing item: ', err);
+        });
     };
 
-    self.addTodo = function (todo) {
+    /*self.addTodo = function (todo) {
         console.log('add task clicked');
         todoService.addTodo(todo)
             .then(
@@ -63,7 +65,7 @@ function listCtrl (todoService) {
                     console.warn('fail: ', snapshot);
                 });
         self.todo = {};
-    };
+    };*/
 
 }
 /****************************************************************************************
@@ -88,8 +90,14 @@ function formCtrl (todoService) {
     var self = this;
 
     self.addItem = function (todo) {
+        todo.checked = false;
+        todo.date = null;
         console.log(todo);
-        console.log('addItem function called');
-
+        console.info(self.todos);
+        self.todos.$add(todo).then(function(){
+            self.todo = {};
+            console.info('Todo added!');
+        });
+        console.info(self.todos);
     };
 }
