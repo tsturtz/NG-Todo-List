@@ -8,24 +8,16 @@ angular.module('todoApp')
 
         var self = this;
 
-        //initiate preloader
+        //Initiate spinner
         self.activated = true;
 
-        self.todos = [];
+        //Bind todos array to Firebase through AngularFire
+        self.todos = todoService.getTodos('todos');
 
-        todoService.getTodos()
-            .then(
-                function (snapshot) {
-                    self.todos = snapshot;
-                    console.log('todos array after successful data call: ', self.todos);
-                    //turn off preloader
-                    self.activated = false;
-                },
-                function (snapshot) {
-                    console.warn('fail: ', snapshot);
-                });
-
-
+        //Turn off spinner after data is initially loaded
+        self.todos.$loaded(function (){
+            self.activated = false;
+        });
 
 /*        self.addTodo = function (todo) {
             console.log('add task clicked');

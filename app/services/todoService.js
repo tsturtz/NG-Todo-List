@@ -4,7 +4,7 @@
 
 angular.module('todoApp')
 
-    .service('todoService', function ($http, $q) {
+    .service('todoService', function ($firebaseArray, $q) {
 
         /**
          * Initialize Firebase
@@ -26,13 +26,9 @@ angular.module('todoApp')
         // Create a reference to this service
         var self = this;
 
-        self.getTodos = function () {
-            var defer = $q.defer();
-            fb.ref('todos').once('value', function(snapshot) {
-                console.log('snapshot from service: ', snapshot.val());
-                defer.resolve(snapshot.val());
-            });
-            return defer.promise;
+        self.getTodos = function(where){
+            var ref = firebase.database().ref().child(where);
+            return $firebaseArray(ref);
         };
 
         self.addTodo = function (todo) {

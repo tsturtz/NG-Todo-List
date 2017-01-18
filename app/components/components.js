@@ -35,24 +35,6 @@ angular.module('todoApp')
 function listCtrl (todoService) {
     var self = this;
 
-    self.todos = [];
-
-    //initiate preloader
-    self.activated = true;
-
-    todoService.getTodos()
-        .then(
-            function (snapshot) {
-                self.todos = snapshot;
-                console.log('todos array after successful data call: ', self.todos);
-                //turn off preloader
-                console.info('SWITCH TO ANGULAR FIRE - REFER TO DOCUMENTATION AND SCOTT\'S REPO - https://github.com/Learning-Fuze/c11_tdl');
-                self.activated = false;
-            },
-            function (snapshot) {
-                console.warn('fail: ', snapshot);
-            });
-
     self.setDateTodo = function () {
         console.log('date edit clicked');
     };
