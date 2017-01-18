@@ -9,6 +9,10 @@ md-input-container .md-errors-spacer {
     min-height: 0 !important;
 }
 
+md-input-container {
+    margin: 8px 0;
+}
+
 md-tooltip .md-content {
     position: relative;
     opacity: 1;
@@ -45,13 +49,13 @@ md-tooltip .md-content {
 
 /*Sorting animations*/
 .ng-move {
-    -webkit-transition: all ease-in-out .7s;
-    transition: all ease-in-out .7s;
+    -webkit-transition: all ease-in-out .5s;
+    transition: all ease-in-out .5s;
     opacity: 0;
 }
 .ng-move-stagger {
-    transition-delay: 0.3s;
-    animation-delay: 0.3s;
+    transition-delay: 0.1s;
+    animation-delay: 0.1s;
 }
 .ng-move.ng-move-active {
     opacity: 1;

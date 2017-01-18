@@ -13,6 +13,7 @@ angular.module('todoApp')
         controller: detailsCtrl,
         bindings: {
             todo: '<',
+            update: '<',
             onDelete: '&',
             onEdit: '&',
             setDate: '&'
@@ -40,32 +41,23 @@ function listCtrl (todoService) {
         console.log('date edit clicked');
     };
 
-    self.editTodo = function () {
-        console.log('edit task clicked');
-
+    self.editTodo = function (todo, update) {
+        todo.task = update;
+        self.todos.$save(todo).then(function(ref){
+            console.log('Item edited: ', ref);
+            console.info('Updated list: ', self.todos);
+        }, function(err){
+            console.warn('Error editing item: ', err);
+        });
     };
 
     self.deleteTodo = function (todo) {
         self.todos.$remove(todo).then(function(ref){
-            console.log('Item removed. Firebase reference: ', ref);
+            console.log('Item removed: ', ref);
         }, function(err){
             console.warn('Error removing item: ', err);
         });
     };
-
-    /*self.addTodo = function (todo) {
-        console.log('add task clicked');
-        todoService.addTodo(todo)
-            .then(
-                function (snapshot) {
-                    self.todos = snapshot;
-                    self.todo = {};
-                },
-                function (snapshot) {
-                    console.warn('fail: ', snapshot);
-                });
-        self.todo = {};
-    };*/
 
 }
 /****************************************************************************************
@@ -78,9 +70,11 @@ function detailsCtrl () {
         self.onDelete({todo: self.todo});
     };
 
-    self.edit = function () {
-        self.onEdit({todo: self.todo});
-        console.log({todo: self.todo});
+    self.edit = function (update) {
+        if (update === undefined) {
+            return;
+        }
+        self.onEdit({todo: self.todo, update: update});
     };
 }
 /****************************************************************************************

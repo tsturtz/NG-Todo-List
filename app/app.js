@@ -6,7 +6,7 @@
  * @config Configure Angular Material Color Themes
  */
 
-angular.module('todoApp', ['ngMaterial','firebase'])
+angular.module('todoApp', ['ngMaterial','firebase','focus-if'])
 
     .config(function ($mdAriaProvider) {
         $mdAriaProvider.disableWarnings();
