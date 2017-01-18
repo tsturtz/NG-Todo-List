@@ -42,3 +42,13 @@ md-tooltip .md-content {
 #content-area::-webkit-scrollbar-thumb {
     background-color: rgb(92,107,192);
 }
+
+/*Sorting animations*/
+.ng-move {
+    -webkit-transition: all ease-in .7s;
+    transition: all ease-in .7s;
+    opacity: 0;
+}
+.ng-move.ng-move-active {
+    opacity: 1;
+}

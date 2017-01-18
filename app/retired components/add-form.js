@@ -1,3 +1,4 @@
+/*
 function formCtrl () {
     var self = this;
 
@@ -15,4 +16,4 @@ angular.module('todoApp')
             todo: '<',
             onAdd: '&'
         }
-    });
+    });*/

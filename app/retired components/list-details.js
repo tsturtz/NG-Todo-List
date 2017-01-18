@@ -1,3 +1,4 @@
+/*
 function detailsCtrl () {
     var self = this;
 
@@ -21,4 +22,4 @@ angular.module('todoApp')
             onEdit: '&',
             setDate: '&'
         }
-    });
+    });*/

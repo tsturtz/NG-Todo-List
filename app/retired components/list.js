@@ -1,3 +1,4 @@
+/*
 function listCtrl (todoService) {
     var self = this;
 
@@ -41,4 +42,4 @@ angular.module('todoApp')
     .component('tdList', {
         templateUrl: './app/components/list.html',
         controller: listCtrl
-    });
+    });*/
