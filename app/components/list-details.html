@@ -6,9 +6,18 @@
         <div class="md-checkbox-div" ng-repeat="v in [0]" flex="10">
             <md-checkbox ng-model="$ctrl.todo.checked" class="md-primary checkbox-row" ng-disabled="editing"></md-checkbox>
         </div>
-        <md-list-item-text>
-            <p ng-hide="editing" class="md-title task-row" flex>{{$ctrl.todo.task}}</p>
-            <p class="date-display md-caption md-icon-button" ng-hide="editing">
+        <md-list-item-text flex>
+            <p ng-hide="editing" class="md-title task-row">{{$ctrl.todo.task}}</p>
+            <md-input-container ng-show="editing" class="editing-input" md-no-float>
+                <input id="editTodo"
+                       type="text"
+                       placeholder="{{$ctrl.todo.task}}"
+                       ng-model="update"
+                       ng-blur="editing = false; $ctrl.edit(update); focus = false;"
+                       ng-keyup="($event.which === 13) ? editing = false : editing = true"
+                       focus-if="focus">
+            </md-input-container>
+            <p class="date-display md-caption md-icon-button">
                 <md-icon ng-show="$ctrl.todo.date"
                          md-font-set="material-icons"
                          ng-click="$ctrl.setDate('')">cancel
@@ -28,17 +37,6 @@
                 <span ng-show="!$ctrl.todo.date" class="noDate">No due date set</span>
             </p>
         </md-list-item-text>
-        <md-input-container md-no-float flex>
-            <input id="editTodo"
-                   type="text"
-                   ng-show="editing"
-                   placeholder="{{$ctrl.todo.task}}"
-                   ng-model="update"
-                   ng-blur="editing = false; $ctrl.edit(update); focus = false;"
-                   ng-keyup="($event.which === 13) ? editing = false : editing = true"
-                   focus-if="focus">
-        </md-input-container>
-
         <div class="button-row">
             <md-button class="md-fab md-mini md-primary datepicker-btn" ng-disabled="editing">
                 <md-datepicker ng-model="todoDate"

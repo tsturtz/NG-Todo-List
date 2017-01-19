@@ -7,8 +7,9 @@
                ng-keyup="($event.which === 13) && $ctrl.addItem($ctrl.todo)">
     </md-input-container>
 
-    <md-button class="md-fab md-warn"
-               ng-click="$ctrl.addItem($ctrl.todo)">
+    <md-button class="md-fab md-warn add-btn"
+               ng-click="$ctrl.addItem($ctrl.todo)"
+               ng-disabled="!$ctrl.todo.task">
         <md-icon md-font-set="material-icons">add</md-icon>
     </md-button>
 </div>
