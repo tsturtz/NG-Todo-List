@@ -6,7 +6,7 @@
  * @config Configure Angular Material Color Themes
  */
 
-angular.module('todoApp', ['ngMaterial','firebase','focus-if'])
+angular.module('todoApp', ['ngMaterial','firebase','focus-if','angularMoment'])
 
     .config(function ($mdAriaProvider) {
         $mdAriaProvider.disableWarnings();
@@ -42,4 +42,6 @@ angular.module('todoApp', ['ngMaterial','firebase','focus-if'])
         $mdThemingProvider.theme('add')
             .primaryPalette('white')
             .accentPalette('teal', {'default': '500'})
+            .warnPalette('grey', {'default': '800'})
+            .dark();
     });

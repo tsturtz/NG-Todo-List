@@ -1,8 +1,11 @@
 <md-list-item>
     <md-divider></md-divider>
-    <div flex="20"></div>
+    <div flex="15"></div>
     <div class="todo-row" layout="row" layout-align="center end" flex>
-        <md-checkbox ng-model="$ctrl.todo.checked" class="md-primary" ng-disabled="editing"></md-checkbox>
+        <!--This div with the blank ng-repeat is a workaround for making the checkbox not clickable across the entire row-->
+        <div class="md-checkbox-div" ng-repeat="v in [0]">
+            <md-checkbox ng-model="$ctrl.todo.checked" class="md-primary" ng-disabled="editing"></md-checkbox>
+        </div>
         <p ng-hide="editing" flex>{{$ctrl.todo.task}}</p>
         <md-input-container md-no-float flex>
             <input id="editTodo"
@@ -11,13 +14,16 @@
                    placeholder="{{$ctrl.todo.task}}"
                    ng-model="update"
                    ng-blur="editing = false; $ctrl.edit(update); focus = false;"
-                   ng-keypress="($event.which === 13) ? editing = false : editing = true"
+                   ng-keyup="($event.which === 13) ? editing = false : editing = true"
                    focus-if="focus">
         </md-input-container>
-        <md-button class="md-fab md-primary md-mini"
-                   ng-disabled="editing"
-                   ng-click="$ctrl.setDate()">
-            <md-icon md-font-set="material-icons">date_range</md-icon>
+        <p ng-show="$ctrl.todo.date">due: {{$ctrl.todo.date | amCalendar:referenceTime:formats}}</p>
+        <md-button class="md-fab md-mini md-primary datepicker-btn" ng-disabled="editing">
+            <md-datepicker ng-model="todoDate"
+                           md-hide-icons="triangle"
+                           ng-blur="$ctrl.setDate(todoDate)"
+                           md-min-date="$ctrl.todaysDate">
+            </md-datepicker>
             <md-tooltip md-direction="top">
                 Add/Edit Date
             </md-tooltip>
@@ -34,7 +40,7 @@
         <md-button class="md-fab md-accent md-mini"
                    ng-class="{'md-primary': todo.details.checked}"
                    ng-show="editing"
-                   ng-click="$ctrl.edit(todo, update); editing = false;">
+                   ng-click="$ctrl.edit(update); editing = false;">
             <md-icon md-font-set="material-icons">check</md-icon>
             <md-tooltip md-direction="top">
                 Submit Edit
@@ -51,5 +57,5 @@
             </md-tooltip>
         </md-button>
     </div>
-    <div flex="20"></div>
+    <div flex="15"></div>
 </md-list-item>

@@ -30,6 +30,10 @@
     <!--Input Focus on Render Directive-->
     <script src="https://rawgit.com/hiebj/ng-focus-if/master/focusIf.min.js"></script>
 
+    <!--MomentJS and Angular Moment-->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/1.0.1/angular-moment.min.js"></script>
+
     <!--To-Do App-->
     <script src="app/app.js"></script>
     <!--Controller-->
@@ -46,7 +50,7 @@
 
     <md-toolbar layout="row" md-whiteframe="8" class="md-accent md-medium-tall" md-theme="add" layout-padding>
 
-        <span layout="row" flex="20">
+        <span layout="row" flex="15">
             <md-button ng-click="root.openLeftMenu()">
                 <md-icon md-font-set="material-icons">account_circle</md-icon>
                 Login
@@ -56,7 +60,7 @@
         <!--tdForm component-->
         <td-form flex todos="root.todos"></td-form>
 
-        <span flex="20"></span>
+        <span flex="15"></span>
 
     </md-toolbar>
 
@@ -99,8 +103,6 @@
 
         </div>
     </md-content>
-
-
 
 </div>
 </body>

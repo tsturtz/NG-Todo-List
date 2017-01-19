@@ -14,9 +14,10 @@ angular.module('todoApp')
         bindings: {
             todo: '<',
             update: '<',
+            date: '<',
             onDelete: '&',
             onEdit: '&',
-            setDate: '&'
+            onUpdate: '&'
         }
     })
     //td-form
@@ -34,11 +35,15 @@ angular.module('todoApp')
  * td-list controller
  * @param todoService
  ****************************************************************************************/
-function listCtrl (todoService) {
+function listCtrl () {
     var self = this;
 
-    self.setDateTodo = function () {
-        console.log('date edit clicked');
+    self.deleteTodo = function (todo) {
+        self.todos.$remove(todo).then(function(ref){
+            console.log('Item removed: ', ref);
+        }, function(err){
+            console.warn('Error removing item: ', err);
+        });
     };
 
     self.editTodo = function (todo, update) {
@@ -51,20 +56,26 @@ function listCtrl (todoService) {
         });
     };
 
-    self.deleteTodo = function (todo) {
-        self.todos.$remove(todo).then(function(ref){
-            console.log('Item removed: ', ref);
+    self.setDateTodo = function (todo, date) {
+        date = date.toString();
+        todo.date = date;
+        console.info(todo.date);
+        console.warn(todo);
+        self.todos.$save(todo).then(function(ref){
+            console.log('Item date set: ', ref);
+            console.info('Updated list: ', self.todos);
         }, function(err){
-            console.warn('Error removing item: ', err);
+            console.warn('Error setting date: ', err);
         });
     };
-
 }
 /****************************************************************************************
  * td-list-details controller
  ****************************************************************************************/
 function detailsCtrl () {
     var self = this;
+
+    self.todaysDate = new Date();
 
     self.delete = function () {
         self.onDelete({todo: self.todo});
@@ -76,11 +87,18 @@ function detailsCtrl () {
         }
         self.onEdit({todo: self.todo, update: update});
     };
+
+    self.setDate = function (date) {
+        if (date === undefined) {
+            return;
+        }
+        self.onUpdate({todo: self.todo, date: date});
+    };
 }
 /****************************************************************************************
  * td-form controller
  ****************************************************************************************/
-function formCtrl (todoService) {
+function formCtrl () {
     var self = this;
 
     self.addItem = function (todo) {

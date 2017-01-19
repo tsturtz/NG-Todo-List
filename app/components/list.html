@@ -5,7 +5,7 @@
                      ng-animate="todo"
                      ng-init="todo.checked = false"
                      todo="todo"
-                     set-date="$ctrl.setDateTodo(todo)"
+                     on-update="$ctrl.setDateTodo(todo, date)"
                      on-edit="$ctrl.editTodo(todo, update)"
                      on-delete="$ctrl.deleteTodo(todo)"
                      md-no-ink>
