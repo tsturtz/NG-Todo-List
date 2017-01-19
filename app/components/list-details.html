@@ -17,11 +17,29 @@
                    ng-keyup="($event.which === 13) ? editing = false : editing = true"
                    focus-if="focus">
         </md-input-container>
-        <p ng-show="$ctrl.todo.date">due: {{$ctrl.todo.date | amCalendar:referenceTime:formats}}</p>
+            <p class="date-display md-caption md-icon-button">
+                <md-icon ng-show="$ctrl.todo.date"
+                         md-font-set="material-icons"
+                         ng-click="$ctrl.setDate('')">cancel
+                    <md-tooltip md-direction="left">
+                        Remove Due Date
+                    </md-tooltip>
+                </md-icon>
+                <md-icon ng-show="!$ctrl.todo.date"
+                         md-font-set="material-icons"
+                         ng-click="todo.openDatepicker = true">add_circle
+                    <md-tooltip md-direction="left">
+                        Add Due Date
+                    </md-tooltip>
+                </md-icon>
+                <span ng-show="$ctrl.todo.date">{{$ctrl.todo.date | amDateFormat: 'll'}}</span>
+                <span ng-show="!$ctrl.todo.date">No due date</span>
+            </p>
         <md-button class="md-fab md-mini md-primary datepicker-btn" ng-disabled="editing">
             <md-datepicker ng-model="todoDate"
                            md-hide-icons="triangle"
                            ng-blur="$ctrl.setDate(todoDate)"
+                           md-is-open="todo.openDatepicker"
                            md-min-date="$ctrl.todaysDate">
             </md-datepicker>
             <md-tooltip md-direction="top">
@@ -46,7 +64,6 @@
                 Submit Edit
             </md-tooltip>
         </md-button>
-
         <md-button class="md-fab md-warn md-mini"
                    ng-class="{'md-primary': $ctrl.todo.checked}"
                    ng-disabled="editing"

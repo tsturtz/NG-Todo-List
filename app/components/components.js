@@ -72,7 +72,7 @@ function listCtrl () {
 /****************************************************************************************
  * td-list-details controller
  ****************************************************************************************/
-function detailsCtrl () {
+function detailsCtrl ($timeout) {
     var self = this;
 
     self.todaysDate = new Date();

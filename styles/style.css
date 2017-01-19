@@ -1,74 +1,81 @@
-.td-center {
+/*.td-center {
     position: absolute;
     top: 0;
     left: 0;
     transform: translate(-50%, -50%);
+}*/
+
+
+/*Date style*/
+.date-display span {
+    vertical-align: middle;
+}
+.date-display md-icon {
+    cursor: pointer;
 }
 
-md-input-container .md-errors-spacer {
-    min-height: 0 !important;
-}
 
-md-input-container:not(.add-form-input) {
-    margin: 8px 0;
-}
-
+/*Tooltips*/
 md-tooltip .md-content {
     position: relative;
     opacity: 1;
     color: black;
 }
 
+
+/*Checked items*/
+.todo-checked {
+    background-color: rgba(0,0,0,.1);
+}
+.todo-checked p {
+    font-style: italic;
+    color: rgb(92,107,192);
+}
+
+
+/*Input container*/
+md-input-container .md-errors-spacer {
+    min-height: 0 !important;
+}
+md-input-container:not(.add-form-input) {
+    margin: 8px 0;
+}
+
+
+/*Datepicker*/
 .md-datepicker-input {
     display: none;
 }
-
 .md-datepicker-button {
     position: relative;
     bottom: 3px;
     margin: 0 !important;
 }
-
 .md-datepicker-open {
     position: relative;
     right: 6px;
 }
-
 .md-icon-button+.md-datepicker-input-container {
     margin-left: 0;
 }
-
 .datepicker-btn {
     padding: 0;
 }
 
-.datepick {
-    margin: 0 !important;
-}
 
-.todo-checked {
-    background-color: rgba(0,0,0,.1);
-}
-
-.todo-checked p {
-    /*text-decoration: line-through;*/
-    font-style: italic;
-    color: rgb(92,107,192);
-}
-
+/*Scrollbar*/
 #content-area::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
     background-color: rgba(0,0,0,0,);
 }
-
 #content-area::-webkit-scrollbar {
     width: 8px;
     background-color: rgba(0,0,0,.2);
 }
-
 #content-area::-webkit-scrollbar-thumb {
     background-color: rgb(92,107,192);
 }
+
 
 /*Sorting animations*/
 .ng-move {
