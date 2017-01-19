@@ -37,7 +37,7 @@ angular.module('todoApp', ['ngMaterial','firebase','focus-if','angularMoment'])
         $mdThemingProvider.theme('default')
             .primaryPalette('indigo', {'default': '400'})
             .accentPalette('teal', {'default': '500'})
-            .warnPalette('red', {'default': 'A200'})
+            .warnPalette('red', {'default': '600'})
             .dark();
         $mdThemingProvider.theme('add')
             .primaryPalette('white')

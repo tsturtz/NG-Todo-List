@@ -77,6 +77,15 @@ function detailsCtrl ($timeout) {
 
     self.todaysDate = new Date();
 
+    self.compareDates = function (date) {
+        date = new Date(date);
+        var diff = date.getTime() - self.todaysDate.getTime();
+        self.overdueOrClose = diff <= 0 ? 'lateDate'
+            : diff < 200000000 && diff > 0 ? 'warnDate'
+            : 'okDate';
+        return self.overdueOrClose;
+    };
+
     self.delete = function () {
         self.onDelete({todo: self.todo});
     };
@@ -92,6 +101,7 @@ function detailsCtrl ($timeout) {
         if (date === undefined) {
             return;
         }
+        console.log(date);
         self.onUpdate({todo: self.todo, date: date});
     };
 }
@@ -102,10 +112,12 @@ function formCtrl () {
     var self = this;
 
     self.addItem = function (todo) {
-        todo.checked = false;
-        todo.date = null;
         console.log(todo);
         console.info(self.todos);
+        if (todo === undefined) {
+            return;
+        }
+        todo.checked = false;
         self.todos.$add(todo).then(function(){
             self.todo = {};
             console.info('Todo added!');
