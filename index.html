@@ -52,9 +52,16 @@
 </head>
 <body ng-cloak layout="column">
 
-<div id="sideNavContainer" ng-controller="rootCtrl as root" layout-fill layout="column">
+<div id="sideNavContainer"
+     ng-controller="rootCtrl as root"
+     layout="column"
+     layout-fill>
 
-    <md-toolbar layout="row" md-whiteframe="8" class="md-accent md-medium-tall" md-theme="add" layout-padding>
+    <md-toolbar layout="row"
+                md-whiteframe="8"
+                class="md-accent md-medium-tall"
+                md-theme="add"
+                layout-padding>
 
         <span layout="row" flex="15">
             <md-button ng-click="root.openLeftMenu()">
@@ -64,7 +71,7 @@
         </span>
 
         <!--Add Form component-->
-        <td-form flex todos="root.todos"></td-form>
+        <td-form todos="root.todos" flex></td-form>
 
         <span flex="15"></span>
 
@@ -78,12 +85,14 @@
 
         <span flex="10"></span>
 
-        <div class="app-title" layout="column" layout-align="center center">
-            <p class="md-caption">Angular Material & AngularFire</p>
+        <div class="app-title"
+             layout="column"
+             layout-align="center center">
+            <p class="md-body-1">Angular Material & AngularFire</p>
             <p class="md-display-1">ng-todo-list</p>
             <p class="md-body-2">Developed by</p>
             <md-button class="md-accent">
-                <a href="https://github.com/tsturtz">Taylor Sturtz <i class="fa fa-github"></i></a>
+                <a href="https://github.com/tsturtz"><i class="fa fa-github"></i> Taylor Sturtz</a>
             </md-button>
         </div>
 
@@ -106,25 +115,29 @@
                        ng-model="root.password">
             </md-input-container>
             <div layout="row">
-                <md-button class="md-raised md-primary" ng-click="root.loginUser(root.email, root.password)">
+                <md-button class="md-raised md-accent"
+                           ng-click="root.loginUser(root.email, root.password)">
                     <md-icon md-font-set="material-icons">account_circle</md-icon>
                     Log In
                 </md-button>
-                <md-button class="md-raised md-primary" ng-click="root.createUser(root.email, root.password)">
+                <md-button class="md-raised md-accent"
+                           ng-click="root.createUser(root.email, root.password)">
                     <md-icon md-font-set="material-icons">account_box</md-icon>
                     Sign up
                 </md-button>
             </div>
             <div>
-                <md-button class="md-raised md-warn" ng-click="root.googleUserLogin()">
+                <md-button class="md-raised md-primary"
+                           ng-click="root.googleUserLogin()">
                     <i class="fa fa-google"></i>
                     Google Log In
                 </md-button>
             </div>
             <div>
-                <md-button class="" ng-click="root.signIn()">
-                    <md-icon md-font-set="material-icons">laptop_mac</md-icon>
-                    Demo Log In
+                <md-button class="md-accent"
+                           ng-click="root.signIn()">
+                    <a href="#"><i class="fa fa-laptop"></i>
+                    Demo Log In</a>
                 </md-button>
             </div>
         </div>
@@ -132,8 +145,9 @@
         <span flex></span>
 
         <div id="nav-close">
-            <md-button class="" ng-click="root.openLeftMenu()">
-                Close
+            <md-button class="md-accent"
+                       ng-click="root.openLeftMenu()">
+                <a href="#">Close</a>
             </md-button>
         </div>
 
@@ -141,10 +155,17 @@
 
     </md-sidenav>
 
-    <md-content id="content-area" layout="row" layout-align="center start" flex>
-        <div flex="100" layout="column" layout-padding>
+    <md-content id="content-area"
+                layout="row"
+                layout-align="center start"
+                flex>
+        <div layout="column"
+             flex="100"
+             layout-padding>
 
-            <div layout="row" layout-sm="column" layout-align="space-around center">
+            <div layout="row"
+                 layout-sm="column"
+                 layout-align="space-around center">
                 <md-progress-circular md-mode="indeterminate"
                                       ng-if="root.activated"
                                       class="md-primary"
