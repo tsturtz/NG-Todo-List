@@ -65,9 +65,13 @@
                 layout-padding>
 
         <span layout="row" flex="15">
-            <md-button class="" ng-click="root.openLeftMenu()">
+            <md-button ng-hide="root.firebaseUser" ng-click="root.openLeftMenu()">
                 <md-icon md-font-set="material-icons">account_circle</md-icon>
                 <span class="md-caption">Log In</span>
+            </md-button>
+            <md-button ng-show="root.firebaseUser" ng-click="root.openLeftMenu()">
+                <md-icon md-font-set="material-icons">account_circle</md-icon>
+                <span class="md-caption">Log Out</span>
             </md-button>
         </span>
 
@@ -156,7 +160,8 @@
                     <p class="md-subhead teal-text">{{ root.firebaseUser.email ? root.firebaseUser.email : 'demo@demo.com' }}</p>
                     <md-button class="md-raised md-accent"
                                ng-click="root.signOut()">
-                        <md-icon md-font-set="material-icons">person_outline</md-icon>Log Out
+                        <md-icon md-font-set="material-icons">person</md-icon>
+                        <span class="md-caption">Log Out</span>
                     </md-button>
                 </div>
                 <span></span>
