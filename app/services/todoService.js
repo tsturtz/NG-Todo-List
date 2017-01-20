@@ -1,6 +1,6 @@
 angular.module('todoApp')
 
-    .service('todoService', function ($firebaseArray, $firebaseAuth, $q) {
+    .service('todoService', function ($firebaseArray, $q) {
 
         // Initialize Firebase
         var config = {

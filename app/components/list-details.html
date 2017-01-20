@@ -1,5 +1,4 @@
 <md-list-item class="md-2-line">
-    <md-divider></md-divider>
     <div flex="15"></div>
     <div class="todo-row" layout="row" layout-align="center end" flex>
         <!--This div with the blank ng-repeat is a workaround for making the checkbox not clickable across the entire row-->
@@ -18,6 +17,9 @@
                        focus-if="focus">
             </md-input-container>
             <p class="date-display md-caption md-icon-button">
+                <span ng-show="$ctrl.todo.date"
+                      ng-class="$ctrl.compareDates($ctrl.todo.date)">{{$ctrl.todo.date | amDateFormat: 'll'}}</span>
+                <span ng-show="!$ctrl.todo.date" class="noDate">No due date set</span>
                 <md-icon ng-show="$ctrl.todo.date"
                          md-font-set="material-icons"
                          ng-click="$ctrl.setDate('')">cancel
@@ -32,9 +34,6 @@
                         Add Due Date
                     </md-tooltip>
                 </md-icon>
-                <span ng-show="$ctrl.todo.date"
-                      ng-class="$ctrl.compareDates($ctrl.todo.date)">{{$ctrl.todo.date | amDateFormat: 'll'}}</span>
-                <span ng-show="!$ctrl.todo.date" class="noDate">No due date set</span>
             </p>
         </md-list-item-text>
         <div class="button-row">
@@ -80,3 +79,4 @@
     </div>
     <div flex="15"></div>
 </md-list-item>
+<md-divider></md-divider>

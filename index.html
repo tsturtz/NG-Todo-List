@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
+    <!--Font Awesome for brand icons-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <!--To-Do Style Sheet-->
     <link rel="stylesheet" href="styles/style.css">
 
@@ -21,11 +24,14 @@
     <!--Angular Material Library-->
     <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
 
+    <!--Firebase Database-->
+    <!--<script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>-->
+    <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase-database.js"></script>
+
     <!--AngularFire-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angularFire/2.2.0/angularfire.min.js"></script>
-
-    <!--Firebase Database-->
-    <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
 
     <!--Input Focus on Render Directive-->
     <script src="https://rawgit.com/hiebj/ng-focus-if/master/focusIf.min.js"></script>
@@ -53,41 +59,85 @@
         <span layout="row" flex="15">
             <md-button ng-click="root.openLeftMenu()">
                 <md-icon md-font-set="material-icons">account_circle</md-icon>
-                Login
+                 Log In
             </md-button>
         </span>
 
-        <!--tdForm component-->
+        <!--Add Form component-->
         <td-form flex todos="root.todos"></td-form>
 
         <span flex="15"></span>
 
     </md-toolbar>
 
-    <md-sidenav md-component-id="left" class="md-sidenav-left" layout="column" layout-align="center center">
+    <md-sidenav md-component-id="left"
+                class="md-sidenav-left"
+                layout="column"
+                layout-align="center center"
+                md-is-open="true">
 
-        <div id="nav-login" layout="column" layout-align="center center" flex="80">
+        <span flex="10"></span>
+
+        <div class="app-title" layout="column" layout-align="center center">
+            <p class="md-caption">Angular Material & AngularFire</p>
+            <p class="md-display-1">ng-todo-list</p>
+            <p class="md-body-2">Developed by</p>
+            <md-button class="md-accent">
+                <a href="https://github.com/tsturtz">Taylor Sturtz <i class="fa fa-github"></i></a>
+            </md-button>
+        </div>
+
+        <span></span>
+
+        <div id="nav-login"
+             layout="column"
+             layout-align="center center"
+             flex>
             <md-input-container>
                 <label for="username">Username</label>
-                <input type="text" id="username">
+                <input type="text"
+                       id="username"
+                       ng-model="root.email">
             </md-input-container>
             <md-input-container>
                 <label for="password">Password</label>
-                <input type="text" id="password">
+                <input type="text"
+                       id="password"
+                       ng-model="root.password">
             </md-input-container>
-            <md-input-container>
-                <md-button class="md-raised md-primary">
+            <div layout="row">
+                <md-button class="md-raised md-primary" ng-click="root.loginUser(root.email, root.password)">
                     <md-icon md-font-set="material-icons">account_circle</md-icon>
-                    Log in
+                    Log In
                 </md-button>
-            </md-input-container>
+                <md-button class="md-raised md-primary" ng-click="root.createUser(root.email, root.password)">
+                    <md-icon md-font-set="material-icons">account_box</md-icon>
+                    Sign up
+                </md-button>
+            </div>
+            <div>
+                <md-button class="md-raised md-warn" ng-click="root.googleUserLogin()">
+                    <i class="fa fa-google"></i>
+                    Google Log In
+                </md-button>
+            </div>
+            <div>
+                <md-button class="" ng-click="root.signIn()">
+                    <md-icon md-font-set="material-icons">laptop_mac</md-icon>
+                    Demo Log In
+                </md-button>
+            </div>
         </div>
 
+        <span flex></span>
+
         <div id="nav-close">
-            <md-button ng-click="root.openLeftMenu()">
+            <md-button class="" ng-click="root.openLeftMenu()">
                 Close
             </md-button>
         </div>
+
+        <span flex="10"></span>
 
     </md-sidenav>
 
@@ -95,7 +145,11 @@
         <div flex="100" layout="column" layout-padding>
 
             <div layout="row" layout-sm="column" layout-align="space-around center">
-                <md-progress-circular md-mode="indeterminate" ng-if="root.activated" class="md-primary" md-diameter="50"></md-progress-circular>
+                <md-progress-circular md-mode="indeterminate"
+                                      ng-if="root.activated"
+                                      class="md-primary"
+                                      md-diameter="50">
+                </md-progress-circular>
             </div>
 
             <!--tdList component-->
