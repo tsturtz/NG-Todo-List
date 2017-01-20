@@ -1,6 +1,6 @@
 angular.module('todoApp')
 
-    .service('todoService', function ($firebaseArray, $q) {
+    .service('todoService', function ($firebaseArray) {
 
         // Initialize Firebase
         var config = {
@@ -15,8 +15,10 @@ angular.module('todoApp')
         // Create a reference to this service
         var svc = this;
 
-        svc.getTodos = function(where){
-            var ref = firebase.database().ref().child(where);
+        svc.getTodos = function(uid){
+            console.log(uid);
+            var ref = firebase.database().ref().child('users/' + uid);
+            console.log(ref);
             return $firebaseArray(ref);
         };
 

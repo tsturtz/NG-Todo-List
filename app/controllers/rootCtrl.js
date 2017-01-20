@@ -6,15 +6,33 @@ angular.module('todoApp')
 
         var auth = fbFactory;
 
+        //Initiate spinner
+        self.activated = true;
+
+        //Watch for authenticated user changes (signing in/out)
         auth.$onAuthStateChanged(function(firebaseUser) {
             self.firebaseUser = firebaseUser;
-            console.info(self.firebaseUser);
+            if (firebaseUser === null) {
+                //Bind todos array to default user
+                self.todos = todoService.getTodos('default');
+                //Turn off spinner after data is loaded
+                self.todos.$loaded(function (){
+                    self.activated = false;
+                });
+            } else {
+                //Bind todos array to currently logged in user
+                self.todos = todoService.getTodos(firebaseUser.uid);
+
+                //Turn off spinner after data is loaded
+                self.todos.$loaded(function (){
+                    self.activated = false;
+                });
+            }
         });
 
         //Sign out
         self.signOut = function () {
             auth.$signOut().then(function () {
-                console.log(self.firebaseUser);
                 self.showToastyToast('Successfully logged out.');
             }).catch(function(error) {
                 self.showToastyToast(error);
@@ -130,7 +148,7 @@ angular.module('todoApp')
             $mdToast.hide();
         };
 
-        //Initiate spinner
+        /*//Initiate spinner
         self.activated = true;
 
         //Bind todos array to Firebase through AngularFire
@@ -139,7 +157,7 @@ angular.module('todoApp')
         //Turn off spinner after data is initially loaded
         self.todos.$loaded(function (){
             self.activated = false;
-        });
+        });*/
 
         //Toggle the side menu
         self.openLeftMenu = function () {

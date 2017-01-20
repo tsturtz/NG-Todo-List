@@ -27,7 +27,7 @@
             </md-input-container>
             <p class="date-display md-caption md-icon-button">
                 <span ng-show="$ctrl.todo.date"
-                      class="grey-text">Due: {{$ctrl.todo.date | amDateFormat: 'll'}}</span>
+                      class="grey-text">Complete by: {{$ctrl.todo.date | amDateFormat: 'll'}}</span>
                 <span ng-show="!$ctrl.todo.date"
                       class="grey-text italic-text">No due date</span>
                 <md-icon ng-show="$ctrl.todo.date"
