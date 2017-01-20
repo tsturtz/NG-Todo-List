@@ -35,8 +35,8 @@ angular.module('todoApp', ['ngMaterial','firebase','focus-if','angularMoment'])
             'contrastLightColors': undefined    // could also specify this if default was 'dark'
         });
         $mdThemingProvider.theme('default')
-            .primaryPalette('indigo', {'default': '400'})
-            .accentPalette('teal', {'default': '500'})
+            .primaryPalette('teal', {'default': '500'})
+            .accentPalette('indigo', {'default': '400'})
             .warnPalette('deep-orange', {'default': '700'})
             .dark();
         $mdThemingProvider.theme('add')

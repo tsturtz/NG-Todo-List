@@ -46,6 +46,7 @@
     <script src="app/controllers/rootCtrl.js"></script>
     <!--Services-->
     <script src="app/services/todoService.js"></script>
+    <script src="app/services/fbAuthFactory.js"></script>
     <!--Components-->
     <script src="app/components/components.js"></script>
 
@@ -64,9 +65,9 @@
                 layout-padding>
 
         <span layout="row" flex="15">
-            <md-button ng-click="root.openLeftMenu()">
+            <md-button class="" ng-click="root.openLeftMenu()">
                 <md-icon md-font-set="material-icons">account_circle</md-icon>
-                 Log In
+                <span class="md-caption">Log In</span>
             </md-button>
         </span>
 
@@ -81,7 +82,8 @@
                 class="md-sidenav-left"
                 layout="column"
                 layout-align="center center"
-                md-is-open="true">
+                md-is-open="true"
+                md-whiteframe="10">
 
         <span flex="10"></span>
 
@@ -91,67 +93,86 @@
             <p class="md-body-1">Angular Material & AngularFire</p>
             <p class="md-display-1">ng-todo-list</p>
             <p class="md-body-2">Developed by</p>
-            <md-button class="md-accent">
-                <a href="https://github.com/tsturtz"><i class="fa fa-github"></i> Taylor Sturtz</a>
+            <md-button class="md-primary">
+                <a href="https://github.com/tsturtz">
+                    <i class="fa fa-github"></i>
+                    <span class="md-caption"> Taylor Sturtz</span>
+                </a>
             </md-button>
         </div>
 
-        <span></span>
+        <span flex></span>
 
         <div id="nav-login"
              layout="column"
-             layout-align="center center"
-             flex>
-            <md-input-container>
-                <label for="username">Username</label>
+             layout-align="center center">
+            <md-input-container ng-hide="root.firebaseUser">
+                <label for="username">Email</label>
                 <input type="text"
                        id="username"
                        ng-model="root.email">
             </md-input-container>
-            <md-input-container>
+            <span class="small-spacer"></span>
+            <md-input-container ng-hide="root.firebaseUser">
                 <label for="password">Password</label>
                 <input type="text"
                        id="password"
                        ng-model="root.password">
             </md-input-container>
-            <div layout="row">
-                <md-button class="md-raised md-accent"
+            <span class="small-spacer"></span>
+            <div layout="row" ng-hide="root.firebaseUser">
+                <md-button class="md-raised md-primary"
                            ng-click="root.loginUser(root.email, root.password)">
-                    <md-icon md-font-set="material-icons">account_circle</md-icon>
-                    Log In
+                    <md-icon md-font-set="material-icons">person</md-icon>
+                    <span class="md-caption">Log In</span>
                 </md-button>
-                <md-button class="md-raised md-accent"
+                <md-button class="md-raised md-primary"
                            ng-click="root.createUser(root.email, root.password)">
-                    <md-icon md-font-set="material-icons">account_box</md-icon>
-                    Sign up
+                    <md-icon md-font-set="material-icons">person_add</md-icon>
+                    <span class="md-caption">Sign up</span>
                 </md-button>
             </div>
-            <div>
-                <md-button class="md-raised md-primary"
+            <div ng-hide="root.firebaseUser">
+                <md-button class="md-raised md-accent"
                            ng-click="root.googleUserLogin()">
                     <i class="fa fa-google"></i>
-                    Google Log In
+                    <span class="md-caption">Google Log In</span>
                 </md-button>
             </div>
-            <div>
-                <md-button class="md-accent"
-                           ng-click="root.signIn()">
+            <div ng-hide="root.firebaseUser">
+                <md-button class="md-primary"
+                           ng-click="root.signInAnon()">
                     <a href="#"><i class="fa fa-laptop"></i>
-                    Demo Log In</a>
+                        <span class="md-caption">Demo Log In</span>
+                    </a>
                 </md-button>
+            </div>
+            <div ng-show="root.firebaseUser"
+                 layout="row"
+                 class="text-center">
+                <span></span>
+                <div flex>
+                    <p class="md-body-1">Currently logged in with email:</p>
+                    <p class="md-subhead teal-text">{{ root.firebaseUser.email ? root.firebaseUser.email : 'demo@demo.com' }}</p>
+                    <md-button class="md-raised md-accent"
+                               ng-click="root.signOut()">
+                        <md-icon md-font-set="material-icons">person_outline</md-icon>Log Out
+                    </md-button>
+                </div>
+                <span></span>
             </div>
         </div>
 
         <span flex></span>
 
         <div id="nav-close">
-            <md-button class="md-accent"
+            <md-button class="md-primary"
                        ng-click="root.openLeftMenu()">
                 <a href="#">Close</a>
             </md-button>
         </div>
 
-        <span flex="10"></span>
+        <span flex="5"></span>
 
     </md-sidenav>
 
@@ -165,10 +186,10 @@
 
             <div layout="row"
                  layout-sm="column"
-                 layout-align="space-around center">
+                 layout-align="center center">
                 <md-progress-circular md-mode="indeterminate"
                                       ng-if="root.activated"
-                                      class="md-primary"
+                                      class="md-accent"
                                       md-diameter="50">
                 </md-progress-circular>
             </div>

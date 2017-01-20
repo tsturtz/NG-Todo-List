@@ -1,13 +1,28 @@
 angular.module('todoApp')
 
-    .controller('rootCtrl', function ($firebaseAuth, $mdSidenav, $mdToast, todoService) {
+    .controller('rootCtrl', function ($mdSidenav, $mdToast, todoService, fbFactory) {
 
         var self = this;
 
-        var auth = $firebaseAuth();
+        var auth = fbFactory;
+
+        auth.$onAuthStateChanged(function(firebaseUser) {
+            self.firebaseUser = firebaseUser;
+            console.info(self.firebaseUser);
+        });
+
+        //Sign out
+        self.signOut = function () {
+            auth.$signOut().then(function () {
+                console.log(self.firebaseUser);
+                self.showToastyToast('Successfully logged out.');
+            }).catch(function(error) {
+                self.showToastyToast(error);
+            })
+        };
 
         //Sign In
-        self.signIn = function() {
+        self.signInAnon = function() {
             self.firebaseUser = null;
             self.error = null;
             auth.$signInAnonymously().then(function(firebaseUser) {
@@ -30,6 +45,8 @@ angular.module('todoApp')
                     console.log(firebaseUser);
                     console.log(self.message);
                     self.showToastyToast('User created with email: ' + self.email);
+                    self.email = '';
+                    self.password = '';
                 }).catch(function(error) {
                     self.error = error;
                     console.log(error);
@@ -52,6 +69,8 @@ angular.module('todoApp')
                     console.log(firebaseUser);
                     console.log(self.message);
                     self.showToastyToast('User logged in with email: ' + self.email);
+                    self.email = '';
+                    self.password = '';
                 }).catch(function(error) {
                     self.error = error;
                     console.log(error);
@@ -104,16 +123,8 @@ angular.module('todoApp')
             var pinTo = self.getToastPosition();
             var toast = $mdToast.simple()
                 .textContent(paramText)
-                .action('OK')
-                .highlightAction(true)
-                .highlightClass('md-primary')
                 .position(pinTo);
-
-            $mdToast.show(toast).then(function(response) {
-                if ( response == 'ok' ) {
-                    // whatever happens after toast 'OK' click
-                }
-            });
+            $mdToast.show(toast)
         };
         self.closeToast = function() {
             $mdToast.hide();

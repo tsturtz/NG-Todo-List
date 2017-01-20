@@ -1,21 +1,6 @@
-/*.td-center {
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: translate(-50%, -50%);
-}*/
-
 a {
     color: #fff;
     text-decoration: none;
-}
-
-.app-title p {
-    margin: 5px;
-}
-
-.app-title .md-display-1 {
-    color: #009688;
 }
 
 .fa {
@@ -23,20 +8,50 @@ a {
     vertical-align: sub;
 }
 
-.add-btn[disabled] {
-    color: #9e9e9e !important;
-    background-color: #424242 !important;
+.small-spacer {
+    height: 10px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.bold-text {
+    font-weight: bold;
+}
+
+.italic-text {
+    font-style: italic;
+}
+
+.blue-text {
+    color: #5C6BC0;
+}
+
+.grey-text {
+    color: #a9a9a9;
+}
+
+.app-title .md-display-1, .teal-text {
+    color: #009688;
+}
+
+md-backdrop.md-opaque.ng-enter {
+    opacity: 0.5;
+}
+
+.app-title p {
+    margin: 5px;
 }
 
 .todo-row {
     position: relative;
 }
+
 .task-row {
     margin-bottom: 0;
 }
-.button-row {
-    margin-bottom: 20px;
-}
+
 .checkbox-row .md-container {
     top: -50%;
 }
@@ -47,9 +62,10 @@ a {
 }
 .date-display md-icon {
     cursor: pointer;
+    outline: none;
 }
-.lateDate {
-    color: #E64A19;
+/*.lateDate {
+    color: #FF7043;
 }
 .warnDate {
     color: #FFAB91;
@@ -60,8 +76,7 @@ a {
 .noDate {
     color: #9e9e9e;
     font-style: italic;
-}
-
+}*/
 
 /*Tooltips*/
 md-tooltip .md-content {
@@ -69,7 +84,6 @@ md-tooltip .md-content {
     opacity: 1;
     color: black;
 }
-
 
 /*Checked items*/
 .todo-checked {
@@ -79,7 +93,6 @@ md-tooltip .md-content {
     font-style: italic;
     color: rgb(92,107,192);
 }
-
 
 /*Input container*/
 md-input-container .md-errors-spacer {
@@ -92,8 +105,20 @@ md-input-container.editing-input {
     width: 90%;
 }
 
-
-/*Datepicker*/
+/*Buttons*/
+.add-btn[disabled] {
+    color: #9e9e9e !important;
+    background-color: #424242 !important;
+}
+.add-btn {
+    margin-top: 0 !important;
+}
+.button-row {
+    margin-bottom: 20px;
+}
+.button-row button {
+    margin-right: 0;
+}
 .md-datepicker-input {
     display: none;
 }
@@ -113,7 +138,6 @@ md-input-container.editing-input {
     padding: 0;
 }
 
-
 /*Scrollbar*/
 #content-area::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
@@ -126,7 +150,6 @@ md-input-container.editing-input {
 #content-area::-webkit-scrollbar-thumb {
     background-color: rgb(92,107,192);
 }
-
 
 /*Sorting animations*/
 .ng-move {

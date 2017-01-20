@@ -77,14 +77,14 @@ function detailsCtrl ($timeout) {
 
     self.todaysDate = new Date();
 
-    self.compareDates = function (date) {
+    /*self.compareDates = function (date) {
         date = new Date(date);
         var diff = date.getTime() - self.todaysDate.getTime();
         self.overdueOrClose = diff <= 0 ? 'lateDate'
             : diff < 200000000 && diff > 0 ? 'warnDate'
             : 'okDate';
         return self.overdueOrClose;
-    };
+    };*/
 
     self.delete = function () {
         self.onDelete({todo: self.todo});

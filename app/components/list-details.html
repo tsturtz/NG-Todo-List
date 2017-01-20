@@ -7,7 +7,7 @@
         <!--This div with the blank ng-repeat is a workaround for making the checkbox not clickable across the entire row-->
         <div class="md-checkbox-div" ng-repeat="v in [0]" flex="10">
             <md-checkbox ng-model="$ctrl.todo.checked"
-                         class="md-primary checkbox-row"
+                         class="md-accent checkbox-row"
                          ng-disabled="editing"></md-checkbox>
         </div>
         <md-list-item-text flex>
@@ -27,19 +27,21 @@
             </md-input-container>
             <p class="date-display md-caption md-icon-button">
                 <span ng-show="$ctrl.todo.date"
-                      ng-class="$ctrl.compareDates($ctrl.todo.date)">{{$ctrl.todo.date | amDateFormat: 'll'}}</span>
+                      class="grey-text">Due: {{$ctrl.todo.date | amDateFormat: 'll'}}</span>
                 <span ng-show="!$ctrl.todo.date"
-                      class="noDate">No due date set</span>
+                      class="grey-text italic-text">No due date</span>
                 <md-icon ng-show="$ctrl.todo.date"
                          md-font-set="material-icons"
-                         ng-click="$ctrl.setDate('')">cancel
+                         ng-click="$ctrl.setDate('')"
+                         cancel="grey-text">cancel
                     <md-tooltip md-direction="right">
                         Remove Due Date
                     </md-tooltip>
                 </md-icon>
                 <md-icon ng-show="!$ctrl.todo.date"
                          md-font-set="material-icons"
-                         ng-click="todo.openDatepicker = true">add_circle
+                         ng-click="todo.openDatepicker = true"
+                         class="grey-text">add_circle
                     <md-tooltip md-direction="right">
                         Add Due Date
                     </md-tooltip>
@@ -47,7 +49,7 @@
             </p>
         </md-list-item-text>
         <div class="button-row">
-            <md-button class="md-fab md-mini md-primary datepicker-btn"
+            <md-button class="md-fab md-mini md-accent datepicker-btn"
                        ng-disabled="editing">
                 <md-datepicker ng-model="todoDate"
                                md-hide-icons="triangle"
@@ -59,8 +61,7 @@
                     Add/Edit Date
                 </md-tooltip>
             </md-button>
-            <md-button class="md-fab md-accent md-mini"
-                       ng-class="{'md-primary': todo.details.checked}"
+            <md-button class="md-fab md-primary md-mini"
                        ng-hide="editing"
                        ng-click="editing = true; focus = true;">
                 <md-icon md-font-set="material-icons">edit</md-icon>
@@ -68,8 +69,7 @@
                     Edit To-Do
                 </md-tooltip>
             </md-button>
-            <md-button class="md-fab md-accent md-mini"
-                       ng-class="{'md-primary': todo.details.checked}"
+            <md-button class="md-fab md-primary md-mini"
                        ng-show="editing"
                        ng-click="$ctrl.edit(update); editing = false;">
                 <md-icon md-font-set="material-icons">check</md-icon>
@@ -78,7 +78,6 @@
                 </md-tooltip>
             </md-button>
             <md-button class="md-fab md-warn md-mini"
-                       ng-class="{'md-primary': $ctrl.todo.checked}"
                        ng-disabled="editing"
                        ng-click="$ctrl.delete()">
                 <md-icon md-font-set="material-icons">delete</md-icon>
