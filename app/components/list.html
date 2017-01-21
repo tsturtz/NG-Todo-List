@@ -11,4 +11,70 @@
                      md-no-ink>
     </td-list-details>
 
+    <div layout="row" layout-align="center space-between" ng-cloak>
+        <span flex></span>
+        <md-card class="text-center" ng-hide="$ctrl.user" flex="40" layout-padding>
+            <p class="md-headline">
+                Hello & Welcome!
+            </p>
+            <div>
+                <span flex></span>
+                <md-button ng-click="$ctrl.menu()" class="md-primary md-raised">
+                    <span>log in</span></md-button>
+                <span flex></span>
+            </div>
+            <p class="md-subhead">to build out your own to-do list!</p>
+        </md-card>
+        <md-card class="text-center" ng-if="$ctrl.user" ng-hide="$ctrl.todos.length > 0" flex="40" layout-padding>
+            <p class="md-headline">
+                Get busy and start adding some to-dos!
+            </p>
+            <div class="button-demo-row">
+                <md-button class="md-fab md-mini md-accent datepicker-btn"
+                           ng-disabled="editDemo">
+                    <md-datepicker ng-model="needThisForTooltipToWork"
+                                   md-hide-icons="triangle">
+                    </md-datepicker>
+                    <md-tooltip md-direction="top">
+                        Add/Edit Date
+                    </md-tooltip>
+                </md-button>
+                <md-button class="md-fab md-primary md-mini"
+                           ng-hide="editDemo"
+                           ng-click="editDemo = true">
+                    <md-icon md-font-set="material-icons">edit</md-icon>
+                    <md-tooltip md-direction="top">
+                        Edit To-Do
+                    </md-tooltip>
+                </md-button>
+                <md-button class="md-fab md-primary md-mini"
+                           ng-show="editDemo"
+                           ng-click="editDemo = false">
+                    <md-icon md-font-set="material-icons">check</md-icon>
+                    <md-tooltip md-direction="top">
+                        Submit Edit
+                    </md-tooltip>
+                </md-button>
+                <md-button class="md-fab md-warn md-mini"
+                           ng-disabled="editDemo">
+                    <md-icon md-font-set="material-icons">delete</md-icon>
+                    <md-tooltip md-direction="top">
+                        Delete To-Do
+                    </md-tooltip>
+                </md-button>
+            </div>
+            <p class="md-subhead">
+                Once you add a task, you can edit, add a due date, delete it, or just mark it as checked (it will go to the bottom of your list).
+            </p>
+            <div>
+                <span flex></span>
+                <md-button ng-click="$ctrl.menu()" class="md-accent md-raised">
+                    <span class="md-caption">log out or switch user</span>
+                </md-button>
+                <span flex></span>
+            </div>
+        </md-card>
+        <span flex></span>
+    </div>
+
 </md-list>

@@ -4,7 +4,9 @@ angular.module('todoApp')
         templateUrl: './app/components/list.html',
         controller: listCtrl,
         bindings: {
-            todos: '<'
+            todos: '<',
+            user: '<',
+            toggleMenu: '&'
         }
     })
     //td-list-details
@@ -27,6 +29,7 @@ angular.module('todoApp')
         bindings: {
             todos: '<',
             todo: '<',
+            user: '<',
             onAdd: '&'
         }
     });
@@ -67,6 +70,10 @@ function listCtrl () {
         }, function(err){
             console.warn('Error setting date: ', err);
         });
+    };
+
+    self.menu = function () {
+        self.toggleMenu();
     };
 }
 /****************************************************************************************

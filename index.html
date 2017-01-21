@@ -65,18 +65,13 @@
                 layout-padding>
 
         <span layout="row" flex="15">
-            <md-button ng-hide="root.firebaseUser" ng-click="root.openLeftMenu()">
-                <md-icon md-font-set="material-icons">account_circle</md-icon>
-                <span class="md-caption">Log In</span>
-            </md-button>
-            <md-button ng-show="root.firebaseUser" ng-click="root.openLeftMenu()">
-                <md-icon md-font-set="material-icons">account_circle</md-icon>
-                <span class="md-caption">Log Out</span>
+            <md-button ng-click="root.openLeftMenu()">
+                <md-icon md-font-set="material-icons">menu</md-icon>
             </md-button>
         </span>
 
         <!--Add Form component-->
-        <td-form todos="root.todos" flex></td-form>
+        <td-form todos="root.todos" user="root.firebaseUser" flex></td-form>
 
         <span flex="15"></span>
 
@@ -86,7 +81,6 @@
                 class="md-sidenav-left"
                 layout="column"
                 layout-align="center center"
-                md-is-open="true"
                 md-whiteframe="10">
 
         <span flex="10"></span>
@@ -124,6 +118,11 @@
                        ng-model="root.password">
             </md-input-container>
             <span class="small-spacer"></span>
+            <md-progress-circular md-mode="indeterminate"
+                                  ng-if="root.loginSpinner"
+                                  class="md-accent"
+                                  md-diameter="30">
+            </md-progress-circular>
             <div layout="row" ng-hide="root.firebaseUser">
                 <md-button class="md-raised md-primary"
                            ng-click="root.loginUser(root.email, root.password)">
@@ -200,7 +199,10 @@
             </div>
 
             <!--tdList component-->
-            <td-list todos="root.todos"></td-list>
+            <td-list user="root.firebaseUser"
+                     todos="root.todos"
+                     toggle-menu="root.openLeftMenu()">
+            </td-list>
 
         </div>
     </md-content>

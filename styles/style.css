@@ -50,6 +50,8 @@ md-backdrop.md-opaque.ng-enter {
 
 .task-row {
     margin-bottom: 0;
+    max-width: 50vw;
+    word-wrap: break-word;
 }
 
 .checkbox-row .md-container {
@@ -117,6 +119,10 @@ md-input-container.editing-input {
     margin-bottom: 20px;
 }
 .button-row button {
+    margin-right: 0;
+}
+.button-demo-row {
+    margin-bottom: 0;
     margin-right: 0;
 }
 .md-datepicker-input {

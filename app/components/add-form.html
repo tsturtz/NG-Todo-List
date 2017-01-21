@@ -4,12 +4,20 @@
         <input id="add-todo"
                type="text"
                ng-model="$ctrl.todo.task"
-               ng-keyup="($event.which === 13) && $ctrl.addItem($ctrl.todo)">
+               ng-keyup="($event.which === 13) && $ctrl.addItem($ctrl.todo)"
+               maxlength="140">
     </md-input-container>
 
     <md-button class="md-fab md-warn add-btn"
                ng-click="$ctrl.addItem($ctrl.todo)"
                ng-disabled="!$ctrl.todo.task">
         <md-icon md-font-set="material-icons">note_add</md-icon>
+        <md-tooltip md-direction="right">
+        Add a todo
+        </md-tooltip>
     </md-button>
+
+    <md-tooltip ng-if="!$ctrl.user" md-direction="bottom">
+        Login to add a to-do!
+    </md-tooltip>
 </div>

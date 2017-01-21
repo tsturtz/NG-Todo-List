@@ -6,24 +6,23 @@ angular.module('todoApp')
 
         var auth = fbFactory;
 
-        //Initiate spinner
-        self.activated = true;
+        self.todos = [];
 
         //Watch for authenticated user changes (signing in/out)
         auth.$onAuthStateChanged(function(firebaseUser) {
             self.firebaseUser = firebaseUser;
+            //Initiate spinner
+            self.activated = true;
             if (firebaseUser === null) {
-                //Bind todos array to default user
-                self.todos = todoService.getTodos('default');
-                //Turn off spinner after data is loaded
-                self.todos.$loaded(function (){
-                    self.activated = false;
-                });
+                //Empty todos array
+                self.todos = [];
+                //Resolve spinner
+                self.activated = false;
             } else {
                 //Bind todos array to currently logged in user
                 self.todos = todoService.getTodos(firebaseUser.uid);
 
-                //Turn off spinner after data is loaded
+                //Resolve spinner after data is loaded
                 self.todos.$loaded(function (){
                     self.activated = false;
                 });
@@ -32,23 +31,34 @@ angular.module('todoApp')
 
         //Sign out
         self.signOut = function () {
+            //Initiate spinner
             auth.$signOut().then(function () {
+                //Resolve spinner
+                self.loginSpinner = false;
                 self.showToastyToast('Successfully logged out.');
             }).catch(function(error) {
+                //Resolve spinner
+                self.loginSpinner = false;
                 self.showToastyToast(error);
             })
         };
 
         //Sign In
         self.signInAnon = function() {
+            //Initiate spinner
+            self.loginSpinner = true;
             self.firebaseUser = null;
             self.error = null;
             auth.$signInAnonymously().then(function(firebaseUser) {
                 self.firebaseUser = firebaseUser;
                 console.info('anon user id: ' + self.firebaseUser.uid);
+                //Resolve spinner
+                self.loginSpinner = false;
                 self.showToastyToast('Signed in anonymously.');
             }).catch(function(error) {
                 self.error = error;
+                //Resolve spinner
+                self.loginSpinner = false;
                 self.showToastyToast(self.error);
             });
         };
@@ -57,21 +67,29 @@ angular.module('todoApp')
         self.createUser = function() {
             self.message = null;
             self.error = null;
+            //Initiate spinner
+            self.loginSpinner = true;
             try {
                 auth.$createUserWithEmailAndPassword(self.email, self.password).then(function(firebaseUser) {
                     self.message = firebaseUser.uid;
                     console.log(firebaseUser);
                     console.log(self.message);
+                    //Resolve spinner
+                    self.loginSpinner = false;
                     self.showToastyToast('User created with email: ' + self.email);
                     self.email = '';
                     self.password = '';
                 }).catch(function(error) {
                     self.error = error;
                     console.log(error);
+                    //Resolve spinner
+                    self.loginSpinner = false;
                     self.showToastyToast(self.error.message);
                 });
             }
             catch(err) {
+                //Resolve spinner
+                self.loginSpinner = false;
                 self.showToastyToast('You need to feed me your email and password.');
                 console.log(err);
             }
@@ -81,21 +99,29 @@ angular.module('todoApp')
         self.loginUser = function() {
             self.message = null;
             self.error = null;
+            //Initiate spinner
+            self.loginSpinner = true;
             try {
                 auth.$signInWithEmailAndPassword(self.email, self.password).then(function(firebaseUser) {
                     self.message = firebaseUser.uid;
                     console.log(firebaseUser);
                     console.log(self.message);
+                    //Resolve spinner
+                    self.loginSpinner = false;
                     self.showToastyToast('User logged in with email: ' + self.email);
                     self.email = '';
                     self.password = '';
                 }).catch(function(error) {
                     self.error = error;
                     console.log(error);
+                    //Resolve spinner
+                    self.loginSpinner = false;
                     self.showToastyToast(self.error.message);
                 });
             }
             catch(err) {
+                //Resolve spinner
+                self.loginSpinner = false;
                 self.showToastyToast('You need to feed me your email and password.');
                 console.log(err);
             }
@@ -105,19 +131,27 @@ angular.module('todoApp')
         self.googleUserLogin = function() {
             self.message = null;
             self.error = null;
+            //Initiate spinner
+            self.loginSpinner = true;
             try {
                 auth.$signInWithPopup('google').then(function(result) {
                     self.message = result.user.uid;
                     console.log(result);
                     console.log(self.message);
+                    //Resolve spinner
+                    self.loginSpinner = false;
                     self.showToastyToast('You are now logged in through Google.');
                 }).catch(function(error) {
                     self.error = error;
                     console.log(error);
+                    //Resolve spinner
+                    self.loginSpinner = false;
                     self.showToastyToast(self.error.message);
                 });
             }
             catch(err) {
+                //Resolve spinner
+                self.loginSpinner = false;
                 self.showToastyToast('Something went wrong logging in through Google.');
                 console.log(err);
             }
@@ -141,7 +175,10 @@ angular.module('todoApp')
             var pinTo = self.getToastPosition();
             var toast = $mdToast.simple()
                 .textContent(paramText)
-                .position(pinTo);
+                .position(pinTo)
+                .action('OK')
+                .highlightAction(true)
+                .highlightClass('md-primary');
             $mdToast.show(toast)
         };
         self.closeToast = function() {
