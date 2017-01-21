@@ -92,10 +92,10 @@ md-tooltip .md-content {
 }
 
 /*Checked items*/
-.todo-checked {
+.todo-check {
     background-color: rgba(0,0,0,.1);
 }
-.todo-checked p {
+.todo-check p {
     font-style: italic;
     color: #D32F2F;
 }

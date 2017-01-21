@@ -1,6 +1,6 @@
 <md-list layout="column">
 
-    <td-list-details ng-class="{'todo-checked': todo.checked}"
+    <td-list-details ng-class="{'todo-check': todo.check}"
                      ng-repeat="todo in $ctrl.todos | orderBy: 'todo-checked' : true"
                      ng-animate="todo"
                      ng-init="todo.checked = false"
@@ -17,9 +17,7 @@
                  ng-hide="$ctrl.user"
                  flex="40"
                  layout-padding>
-            <p class="md-headline">
-                Hello & Welcome!
-            </p>
+            <p class="md-headline">Hello & Welcome!</p>
             <div>
                 <span flex></span>
                 <md-button ng-click="$ctrl.menu()"
@@ -27,7 +25,7 @@
                     <span>log in</span></md-button>
                 <span flex></span>
             </div>
-            <p class="md-subhead">to build out your own to-do list!</p>
+            <p class="md-subhead">Please log in to build your own to-do list.</p>
         </md-card>
         <md-card class="text-center"
                  ng-if="$ctrl.user"

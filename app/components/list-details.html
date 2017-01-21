@@ -6,9 +6,10 @@
          flex>
         <!--This div with the blank ng-repeat is a workaround for making the checkbox not clickable across the entire row-->
         <div class="md-checkbox-div" ng-repeat="v in [0]" flex="10">
-            <md-checkbox ng-model="$ctrl.todo.checked"
-                         class="md-primary italic-text red-text checkbox-row"
-                         ng-disabled="editing"></md-checkbox>
+            <md-checkbox ng-model="$ctrl.todo.check"
+                         ng-change="$ctrl.edit()"
+                         class="md-primary italic-text red-text checkbox-row">
+            </md-checkbox>
         </div>
         <md-list-item-text flex>
             <p ng-hide="editing"
@@ -23,7 +24,8 @@
                        ng-model="update"
                        ng-blur="editing = false; $ctrl.edit(update); focus = false;"
                        ng-keyup="($event.which === 13) ? editing = false : editing = true"
-                       focus-if="focus">
+                       focus-if="focus"
+                       maxlength="140">
             </md-input-container>
             <p class="date-display md-caption md-icon-button">
                 <span ng-show="$ctrl.todo.date"

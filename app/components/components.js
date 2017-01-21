@@ -15,8 +15,6 @@ angular.module('todoApp')
         controller: detailsCtrl,
         bindings: {
             todo: '<',
-            update: '<',
-            date: '<',
             onDelete: '&',
             onEdit: '&',
             onUpdate: '&'
@@ -50,7 +48,9 @@ function listCtrl () {
     };
 
     self.editTodo = function (todo, update) {
-        todo.task = update;
+        if (update !== undefined) {
+            todo.task = update;
+        }
         self.todos.$save(todo).then(function(ref){
             console.log('Item edited: ', ref);
             console.info('Updated list: ', self.todos);
@@ -71,7 +71,7 @@ function listCtrl () {
             console.warn('Error setting date: ', err);
         });
     };
-
+    //Call sidenav toggle function in root controller
     self.menu = function () {
         self.toggleMenu();
     };
@@ -81,29 +81,17 @@ function listCtrl () {
  ****************************************************************************************/
 function detailsCtrl ($timeout) {
     var self = this;
-
+    //Get todays date for min attribute on datepicker input (can't set a past due date)
     self.todaysDate = new Date();
-
-    /*self.compareDates = function (date) {
-        date = new Date(date);
-        var diff = date.getTime() - self.todaysDate.getTime();
-        self.overdueOrClose = diff <= 0 ? 'lateDate'
-            : diff < 200000000 && diff > 0 ? 'warnDate'
-            : 'okDate';
-        return self.overdueOrClose;
-    };*/
-
+    //Send parameters up to listCtrl
     self.delete = function () {
         self.onDelete({todo: self.todo});
     };
-
+    //Send parameters up to listCtrl
     self.edit = function (update) {
-        if (update === undefined) {
-            return;
-        }
         self.onEdit({todo: self.todo, update: update});
     };
-
+    //Send parameters up to listCtrl
     self.setDate = function (date) {
         if (date === undefined) {
             return;
@@ -117,14 +105,12 @@ function detailsCtrl ($timeout) {
  ****************************************************************************************/
 function formCtrl () {
     var self = this;
-
     self.addItem = function (todo) {
         console.log(todo);
         console.info(self.todos);
         if (todo === undefined) {
             return;
         }
-        todo.checked = false;
         self.todos.$add(todo).then(function(){
             self.todo = {};
             console.info('Todo added!');
