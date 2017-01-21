@@ -35,14 +35,14 @@ angular.module('todoApp', ['ngMaterial','firebase','focus-if','angularMoment'])
             'contrastLightColors': undefined    // could also specify this if default was 'dark'
         });
         $mdThemingProvider.theme('default')
-            .primaryPalette('red', {'default': '900'})
+            .primaryPalette('red', {'default': '500'})
             .accentPalette('indigo', {'default': '300'})
             .warnPalette('indigo', {'default': '700'})
             /*.backgroundPalette('blue-grey', {'default': '900'})*/
             .dark();
         $mdThemingProvider.theme('add')
             .primaryPalette('white', {'default': '300'})
-            .accentPalette('red', {'default': '900'})
+            .accentPalette('red', {'default': '500'})
             .warnPalette('indigo', {'default': '700'})
             .dark();
     });

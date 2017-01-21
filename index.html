@@ -1,52 +1,52 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="todoApp">
+<html lang="en" ng-app="todoApp" ng-cloak>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>To-do List | Taylor Sturtz</title>
 
-    <!--Angular Material Style Sheets-->
+    <!--Angular Material style sheet-->
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+
+    <!--Angular Material font icons-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     <!--Font Awesome for brand icons-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <!--To-Do Style Sheet-->
+    <!--Custom style sheet-->
     <link rel="stylesheet" href="styles/style.css">
 
-    <!--Angular.js Libraries-->
+    <!--Angular.js-->
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
 
-    <!--Angular Material Library-->
+    <!--Angular Material-->
     <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
 
-    <!--Firebase Database-->
-    <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase-database.js"></script>
+    <!--Firebase-->
+    <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
 
     <!--AngularFire-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angularFire/2.2.0/angularfire.min.js"></script>
 
-    <!--Input Focus on Render Directive-->
+    <!--Input focus on render directive-->
     <script src="https://rawgit.com/hiebj/ng-focus-if/master/focusIf.min.js"></script>
 
-    <!--MomentJS and Angular Moment-->
+    <!--Moment.js Angular Moment-->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/1.0.1/angular-moment.min.js"></script>
 
-    <!--To-Do App-->
+    <!--App configuration-->
     <script src="app/app.js"></script>
-    <!--Controller-->
+    <!--Root controller-->
     <script src="app/controllers/rootCtrl.js"></script>
     <!--Services-->
     <script src="app/services/todoService.js"></script>
     <script src="app/services/fbAuthFactory.js"></script>
-    <!--Components-->
+    <!--Individual components-->
     <script src="app/components/components.js"></script>
 
 </head>
@@ -82,23 +82,7 @@
                 layout-align="center center"
                 md-whiteframe="10">
 
-        <span flex="10"></span>
-
-        <div class="app-title"
-             layout="column"
-             layout-align="center center">
-            <p class="md-body-1 red-text">AngularFire & AngularMaterial</p>
-            <p class="md-display-1">To-do List</p>
-            <p class="md-body-2 indigo-lt-text">Developed by</p>
-            <md-button class="md-accent">
-                <a href="https://github.com/tsturtz">
-                    <i class="fa fa-github"></i>
-                    <span class="md-caption"> Taylor Sturtz</span>
-                </a>
-            </md-button>
-        </div>
-
-        <span flex></span>
+        <span flex="20"></span>
 
         <div id="nav-login"
              layout="column"
@@ -143,26 +127,47 @@
             </div>
             <div ng-hide="root.firebaseUser">
                 <md-button class="md-accent"
-                           ng-click="root.signInAnon()">
+                           ng-click="root.signInDemo()">
                     <a href="#"><i class="fa fa-laptop"></i>
                         <span class="md-caption">Demo Log In</span>
                     </a>
                 </md-button>
             </div>
+            <span class="small-spacer"></span>
+            <div ng-hide="root.firebaseUser">
+                <md-input-container ng-hide="root.firebaseUser">
+                    <label for="reset-password">Your email</label>
+                    <input type="text"
+                           id="reset-password"
+                           ng-model="root.emailForReset">
+                </md-input-container>
+            </div>
+            <div ng-hide="root.firebaseUser">
+                <md-button class="md-accent"
+                           ng-click="root.resetPassword(root.emailForReset)">
+                    <span class="md-caption">Reset password</span>
+                </md-button>
+            </div>
             <div ng-show="root.firebaseUser"
-                 layout="row"
+                 layout="column"
                  class="text-center">
-                <span></span>
                 <div flex>
-                    <p class="md-body-1">Currently logged in with email:</p>
-                    <p class="md-subhead indigo-lt-text">{{ root.firebaseUser.email ? root.firebaseUser.email : 'demo@demo.com' }}</p>
-                    <md-button class="md-raised md-primary"
-                               ng-click="root.signOut()">
-                        <md-icon md-font-set="material-icons">person</md-icon>
-                        <span class="md-caption">Log Out</span>
-                    </md-button>
+                    <p class="md-title">Logged in as:</p>
+                    <p class="md-subhead indigo-lt-text">{{ root.firebaseUser.email }}</p>
+                    <span class="small-spacer"></span>
+                    <div layout="column">
+                        <md-button class="md-raised md-accent"
+                                   ng-click="root.signOut()">
+                            <md-icon md-font-set="material-icons">person</md-icon>
+                            <span class="md-caption">Log Out</span>
+                        </md-button>
+                        <md-button class="md-primary"
+                                   ng-click="root.deleteAcct()">
+                            <md-icon md-font-set="material-icons">close</md-icon>
+                            <span class="md-caption">Delete Account</span>
+                        </md-button>
+                    </div>
                 </div>
-                <span></span>
             </div>
         </div>
 
@@ -200,7 +205,8 @@
             <!--tdList component-->
             <td-list user="root.firebaseUser"
                      todos="root.todos"
-                     toggle-menu="root.openLeftMenu()">
+                     toggle-menu="root.openLeftMenu()"
+                     ng-cloak>
             </td-list>
 
         </div>

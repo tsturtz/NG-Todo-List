@@ -1,3 +1,7 @@
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
 a {
     color: #fff;
     text-decoration: none;
@@ -6,6 +10,18 @@ a {
 .fa {
     font-size: 22px;
     vertical-align: sub;
+}
+
+.app-title h1 {
+    line-height: 30px;
+}
+
+.app-title .dev-btn {
+    margin-top: 10px;
+}
+
+.app-title .login-btn {
+    margin-bottom: 20px;
 }
 
 .small-spacer {
@@ -25,7 +41,7 @@ a {
 }
 
 .red-text {
-    color: #D32F2F;
+    color: #F44336;
 }
 
 .indigo-lt-text {
@@ -42,10 +58,6 @@ a {
 
 md-backdrop.md-opaque.ng-enter {
     opacity: 0.5;
-}
-
-.app-title p {
-    margin: 5px;
 }
 
 .todo-row {

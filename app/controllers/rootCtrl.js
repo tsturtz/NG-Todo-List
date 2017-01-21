@@ -29,38 +29,36 @@ angular.module('todoApp')
             }
         });
 
-        //Sign out
-        self.signOut = function () {
-            //Initiate spinner
-            auth.$signOut().then(function () {
-                //Resolve spinner
-                self.loginSpinner = false;
-                self.showToastyToast('Successfully logged out.');
-            }).catch(function(error) {
-                //Resolve spinner
-                self.loginSpinner = false;
-                self.showToastyToast(error);
-            })
-        };
-
-        //Sign In
-        self.signInAnon = function() {
+        //Sign In as Demo
+        self.signInDemo = function() {
+            self.message = null;
+            self.error = null;
             //Initiate spinner
             self.loginSpinner = true;
-            self.firebaseUser = null;
-            self.error = null;
-            auth.$signInAnonymously().then(function(firebaseUser) {
-                self.firebaseUser = firebaseUser;
-                console.info('anon user id: ' + self.firebaseUser.uid);
+            try {
+                auth.$signInWithEmailAndPassword('demo@demo.com', 'pass123').then(function(firebaseUser) {
+                    self.message = firebaseUser.uid;
+                    console.log(firebaseUser);
+                    console.log(self.message);
+                    //Resolve spinner
+                    self.loginSpinner = false;
+                    self.showToastyToast('Demo email: demo@demo.com & password: pass123');
+                    self.email = '';
+                    self.password = '';
+                }).catch(function(error) {
+                    self.error = error;
+                    console.log(error);
+                    //Resolve spinner
+                    self.loginSpinner = false;
+                    self.showToastyToast(self.error.message);
+                });
+            }
+            catch(err) {
                 //Resolve spinner
                 self.loginSpinner = false;
-                self.showToastyToast('Signed in anonymously.');
-            }).catch(function(error) {
-                self.error = error;
-                //Resolve spinner
-                self.loginSpinner = false;
-                self.showToastyToast(self.error);
-            });
+                self.showToastyToast('There was a problem logging in with the demo account.');
+                console.log(err);
+            }
         };
 
         //Create New User
@@ -153,6 +151,68 @@ angular.module('todoApp')
                 //Resolve spinner
                 self.loginSpinner = false;
                 self.showToastyToast('Something went wrong logging in through Google.');
+                console.log(err);
+            }
+        };
+
+        //Sign out
+        self.signOut = function () {
+            //Initiate spinner
+            auth.$signOut().then(function () {
+                //Resolve spinner
+                self.loginSpinner = false;
+                self.showToastyToast('Successfully logged out.');
+            }).catch(function(error) {
+                //Resolve spinner
+                self.loginSpinner = false;
+                self.showToastyToast(error);
+            })
+        };
+
+        self.resetPassword = function () {
+            //Initiate spinner
+            self.loginSpinner = true;
+            try {
+                auth.$sendPasswordResetEmail(self.emailForReset).then(function() {
+                    //Resolve spinner
+                    self.loginSpinner = false;
+                    self.showToastyToast('Reset password email has been sent.');
+                }).catch(function(error) {
+                    self.error = error;
+                    console.log(error);
+                    //Resolve spinner
+                    self.loginSpinner = false;
+                    self.showToastyToast(self.error.message);
+                });
+            }
+            catch(err) {
+                //Resolve spinner
+                self.loginSpinner = false;
+                self.showToastyToast('Something went wrong sending the reset password email.');
+                console.log(err);
+            }
+        };
+
+        self.deleteAcct = function () {
+            //Initiate spinner
+            self.loginSpinner = true;
+            try {
+                auth.$deleteUser().then(function() {
+                    //Resolve spinner
+                    self.loginSpinner = false;
+                    self.showToastyToast('Account successfully deleted.');
+                }).catch(function(error) {
+                    self.error = error;
+                    console.log(error);
+                    //Resolve spinner
+                    self.loginSpinner = false;
+                    self.showToastyToast(self.error.message);
+                });
+            }
+            catch(err) {
+                //Resolve spinner
+                self.loginSpinner = false;
+                self.showToastyToast('Something went wrong sending the reset password email.');
                 console.log(err);
             }
         };
