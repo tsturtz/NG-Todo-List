@@ -47,7 +47,7 @@
                         Add/Edit Date
                     </md-tooltip>
                 </md-button>
-                <md-button class="md-fab md-primary md-mini"
+                <md-button class="md-fab md-accent md-mini"
                            ng-hide="editDemo"
                            ng-click="editDemo = true">
                     <md-icon md-font-set="material-icons">edit</md-icon>
@@ -55,7 +55,7 @@
                         Edit To-Do
                     </md-tooltip>
                 </md-button>
-                <md-button class="md-fab md-primary md-mini"
+                <md-button class="md-fab md-accent md-mini"
                            ng-show="editDemo"
                            ng-click="editDemo = false">
                     <md-icon md-font-set="material-icons">check</md-icon>
@@ -63,7 +63,7 @@
                         Submit Edit
                     </md-tooltip>
                 </md-button>
-                <md-button class="md-fab md-warn md-mini"
+                <md-button class="md-fab md-primary md-mini"
                            ng-disabled="editDemo">
                     <md-icon md-font-set="material-icons">delete</md-icon>
                     <md-tooltip md-direction="top">
@@ -74,14 +74,6 @@
             <p class="md-subhead">
                 Once you add a task, you can edit, add a due date, delete it, or just mark it as checked (it will go to the bottom of your list).
             </p>
-            <div>
-                <span flex></span>
-                <md-button ng-click="$ctrl.menu()"
-                           class="md-accent md-raised">
-                    <span class="md-caption">log out</span>
-                </md-button>
-                <span flex></span>
-            </div>
         </md-card>
         <span flex></span>
     </div>

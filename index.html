@@ -59,7 +59,7 @@
 
     <md-toolbar layout="row"
                 md-whiteframe="8"
-                class="md-accent md-medium-tall"
+                class="md-accent"
                 md-theme="add"
                 layout-padding>
 
@@ -87,10 +87,10 @@
         <div class="app-title"
              layout="column"
              layout-align="center center">
-            <p class="md-body-1">Angular Material & AngularFire</p>
-            <p class="md-display-1">ng-todo-list</p>
-            <p class="md-body-2">Developed by</p>
-            <md-button class="md-primary">
+            <p class="md-body-1 red-text">AngularMaterial & AngularFire</p>
+            <p class="md-display-1">To-do List</p>
+            <p class="md-body-2 indigo-lt-text">Developed by</p>
+            <md-button class="md-accent">
                 <a href="https://github.com/tsturtz">
                     <i class="fa fa-github"></i>
                     <span class="md-caption"> Taylor Sturtz</span>
@@ -142,7 +142,7 @@
                 </md-button>
             </div>
             <div ng-hide="root.firebaseUser">
-                <md-button class="md-primary"
+                <md-button class="md-accent"
                            ng-click="root.signInAnon()">
                     <a href="#"><i class="fa fa-laptop"></i>
                         <span class="md-caption">Demo Log In</span>
@@ -155,8 +155,8 @@
                 <span></span>
                 <div flex>
                     <p class="md-body-1">Currently logged in with email:</p>
-                    <p class="md-subhead teal-text">{{ root.firebaseUser.email ? root.firebaseUser.email : 'demo@demo.com' }}</p>
-                    <md-button class="md-raised md-accent"
+                    <p class="md-subhead indigo-lt-text">{{ root.firebaseUser.email ? root.firebaseUser.email : 'demo@demo.com' }}</p>
+                    <md-button class="md-raised md-primary"
                                ng-click="root.signOut()">
                         <md-icon md-font-set="material-icons">person</md-icon>
                         <span class="md-caption">Log Out</span>
