@@ -13,19 +13,27 @@
 
     <div layout="row" layout-align="center space-between" ng-cloak>
         <span flex></span>
-        <md-card class="text-center" ng-hide="$ctrl.user" flex="40" layout-padding>
+        <md-card class="text-center"
+                 ng-hide="$ctrl.user"
+                 flex="40"
+                 layout-padding>
             <p class="md-headline">
                 Hello & Welcome!
             </p>
             <div>
                 <span flex></span>
-                <md-button ng-click="$ctrl.menu()" class="md-primary md-raised">
+                <md-button ng-click="$ctrl.menu()"
+                           class="md-primary md-raised">
                     <span>log in</span></md-button>
                 <span flex></span>
             </div>
             <p class="md-subhead">to build out your own to-do list!</p>
         </md-card>
-        <md-card class="text-center" ng-if="$ctrl.user" ng-hide="$ctrl.todos.length > 0" flex="40" layout-padding>
+        <md-card class="text-center"
+                 ng-if="$ctrl.user"
+                 ng-hide="$ctrl.todos.length > 0"
+                 flex="40"
+                 layout-padding>
             <p class="md-headline">
                 Get busy and start adding some to-dos!
             </p>
@@ -68,8 +76,9 @@
             </p>
             <div>
                 <span flex></span>
-                <md-button ng-click="$ctrl.menu()" class="md-accent md-raised">
-                    <span class="md-caption">log out or switch user</span>
+                <md-button ng-click="$ctrl.menu()"
+                           class="md-accent md-raised">
+                    <span class="md-caption">log out</span>
                 </md-button>
                 <span flex></span>
             </div>
