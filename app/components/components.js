@@ -6,7 +6,8 @@ angular.module('todoApp')
         bindings: {
             todos: '<',
             user: '<',
-            toggleMenu: '&'
+            toggleMenu: '&',
+            demo: '&'
         }
     })
     //td-list-details
@@ -75,6 +76,11 @@ function listCtrl () {
     self.menu = function () {
         self.toggleMenu();
     };
+    //Call sign in demo function in root controller
+    self.loginDemo = function() {
+        self.demo();
+        self.toggleMenu();
+    }
 }
 /****************************************************************************************
  * td-list-details controller

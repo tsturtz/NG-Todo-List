@@ -3,7 +3,7 @@
 }
 
 a {
-    color: #fff;
+    color: #000;
     text-decoration: none;
 }
 
@@ -12,16 +12,52 @@ a {
     vertical-align: sub;
 }
 
-.app-title h1 {
-    line-height: 30px;
-}
-
 .app-title .dev-btn {
     margin-top: 10px;
 }
-
 .app-title .login-btn {
     margin-bottom: 20px;
+}
+.app-title h1.logo-text {
+    vertical-align: middle;
+    line-height: 30px;
+}
+.app-title .check-logo {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    font-size: 60px;
+    color: #F44336;
+    cursor: default;
+}
+
+/*Sidenav*/
+.md-sidenav-left .check-logo {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 40px;
+    color: #F44336;
+    cursor: default;
+}
+.md-sidenav-left span.logo-text {
+    vertical-align: middle;
+    line-height: 30px;
+}
+.md-sidenav-left .user-logged-in {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    font-size: 60px;
+    color: #7986CB;
+    cursor: default;
+}
+
+md-tooltip .md-content span {
+    color: white;
 }
 
 .small-spacer {
@@ -109,7 +145,7 @@ md-tooltip .md-content {
 }
 .todo-check p {
     font-style: italic;
-    color: #D32F2F;
+    color: #7986CB;
 }
 
 /*Input container*/
@@ -158,6 +194,9 @@ md-input-container.editing-input {
 }
 
 /*Scrollbar*/
+#content-area {
+    overflow-x: hidden;
+}
 #content-area::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
     background-color: rgba(0,0,0,0);
@@ -167,7 +206,7 @@ md-input-container.editing-input {
     background-color: rgba(0,0,0,.2);
 }
 #content-area::-webkit-scrollbar-thumb {
-    background-color: rgb(92,107,192);
+    background-color: #7986CB;
 }
 
 /*Sorting animations*/

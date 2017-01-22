@@ -35,7 +35,7 @@
                 <md-icon ng-show="$ctrl.todo.date"
                          md-font-set="material-icons"
                          ng-click="$ctrl.setDate('')"
-                         cancel="grey-text">cancel
+                         class="grey-text">cancel
                     <md-tooltip md-direction="right">
                         Remove Due Date
                     </md-tooltip>
@@ -51,7 +51,7 @@
             </p>
         </md-list-item-text>
         <div class="button-row">
-            <md-button class="md-fab md-mini md-accent datepicker-btn"
+            <md-button class="md-fab md-mini md-warn datepicker-btn"
                        ng-disabled="editing">
                 <md-datepicker ng-model="todoDate"
                                md-hide-icons="triangle"
@@ -63,7 +63,7 @@
                     Add/Edit Date
                 </md-tooltip>
             </md-button>
-            <md-button class="md-fab md-accent md-mini"
+            <md-button class="md-fab md-primary md-mini"
                        ng-hide="editing"
                        ng-click="editing = true; focus = true;">
                 <md-icon md-font-set="material-icons">edit</md-icon>
@@ -71,7 +71,7 @@
                     Edit To-Do
                 </md-tooltip>
             </md-button>
-            <md-button class="md-fab md-accent md-mini"
+            <md-button class="md-fab md-primary md-mini"
                        ng-show="editing"
                        ng-click="$ctrl.edit(update); editing = false;">
                 <md-icon md-font-set="material-icons">check</md-icon>
@@ -79,7 +79,7 @@
                     Submit Edit
                 </md-tooltip>
             </md-button>
-            <md-button class="md-fab md-primary md-mini"
+            <md-button class="md-fab md-accent md-mini"
                        ng-disabled="editing"
                        ng-click="$ctrl.delete()">
                 <md-icon md-font-set="material-icons">delete</md-icon>

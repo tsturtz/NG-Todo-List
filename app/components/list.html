@@ -1,9 +1,8 @@
 <md-list layout="column">
 
     <td-list-details ng-class="{'todo-check': todo.check}"
-                     ng-repeat="todo in $ctrl.todos | orderBy: 'todo-checked' : true"
+                     ng-repeat="todo in $ctrl.todos | orderBy: 'todo-check' : true"
                      ng-animate="todo"
-                     ng-init="todo.checked = false"
                      todo="todo"
                      on-update="$ctrl.setDateTodo(todo, date)"
                      on-edit="$ctrl.editTodo(todo, update)"
@@ -18,21 +17,27 @@
                  ng-show="$ctrl.todos.length === 0"
                  layout-padding ng-cloak>
             <div ng-if="!$ctrl.user" class="app-title">
-                <h1 class="md-display-3">To-do For You</h1>
+                <md-icon md-font-set="material-icons check-logo" md-whiteframe="5">check_circle</md-icon>
+                <h1 class="md-display-2 logo-text">&nbsp;To-do For You</h1>
                 <p class="md-caption indigo-lt-text">Powered by AngularFire & AngularMaterial</p>
                 <md-divider></md-divider>
                 <span class="small-spacer"></span>
                 <p class="md-subhead">Please log in to create a personal to-do list.</p>
                 <md-button ng-click="$ctrl.menu()"
-                           class="md-primary md-raised login-btn">
+                           class="md-accent md-raised login-btn">
                     <span>log in</span>
+                </md-button>
+                <md-button ng-click="$ctrl.loginDemo()"
+                           class="md-primary login-btn">
+                    <i class="fa fa-laptop"></i>
+                    <span class="md-caption"> Demo Log In</span>
                 </md-button>
                 <md-divider></md-divider>
                 <div flex>
-                    <md-button class="md-accent dev-btn">
+                    <md-button class="md-primary dev-btn">
                         <a href="https://github.com/tsturtz">&nbsp;
                             <i class="fa fa-github"></i>
-                            <span class="md-caption">&nbsp;&nbsp;by Taylor Sturtz&nbsp;</span>
+                            <span class="md-caption">&nbsp;&nbsp;Developed by Taylor Sturtz&nbsp;</span>
                         </a>
                     </md-button>
                 </div>
@@ -42,7 +47,7 @@
                     Get busy and start adding some to-dos!
                 </p>
                 <div class="button-demo-row">
-                    <md-button class="md-fab md-mini md-accent datepicker-btn"
+                    <md-button class="md-fab md-mini md-primary datepicker-btn"
                                ng-disabled="editDemo">
                         <md-datepicker ng-model="needThisForTooltipToWork"
                                        md-hide-icons="triangle">
@@ -51,7 +56,7 @@
                             Add/Edit Date
                         </md-tooltip>
                     </md-button>
-                    <md-button class="md-fab md-accent md-mini"
+                    <md-button class="md-fab md-primary md-mini"
                                ng-hide="editDemo"
                                ng-click="editDemo = true">
                         <md-icon md-font-set="material-icons">edit</md-icon>
@@ -59,7 +64,7 @@
                             Edit To-Do
                         </md-tooltip>
                     </md-button>
-                    <md-button class="md-fab md-accent md-mini"
+                    <md-button class="md-fab md-primary md-mini"
                                ng-show="editDemo"
                                ng-click="editDemo = false">
                         <md-icon md-font-set="material-icons">check</md-icon>
@@ -67,7 +72,7 @@
                             Submit Edit
                         </md-tooltip>
                     </md-button>
-                    <md-button class="md-fab md-primary md-mini"
+                    <md-button class="md-fab md-accent md-mini"
                                ng-disabled="editDemo">
                         <md-icon md-font-set="material-icons">delete</md-icon>
                         <md-tooltip md-direction="top">
