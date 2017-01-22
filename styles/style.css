@@ -212,3 +212,9 @@ md-tooltip .md-content span {
 .ng-move.ng-move-active {
     opacity: 1;
 }
+
+@media only screen and (max-width: 350px) {
+    .app-title h1.logo-text {
+        font-size: 32px;
+    }
+}
