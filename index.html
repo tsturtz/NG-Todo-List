@@ -57,12 +57,10 @@
 
 </head>
 <body ng-cloak layout="column">
-
 <div id="sideNavContainer"
      ng-controller="rootCtrl as root"
      layout="column"
      layout-fill>
-
     <md-toolbar layout="row"
                 md-whiteframe="8"
                 class="md-accent"
@@ -70,7 +68,6 @@
                 md-tall
                 layout-padding
                 style="min-height: 102px;">
-
         <span layout="row"
               flex-gt-xs="15"
               layout-align="start center">
@@ -78,7 +75,6 @@
                 <md-icon md-font-set="material-icons">menu</md-icon>
             </md-button>
         </span>
-
         <!--Add Form component-->
         <td-form todos="root.todos"
                  user="root.firebaseUser"
@@ -86,29 +82,24 @@
                  flex-sm="80"
                  flex-xs>
         </td-form>
-
         <span flex-gt-sm="15"
               flex-sm="5"
               flex-xs="5">
         </span>
-
     </md-toolbar>
-
+    <!--Sidenav-->
     <md-sidenav md-component-id="left"
                 class="md-sidenav-left"
                 layout="column"
                 layout-align="center center"
                 md-whiteframe="10">
-
         <span flex="10"></span>
-
+        <!--Sidenav logo-->
         <div>
             <md-icon md-font-set="material-icons check-logo" md-whiteframe="3">check_circle</md-icon>
             <span class="md-headline logo-text">&nbsp;To-do For You</span>
         </div>
-
         <span flex="10"></span>
-
         <div id="nav-login"
              layout="column"
              layout-align="center center">
@@ -128,25 +119,23 @@
             </md-input-container>
             <span class="small-spacer"></span>
             <div layout="row" ng-hide="root.firebaseUser">
-                <md-button class="md-raised md-accent"
-                           ng-click="root.loginUser(root.email, root.password)">
+                <md-button class="md-raised md-accent" ng-click="root.loginUser(root.email, root.password)">
                     <md-icon md-font-set="material-icons">person</md-icon>
                     <span class="md-caption">Log In</span>
                 </md-button>
-                <md-button class="md-raised md-accent"
-                           ng-click="root.createUser(root.email, root.password)">
+                <md-button class="md-raised md-accent" ng-click="root.createUser(root.email, root.password)">
                     <md-icon md-font-set="material-icons">person_add</md-icon>
                     <span class="md-caption">Sign up</span>
                 </md-button>
             </div>
             <div ng-hide="root.firebaseUser">
-                <md-button class="md-raised md-primary"
-                           ng-click="root.googleUserLogin()">
+                <md-button class="md-raised md-primary" ng-click="root.googleUserLogin()">
                     <i class="fa fa-google"></i>
                     <span class="md-caption">Google Log In</span>
                 </md-button>
             </div>
         </div>
+        <!--Logged in user profile-->
         <div ng-show="root.firebaseUser"
              class="text-center">
             <div layout-align="center center">
@@ -155,24 +144,24 @@
                 <p class="md-subhead indigo-lt-text">{{ root.firebaseUser.email }}</p>
                 <span class="small-spacer"></span>
                 <div layout="column">
-                    <md-button class="md-raised md-primary"
-                               ng-click="root.signOut()">
+                    <md-button class="md-raised md-primary" ng-click="root.signOut()">
                         <span class="md-caption">Log Out</span>
                     </md-button>
-                    <md-button class="md-accent"
-                               ng-click="root.deleteAcct()">
+                    <md-button class="md-accent" ng-click="root.deleteAcct()">
                         <md-icon md-font-set="material-icons">close</md-icon>
                         <span class="md-caption">Delete Account</span>
                     </md-button>
                 </div>
             </div>
         </div>
-            <md-progress-circular md-mode="indeterminate"
-                                  ng-if="root.loginSpinner"
-                                  class="md-accent"
-                                  md-diameter="30">
-            </md-progress-circular>
+        <!--Loading user content spinner-->
+        <md-progress-circular md-mode="indeterminate"
+                              ng-if="root.loginSpinner"
+                              class="md-accent"
+                              md-diameter="30">
+        </md-progress-circular>
         <span flex></span>
+        <!--Forgot password-->
         <div class="nav-login-2" layout-align="center center">
             <div ng-hide="root.firebaseUser">
                 <md-input-container ng-show="showResetPassInput">
@@ -183,39 +172,34 @@
                 </md-input-container>
             </div>
             <div ng-hide="root.firebaseUser" class="text-center">
-                <md-button class="md-primary"
-                           ng-hide="showResetPassInput"
+                <md-button ng-hide="showResetPassInput"
+                           class="md-primary"
                            ng-click="showResetPassInput = true">
                     <span class="md-caption">Forgot Password?</span>
                 </md-button>
-                <md-button class="md-accent"
-                           ng-show="showResetPassInput"
+                <md-button ng-show="showResetPassInput"
+                           class="md-accent"
                            ng-click="root.resetPassword(root.emailForReset); showResetPassInput = false;">
                     <span class="md-caption">Reset password</span>
                 </md-button>
             </div>
         </div>
-
         <span flex></span>
-
         <div id="nav-close">
             <md-button class="md-primary"
                        ng-click="root.openLeftMenu()">
                 <a href="#">Close</a>
             </md-button>
         </div>
-
         <span flex="5"></span>
-
     </md-sidenav>
 
     <md-content id="content-area"
                 layout="row"
                 layout-align="center start"
                 flex>
-        <div layout="column"
-             flex="100">
-
+        <div layout="column" flex="100">
+            <!--Loading content spinner-->
             <div layout="row"
                  layout-sm="column"
                  layout-align="center center">
@@ -225,7 +209,6 @@
                                       md-diameter="50">
                 </md-progress-circular>
             </div>
-
             <!--tdList component-->
             <td-list user="root.firebaseUser"
                      todos="root.todos"
@@ -233,7 +216,6 @@
                      demo="root.signInDemo()"
                      ng-cloak>
             </td-list>
-
         </div>
     </md-content>
 
