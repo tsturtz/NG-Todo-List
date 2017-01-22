@@ -71,16 +71,25 @@
                 layout-padding
                 style="min-height: 102px;">
 
-        <span layout="row" flex="15">
-            <md-button ng-click="root.openLeftMenu()">
+        <span layout="row"
+              flex-gt-xs="15">
+            <md-button class="md-icon-button" ng-click="root.openLeftMenu()">
                 <md-icon md-font-set="material-icons">menu</md-icon>
             </md-button>
         </span>
 
         <!--Add Form component-->
-        <td-form todos="root.todos" user="root.firebaseUser" flex></td-form>
+        <td-form todos="root.todos"
+                 user="root.firebaseUser"
+                 flex-gt-sm="70"
+                 flex-sm="80"
+                 flex-xs>
+        </td-form>
 
-        <span flex="15"></span>
+        <span flex-gt-sm="15"
+              flex-sm="5"
+              flex-xs="5">
+        </span>
 
     </md-toolbar>
 

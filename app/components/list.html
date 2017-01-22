@@ -13,7 +13,10 @@
     <div layout="row" layout-align="center space-between">
         <span flex></span>
         <md-card class="text-center"
-                 flex="40"
+                 flex-xs="90"
+                 flex-sm="70"
+                 flex-md="50"
+                 flex-gt-md="40"
                  ng-show="$ctrl.todos.length === 0"
                  layout-padding ng-cloak>
             <div ng-if="!$ctrl.user" class="app-title">
