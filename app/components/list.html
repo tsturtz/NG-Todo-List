@@ -43,9 +43,11 @@
                 </div>
             </div>
             <div ng-if="$ctrl.user">
+                <md-icon md-font-set="material-icons" class="add-note" md-whiteframe="5">note_add</md-icon>
                 <p class="md-headline">
                     Get busy and start adding some to-dos!
                 </p>
+                <md-divider></md-divider>
                 <div class="button-demo-row">
                     <md-button class="md-fab md-mini md-primary datepicker-btn"
                                ng-disabled="editDemo">
@@ -81,7 +83,7 @@
                     </md-button>
                 </div>
                 <p class="md-subhead">
-                    Once you add a task, you can edit, add a due date, delete it, or just mark it as checked (it will go to the bottom of your list).
+                    Once you add a task you can edit, add a due date, delete it, or just mark it as completed (it will go to the bottom of your list).
                 </p>
             </div>
         </md-card>

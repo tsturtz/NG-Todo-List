@@ -1,17 +1,91 @@
+/*For ng-cloak Angular directive*/
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
 }
 
+/*General*/
 a {
     color: #000;
     text-decoration: none;
 }
-
 .fa {
     font-size: 22px;
     vertical-align: sub;
 }
+.small-spacer {
+    height: 10px;
+}
 
+/*Text styling*/
+.text-center {
+    text-align: center;
+}
+.bold-text {
+    font-weight: bold;
+}
+.italic-text {
+    font-style: italic;
+}
+.red-text {
+    color: #F44336;
+}
+.indigo-lt-text {
+    color: #7986CB;
+}
+.grey-text {
+    color: #a9a9a9;
+}
+.white-text {
+    color: #fff !important;
+}
+
+/*Input containers*/
+md-input-container .md-errors-spacer {
+    min-height: 0 !important;
+}
+md-input-container:not(.add-form-input) {
+    margin: 8px 0 0;
+}
+md-input-container.editing-input {
+    width: 90%;
+}
+
+/*Buttons*/
+.add-btn[disabled] {
+    color: #9e9e9e !important;
+    background-color: #424242 !important;
+}
+.button-row {
+    margin-bottom: 20px;
+}
+.button-row button {
+    margin-right: 0;
+}
+.button-demo-row {
+    margin-top: 10px;
+    margin-bottom: 0;
+    margin-right: 0;
+}
+.md-datepicker-input {
+    display: none;
+}
+.md-datepicker-button {
+    position: relative;
+    bottom: 3px;
+    margin: 0 !important;
+}
+.md-datepicker-open {
+    position: relative;
+    right: 6px;
+}
+.md-icon-button+.md-datepicker-input-container {
+    margin-left: 0;
+}
+.datepicker-btn {
+    padding: 0;
+}
+
+/*App title card*/
 .app-title .dev-btn {
     margin-top: 10px;
 }
@@ -32,7 +106,23 @@ a {
     cursor: default;
 }
 
+/*Get busy & add todos card*/
+.add-note {
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    line-height: 55px;
+    font-size: 35px;
+    border: 5px solid #fff;
+    color: #fff;
+    cursor: default;
+    background-color: #F44336;
+}
+
 /*Sidenav*/
+md-backdrop.md-opaque.ng-enter {
+    opacity: 0.5;
+}
 .md-sidenav-left .check-logo {
     border-radius: 50%;
     width: 40px;
@@ -56,61 +146,28 @@ a {
     cursor: default;
 }
 
+/*Tooltips*/
+md-tooltip .md-content {
+    position: relative;
+    opacity: 1;
+    color: black;
+}
 md-tooltip .md-content span {
     color: white;
 }
 
-.small-spacer {
-    height: 10px;
-}
-
-.text-center {
-    text-align: center;
-}
-
-.bold-text {
-    font-weight: bold;
-}
-
-.italic-text {
-    font-style: italic;
-}
-
-.red-text {
-    color: #F44336;
-}
-
-.indigo-lt-text {
-    color: #7986CB;
-}
-
-.grey-text {
-    color: #a9a9a9;
-}
-
-.white-text {
-    color: #fff !important;
-}
-
-md-backdrop.md-opaque.ng-enter {
-    opacity: 0.5;
-}
-
+/*List row items*/
 .todo-row {
     position: relative;
 }
-
 .task-row {
     margin-bottom: 0;
     max-width: 50vw;
     word-wrap: break-word;
 }
-
 .checkbox-row .md-container {
     top: -50%;
 }
-
-/*Date style*/
 .date-display span {
     vertical-align: middle;
 }
@@ -118,79 +175,12 @@ md-backdrop.md-opaque.ng-enter {
     cursor: pointer;
     outline: none;
 }
-/*.lateDate {
-    color: #FF7043;
-}
-.warnDate {
-    color: #FFAB91;
-}
-.okDate {
-    color: #fff;
-}
-.noDate {
-    color: #9e9e9e;
-    font-style: italic;
-}*/
-
-/*Tooltips*/
-md-tooltip .md-content {
-    position: relative;
-    opacity: 1;
-    color: black;
-}
-
-/*Checked items*/
 .todo-check {
     background-color: rgba(0,0,0,.1);
 }
 .todo-check p {
     font-style: italic;
     color: #7986CB;
-}
-
-/*Input container*/
-md-input-container .md-errors-spacer {
-    min-height: 0 !important;
-}
-md-input-container:not(.add-form-input) {
-    margin: 8px 0 0;
-}
-md-input-container.editing-input {
-    width: 90%;
-}
-
-/*Buttons*/
-.add-btn[disabled] {
-    color: #9e9e9e !important;
-    background-color: #424242 !important;
-}
-.button-row {
-    margin-bottom: 20px;
-}
-.button-row button {
-    margin-right: 0;
-}
-.button-demo-row {
-    margin-bottom: 0;
-    margin-right: 0;
-}
-.md-datepicker-input {
-    display: none;
-}
-.md-datepicker-button {
-    position: relative;
-    bottom: 3px;
-    margin: 0 !important;
-}
-.md-datepicker-open {
-    position: relative;
-    right: 6px;
-}
-.md-icon-button+.md-datepicker-input-container {
-    margin-left: 0;
-}
-.datepicker-btn {
-    padding: 0;
 }
 
 /*Scrollbar*/
