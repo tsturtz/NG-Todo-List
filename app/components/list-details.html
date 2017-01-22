@@ -1,5 +1,5 @@
 <md-list-item class="md-2-line">
-    <div flex="15"></div>
+    <div flex-gt-sm="15" flex-sm="5"></div>
     <div class="todo-row"
          layout="row"
          layout-align="center end"
@@ -13,7 +13,11 @@
         </div>
         <md-list-item-text flex>
             <p ng-hide="editing"
-               class="md-title task-row">{{$ctrl.todo.task}}
+               class="md-title task-row hide-xs">{{$ctrl.todo.task}}
+            </p>
+            <p ng-hide="editing"
+               class="md-subhead task-row hide-gt-xs"
+               ng-click="editing = true; focus = true;">{{$ctrl.todo.task}}
             </p>
             <md-input-container ng-show="editing"
                                 class="editing-input"
@@ -50,7 +54,7 @@
                 </md-icon>
             </p>
         </md-list-item-text>
-        <div class="button-row">
+        <div class="button-row hide-xs">
             <md-button class="md-fab md-mini md-warn datepicker-btn"
                        ng-disabled="editing">
                 <md-datepicker ng-model="todoDate"
@@ -88,7 +92,16 @@
                 </md-tooltip>
             </md-button>
         </div>
+        <div class="button-row-sm hide-gt-xs">
+            <md-button class="md-fab md-accent md-mini"
+                       ng-click="$ctrl.delete()">
+                <md-icon md-font-set="material-icons">delete</md-icon>
+                <md-tooltip md-direction="top">
+                    Delete To-Do
+                </md-tooltip>
+            </md-button>
+        </div>
     </div>
-    <div flex="15"></div>
+    <div flex-gt-sm="15" flex-sm="5"></div>
 </md-list-item>
 <md-divider></md-divider>

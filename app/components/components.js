@@ -89,12 +89,23 @@ function detailsCtrl ($timeout) {
     var self = this;
     //Get todays date for min attribute on datepicker input (can't set a past due date)
     self.todaysDate = new Date();
+    self.status = false;
+    self.toggleOptions = function (status) {
+        if (status === true) {
+            self.status = false;
+        } else if (status === false) {
+            self.status = true;
+        }
+    };
     //Send parameters up to listCtrl
     self.delete = function () {
         self.onDelete({todo: self.todo});
     };
     //Send parameters up to listCtrl
     self.edit = function (update) {
+        if (update === null || update === '') {
+            return;
+        }
         self.onEdit({todo: self.todo, update: update});
     };
     //Send parameters up to listCtrl

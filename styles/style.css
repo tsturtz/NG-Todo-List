@@ -58,8 +58,13 @@ md-input-container.editing-input {
 .button-row {
     margin-bottom: 20px;
 }
-.button-row button {
+.button-row button, .button-row-sm button {
     margin-right: 0;
+}
+.button-row-sm {
+    position: absolute;
+    right: 10px;
+    bottom: 20px;
 }
 .button-demo-row {
     margin-top: 10px;
