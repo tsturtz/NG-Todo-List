@@ -75,8 +75,7 @@ md-input-container.editing-input {
     display: none;
 }
 .md-datepicker-button {
-    position: relative;
-    bottom: 3px;
+    vertical-align: bottom;
     margin: 0 !important;
 }
 .md-datepicker-open {

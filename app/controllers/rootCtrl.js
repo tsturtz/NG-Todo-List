@@ -1,5 +1,4 @@
 angular.module('todoApp')
-
     .controller('rootCtrl', function ($mdSidenav, $mdToast, todoService, fbFactory) {
         var self = this;
         //Initialize local array
