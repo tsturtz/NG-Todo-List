@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="todoApp" ng-cloak>
 <head>
+    <!-- "To-do For You" Copyright © 2016-2017 Taylor Sturtz - MIT License (refer to LICENSE.TXT)-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!--Set browser colors for mobile and fullscreen for apple-->
     <meta name="theme-color" content="#F44336">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -13,13 +13,10 @@
 
     <!--Angular Material style sheet-->
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
-
     <!--Angular Material font icons-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
     <!--Font Awesome for brand icons-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
     <!--Custom style sheet-->
     <link rel="stylesheet" href="styles/style.css">
 
@@ -28,19 +25,14 @@
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
-
     <!--Angular Material-->
     <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
-
     <!--Firebase-->
     <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
-
     <!--AngularFire-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angularFire/2.2.0/angularfire.min.js"></script>
-
     <!--Input focus on render directive-->
     <script src="https://rawgit.com/hiebj/ng-focus-if/master/focusIf.min.js"></script>
-
     <!--Moment.js Angular Moment-->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/1.0.1/angular-moment.min.js"></script>
@@ -54,13 +46,13 @@
     <script src="app/services/fbAuthFactory.js"></script>
     <!--Individual components-->
     <script src="app/components/components.js"></script>
-
 </head>
 <body ng-cloak layout="column">
 <div id="sideNavContainer"
      ng-controller="rootCtrl as root"
      layout="column"
      layout-fill>
+    <!--Top toolbar-->
     <md-toolbar layout="row"
                 md-whiteframe="8"
                 class="md-accent"
@@ -75,7 +67,7 @@
                 <md-icon md-font-set="material-icons">menu</md-icon>
             </md-button>
         </span>
-        <!--Add Form component-->
+        <!--tdForm component // add form-->
         <td-form todos="root.todos"
                  user="root.firebaseUser"
                  flex-gt-sm="70"
@@ -100,6 +92,7 @@
             <span class="md-headline logo-text">&nbsp;To-do For You</span>
         </div>
         <span flex="10"></span>
+        <!--Login form and options-->
         <div id="nav-login"
              layout="column"
              layout-align="center center">
@@ -185,6 +178,7 @@
             </div>
         </div>
         <span flex></span>
+        <!--Close sidenav button-->
         <div id="nav-close">
             <md-button class="md-primary"
                        ng-click="root.openLeftMenu()">
@@ -193,7 +187,7 @@
         </div>
         <span flex="5"></span>
     </md-sidenav>
-
+    <!--Content area-->
     <md-content id="content-area"
                 layout="row"
                 layout-align="center start"
@@ -209,7 +203,7 @@
                                       md-diameter="50">
                 </md-progress-circular>
             </div>
-            <!--tdList component-->
+            <!--tdList component // main list content-->
             <td-list user="root.firebaseUser"
                      todos="root.todos"
                      toggle-menu="root.openLeftMenu()"
@@ -218,7 +212,6 @@
             </td-list>
         </div>
     </md-content>
-
 </div>
 </body>
 </html>

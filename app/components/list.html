@@ -1,5 +1,5 @@
 <md-list layout="column">
-
+    <!--tdListDetails component // list items-->
     <td-list-details ng-class="{'todo-check': todo.check}"
                      ng-repeat="todo in $ctrl.todos | orderBy: 'todo-check' : true"
                      ng-animate="todo"
@@ -9,7 +9,7 @@
                      on-delete="$ctrl.deleteTodo(todo)"
                      md-no-ink>
     </td-list-details>
-
+    <!--md-card with content if no user is logged in or if no list is present-->
     <div layout="row" layout-align="center space-between">
         <span flex></span>
         <md-card class="text-center"
@@ -19,6 +19,7 @@
                  flex-gt-md="40"
                  ng-show="$ctrl.todos.length === 0"
                  layout-padding ng-cloak>
+            <!--Card content if no user is logged in (welcome info and logo etc.)-->
             <div ng-if="!$ctrl.user" class="app-title">
                 <md-icon md-font-set="material-icons check-logo" md-whiteframe="5">check_circle</md-icon>
                 <h1 class="md-display-2 logo-text hide-xs">&nbsp;To-do For You</h1>
@@ -46,50 +47,13 @@
                     </md-button>
                 </div>
             </div>
+            <!--Card content if no list is present-->
             <div ng-if="$ctrl.user">
                 <md-icon md-font-set="material-icons" class="add-note" md-whiteframe="5">note_add</md-icon>
                 <p class="md-headline">
                     Get busy and start adding some to-dos!
                 </p>
                 <md-divider></md-divider>
-                <div class="button-demo-row">
-                    <md-button class="md-fab md-mini md-primary datepicker-btn"
-                               ng-disabled="editDemo"
-                               hide-xs>
-                        <md-datepicker ng-model="needThisForTooltipToWork"
-                                       md-hide-icons="triangle">
-                        </md-datepicker>
-                        <md-tooltip md-direction="top">
-                            Add/Edit Date
-                        </md-tooltip>
-                    </md-button>
-                    <md-button class="md-fab md-primary md-mini"
-                               ng-hide="editDemo"
-                               ng-click="editDemo = true"
-                               hide-xs>
-                        <md-icon md-font-set="material-icons">edit</md-icon>
-                        <md-tooltip md-direction="top">
-                            Edit To-Do
-                        </md-tooltip>
-                    </md-button>
-                    <md-button class="md-fab md-primary md-mini"
-                               ng-show="editDemo"
-                               ng-click="editDemo = false"
-                               hide-xs>
-                        <md-icon md-font-set="material-icons">check</md-icon>
-                        <md-tooltip md-direction="top">
-                            Submit Edit
-                        </md-tooltip>
-                    </md-button>
-                    <md-button class="md-fab md-accent md-mini"
-                               ng-disabled="editDemo"
-                               hide-xs>
-                        <md-icon md-font-set="material-icons">delete</md-icon>
-                        <md-tooltip md-direction="top">
-                            Delete To-Do
-                        </md-tooltip>
-                    </md-button>
-                </div>
                 <p class="md-subhead">
                     After you add a task you can edit<span hide-gt-xs> by tapping on it</span>, add a due date, delete it, or just mark it as completed (it will go to the bottom of your list).
                 </p>
@@ -97,5 +61,4 @@
         </md-card>
         <span flex></span>
     </div>
-
 </md-list>

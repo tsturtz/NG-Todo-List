@@ -1,27 +1,34 @@
 angular.module('todoApp')
 
     .controller('rootCtrl', function ($mdSidenav, $mdToast, todoService, fbFactory) {
-
         var self = this;
+        //Initialize local array
+        self.todos = [];
+        //Toggle the side menu
+        self.openLeftMenu = function () {
+            $mdSidenav('left').toggle();
+        };
 
+        /****************************************************************************************
+         * firebaseAuth // AngularFire user authentication
+         ****************************************************************************************/
+
+        //$firebaseAuth reference
         var auth = fbFactory;
 
-        self.todos = [];
-
-        //Watch for authenticated user changes (signing in/out)
+        //Sync local array with user and watch for authenticated user changes (signing in/out)
         auth.$onAuthStateChanged(function(firebaseUser) {
             self.firebaseUser = firebaseUser;
             //Initiate spinner
             self.activated = true;
             if (firebaseUser === null) {
-                //Empty todos array
+                //Empty local todos array to reveal card content
                 self.todos = [];
                 //Resolve spinner
                 self.activated = false;
             } else {
                 //Bind todos array to currently logged in user
                 self.todos = todoService.getTodos(firebaseUser.uid);
-
                 //Resolve spinner after data is loaded
                 self.todos.$loaded(function (){
                     self.activated = false;
@@ -42,7 +49,9 @@ angular.module('todoApp')
                     console.log(self.message);
                     //Resolve spinner
                     self.loginSpinner = false;
+                    //Show success message in a md-toast
                     self.showToastyToast('Demo email: demo@demo.com & password: pass123');
+                    //Clear form inputs
                     self.email = '';
                     self.password = '';
                 }).catch(function(error) {
@@ -50,12 +59,14 @@ angular.module('todoApp')
                     console.log(error);
                     //Resolve spinner
                     self.loginSpinner = false;
+                    //Show error message in a md-toast
                     self.showToastyToast(self.error.message);
                 });
             }
             catch(err) {
                 //Resolve spinner
                 self.loginSpinner = false;
+                //Show error message in a md-toast
                 self.showToastyToast('There was a problem logging in with the demo account.');
                 console.log(err);
             }
@@ -65,14 +76,10 @@ angular.module('todoApp')
         self.createUser = function() {
             self.message = null;
             self.error = null;
-            //Initiate spinner
             self.loginSpinner = true;
             try {
                 auth.$createUserWithEmailAndPassword(self.email, self.password).then(function(firebaseUser) {
                     self.message = firebaseUser.uid;
-                    console.log(firebaseUser);
-                    console.log(self.message);
-                    //Resolve spinner
                     self.loginSpinner = false;
                     self.showToastyToast('User created with email: ' + self.email);
                     self.email = '';
@@ -80,13 +87,11 @@ angular.module('todoApp')
                 }).catch(function(error) {
                     self.error = error;
                     console.log(error);
-                    //Resolve spinner
                     self.loginSpinner = false;
                     self.showToastyToast(self.error.message);
                 });
             }
             catch(err) {
-                //Resolve spinner
                 self.loginSpinner = false;
                 self.showToastyToast('You need to feed me your email and password.');
                 console.log(err);
@@ -97,14 +102,10 @@ angular.module('todoApp')
         self.loginUser = function() {
             self.message = null;
             self.error = null;
-            //Initiate spinner
             self.loginSpinner = true;
             try {
                 auth.$signInWithEmailAndPassword(self.email, self.password).then(function(firebaseUser) {
                     self.message = firebaseUser.uid;
-                    console.log(firebaseUser);
-                    console.log(self.message);
-                    //Resolve spinner
                     self.loginSpinner = false;
                     self.showToastyToast('User logged in with email: ' + self.email);
                     self.email = '';
@@ -112,13 +113,11 @@ angular.module('todoApp')
                 }).catch(function(error) {
                     self.error = error;
                     console.log(error);
-                    //Resolve spinner
                     self.loginSpinner = false;
                     self.showToastyToast(self.error.message);
                 });
             }
             catch(err) {
-                //Resolve spinner
                 self.loginSpinner = false;
                 self.showToastyToast('You need to feed me your email and password.');
                 console.log(err);
@@ -129,95 +128,84 @@ angular.module('todoApp')
         self.googleUserLogin = function() {
             self.message = null;
             self.error = null;
-            //Initiate spinner
             self.loginSpinner = true;
             try {
                 auth.$signInWithPopup('google').then(function(result) {
                     self.message = result.user.uid;
-                    console.log(result);
-                    console.log(self.message);
-                    //Resolve spinner
                     self.loginSpinner = false;
                     self.showToastyToast('You are now logged in through Google.');
                 }).catch(function(error) {
                     self.error = error;
                     console.log(error);
-                    //Resolve spinner
                     self.loginSpinner = false;
                     self.showToastyToast(self.error.message);
                 });
             }
             catch(err) {
-                //Resolve spinner
                 self.loginSpinner = false;
                 self.showToastyToast('Something went wrong logging in through Google.');
                 console.log(err);
             }
         };
 
-        //Sign out
+        //Sign out currently logged in user
         self.signOut = function () {
-            //Initiate spinner
             auth.$signOut().then(function () {
-                //Resolve spinner
                 self.loginSpinner = false;
                 self.showToastyToast('Successfully logged out.');
             }).catch(function(error) {
-                //Resolve spinner
                 self.loginSpinner = false;
                 self.showToastyToast(error);
             })
         };
 
+        //Reset password - send user an email to reset their password
         self.resetPassword = function () {
-            //Initiate spinner
             self.loginSpinner = true;
             try {
                 auth.$sendPasswordResetEmail(self.emailForReset).then(function() {
-                    //Resolve spinner
                     self.loginSpinner = false;
                     self.showToastyToast('Reset password email has been sent.');
                 }).catch(function(error) {
                     self.error = error;
                     console.log(error);
-                    //Resolve spinner
                     self.loginSpinner = false;
                     self.showToastyToast(self.error.message);
                 });
             }
             catch(err) {
-                //Resolve spinner
                 self.loginSpinner = false;
                 self.showToastyToast('Something went wrong sending the reset password email.');
                 console.log(err);
             }
         };
 
+        //Delete account of currently logged in user (also logs them out)
         self.deleteAcct = function () {
-            //Initiate spinner
             self.loginSpinner = true;
             try {
                 auth.$deleteUser().then(function() {
-                    //Resolve spinner
                     self.loginSpinner = false;
                     self.showToastyToast('Account successfully deleted.');
                 }).catch(function(error) {
                     self.error = error;
                     console.log(error);
-                    //Resolve spinner
                     self.loginSpinner = false;
                     self.showToastyToast(self.error.message);
                 });
             }
             catch(err) {
-                //Resolve spinner
                 self.loginSpinner = false;
                 self.showToastyToast('Something went wrong sending the reset password email.');
                 console.log(err);
             }
         };
 
-        // TOAST!
+        /****************************************************************************************
+         * md-toast // toast message configuration
+         ****************************************************************************************/
+
+        //Define toast position
         self.toastPos = {
             bottom: false,
             top: true,
@@ -225,29 +213,25 @@ angular.module('todoApp')
             right: false
         };
         self.toastPosition = angular.extend({}, self.toastPos);
+        //Get toast position
         self.getToastPosition = function() {
             return Object.keys(self.toastPosition)
                 .filter(function(pos) { return self.toastPosition[pos]; })
                 .join(' ');
         };
-        self.showToastyToast = function(paramText) {
-            console.log(paramText);
+        //Show toast
+        self.showToastyToast = function(toastyText) {
             var pinTo = self.getToastPosition();
             var toast = $mdToast.simple()
-                .textContent(paramText)
+                .textContent(toastyText)
                 .position(pinTo)
                 .action('OK')
                 .highlightAction(true)
                 .highlightClass('md-primary');
             $mdToast.show(toast)
         };
+        //Close toast
         self.closeToast = function() {
             $mdToast.hide();
         };
-
-        //Toggle the side menu
-        self.openLeftMenu = function () {
-            $mdSidenav('left').toggle();
-        };
-
     });

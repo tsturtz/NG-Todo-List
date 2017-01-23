@@ -7,7 +7,6 @@
                ng-keyup="($event.which === 13) && $ctrl.addItem($ctrl.todo)"
                maxlength="140">
     </md-input-container>
-
     <md-button class="md-fab md-warn add-btn"
                ng-click="$ctrl.addItem($ctrl.todo)"
                ng-disabled="!$ctrl.user">
@@ -16,8 +15,9 @@
         Add a todo
         </md-tooltip>
     </md-button>
-
-    <md-tooltip class="input-tooltip" ng-if="!$ctrl.user" md-direction="top">
+    <md-tooltip class="input-tooltip"
+                ng-if="!$ctrl.user"
+                md-direction="top">
         Login to add a to-do!
     </md-tooltip>
 </div>

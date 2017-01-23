@@ -1,17 +1,20 @@
 /**
- * Angular App Configuration
- * To-Do App using Angular Material
+ * "To-do For You"
+ * Copyright © 2016-2017 Taylor Sturtz
+ * MIT License (refer to LICENSE.TXT)
  *
+ * Key technologies:
+ * AngularJS(1.5), Angular Material, Firebase, AngularFire, Focus-if.js, Moment.js, Angular Moment
+ *
+ * Angular App and Angular Material Configuration
  * @config Disable Aria Warnings
  * @config Configure Angular Material Color Themes
  */
 
 angular.module('todoApp', ['ngMaterial','firebase','focus-if','angularMoment'])
-
     .config(function ($mdAriaProvider) {
         $mdAriaProvider.disableWarnings();
     })
-
     .config(function ($mdThemingProvider) {
         $mdThemingProvider.definePalette('white', {
             '50': '#fff',

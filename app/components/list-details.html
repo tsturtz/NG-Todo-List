@@ -12,13 +12,13 @@
             </md-checkbox>
         </div>
         <md-list-item-text flex>
-            <p ng-hide="editing"
-               class="md-title task-row hide-xs">{{$ctrl.todo.task}}
-            </p>
+            <!--Item task non-mobile & mobile-->
+            <p ng-hide="editing" class="md-title task-row hide-xs">{{$ctrl.todo.task}}</p>
             <p ng-hide="editing"
                class="md-subhead task-row hide-gt-xs"
                ng-click="editing = true; focus = true; $ctrl.setDelay();">{{$ctrl.todo.task}}
             </p>
+            <!--Edit task input-->
             <md-input-container ng-show="editing"
                                 class="editing-input"
                                 md-no-float>
@@ -28,6 +28,7 @@
                        focus-if="focus"
                        maxlength="140">
             </md-input-container>
+            <!--Date display, using Moment.js-->
             <p class="date-display md-caption md-icon-button">
                 <span ng-show="$ctrl.todo.date"
                       class="grey-text">Complete by: {{$ctrl.todo.date | amDateFormat: 'll'}}</span>
@@ -50,6 +51,7 @@
                         Add Due Date
                     </md-tooltip>
                 </md-icon>
+                <!--Datepicker mobile adjustment-->
                 <md-icon ng-show="!$ctrl.todo.date"
                          md-font-set="material-icons"
                          ng-click="todo.openDatepickerMobile = true"
@@ -61,6 +63,7 @@
                 </md-icon>
             </p>
         </md-list-item-text>
+        <!--List item options-->
         <div class="button-row hide-xs">
             <md-button class="md-fab md-mini md-primary datepicker-btn"
                        ng-disabled="editing">
@@ -100,7 +103,9 @@
             </md-button>
         </div>
         <span flex="15" hide-gt-xs></span>
+        <!--List item options // md-fab-speed-dial for mobile-->
         <div class="button-row-sm hide-gt-xs">
+            <!--Confirm edit button that shows after edit button in speed dial is clicked-->
             <md-button class="md-fab md-primary md-mini"
                        ng-show="$ctrl.delayed"
                        ng-click="$ctrl.edit(update); editing = false; focus = false; $ctrl.delayed = false;"
@@ -111,11 +116,13 @@
                 </md-tooltip>
             </md-button>
             <md-fab-speed-dial md-direction="left" class="md-fling" ng-hide="editing" ng-cloak>
+                <!--Speed dial trigger button-->
                 <md-fab-trigger>
                     <md-button class="md-fab md-mini md-primary">
                         <md-icon md-font-set="material-icons">more_horiz</md-icon>
                     </md-button>
                 </md-fab-trigger>
+                <!--Option buttons that fling out from trigger button-->
                 <md-fab-actions>
                     <md-button class="md-fab md-accent md-mini"
                                ng-disabled="editing"
