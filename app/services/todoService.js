@@ -1,8 +1,6 @@
 angular.module('todoApp')
-
     .service('todoService', function ($firebaseArray) {
-
-        // Initialize Firebase
+        //Initialize Firebase
         var config = {
             apiKey: "AIzaSyCEGQoW8RUnkoTiyFFkzOmdTIk54GpTup8",
             authDomain: "todoappdb.firebaseapp.com",
@@ -11,14 +9,10 @@ angular.module('todoApp')
             messagingSenderId: "569684857503"
         };
         firebase.initializeApp(config);
-
-        // Create a reference to this service
         var svc = this;
-
+        //Create a firebaseArray from the currently authenticated user id
         svc.getTodos = function(uid){
-            console.log(uid);
             var ref = firebase.database().ref().child('users/' + uid);
-            console.log(ref);
             return $firebaseArray(ref);
         };
 
