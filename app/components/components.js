@@ -1,5 +1,5 @@
 angular.module('todoApp')
-    //td-list
+    //td-list / main list content
     .component('tdList', {
         templateUrl: './app/components/list.html',
         controller: listCtrl,
@@ -10,7 +10,7 @@ angular.module('todoApp')
             demo: '&'
         }
     })
-    //td-list-details
+    //td-list-details / list items
     .component('tdListDetails', {
         templateUrl: './app/components/list-details.html',
         controller: detailsCtrl,
@@ -21,7 +21,7 @@ angular.module('todoApp')
             onUpdate: '&'
         }
     })
-    //td-form
+    //td-form / add form
     .component('tdForm', {
         templateUrl: './app/components/add-form.html',
         controller: formCtrl,
@@ -34,12 +34,11 @@ angular.module('todoApp')
     });
 
 /****************************************************************************************
- * td-list controller
- * @param todoService
+ * td-list controller // main list content
  ****************************************************************************************/
 function listCtrl () {
     var self = this;
-
+    //Deletes this item and removes it from $firebaseArray (which is synced with local array)
     self.deleteTodo = function (todo) {
         self.todos.$remove(todo).then(function(ref){
             console.log('Item removed: ', ref);
@@ -47,7 +46,7 @@ function listCtrl () {
             console.warn('Error removing item: ', err);
         });
     };
-
+    //Updates this item's task property and saves it as a string to $firebaseArray (which is synced with local array)
     self.editTodo = function (todo, update) {
         if (update !== undefined) {
             todo.task = update;
@@ -59,12 +58,10 @@ function listCtrl () {
             console.warn('Error editing item: ', err);
         });
     };
-
+    //Updates this item's date property and saves it as a string to $firebaseArray (which is synced with local array)
     self.setDateTodo = function (todo, date) {
         date = date.toString();
         todo.date = date;
-        console.info(todo.date);
-        console.warn(todo);
         self.todos.$save(todo).then(function(ref){
             console.log('Item date set: ', ref);
             console.info('Updated list: ', self.todos);
@@ -83,19 +80,18 @@ function listCtrl () {
     }
 }
 /****************************************************************************************
- * td-list-details controller
+ * td-list-details controller // list items
  ****************************************************************************************/
 function detailsCtrl ($timeout) {
     var self = this;
     //Get todays date for min attribute on datepicker input (can't set a past due date)
     self.todaysDate = new Date();
-    self.status = false;
-    self.toggleOptions = function (status) {
-        if (status === true) {
-            self.status = false;
-        } else if (status === false) {
-            self.status = true;
-        }
+    //Set a half-second delay to give the ng-hide elements a chance to hide before showing the confirm edit button
+    self.setDelay = function() {
+        self.delay = false;
+        $timeout(function(){
+            self.delayed = true;
+        }, 500);
     };
     //Send parameters up to listCtrl
     self.delete = function () {
@@ -113,25 +109,22 @@ function detailsCtrl ($timeout) {
         if (date === undefined) {
             return;
         }
-        console.log(date);
         self.onUpdate({todo: self.todo, date: date});
     };
 }
 /****************************************************************************************
- * td-form controller
+ * td-form controller // add form
  ****************************************************************************************/
 function formCtrl () {
     var self = this;
     self.addItem = function (todo) {
-        console.log(todo);
-        console.info(self.todos);
-        if (todo === undefined) {
+        if (todo === undefined || todo.task === '') {
             return;
         }
+        //Adds this item to $firebaseArray (which is synced with local array)
         self.todos.$add(todo).then(function(){
             self.todo = {};
-            console.info('Todo added!');
+            console.info('Todo added.');
         });
-        console.info(self.todos);
     };
 }

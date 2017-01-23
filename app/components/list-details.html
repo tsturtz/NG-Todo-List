@@ -8,7 +8,7 @@
         <div class="md-checkbox-div" ng-repeat="v in [0]" flex="10">
             <md-checkbox ng-model="$ctrl.todo.check"
                          ng-change="$ctrl.edit()"
-                         class="md-primary italic-text red-text checkbox-row">
+                         class="md-accent italic-text red-text checkbox-row">
             </md-checkbox>
         </div>
         <md-list-item-text flex>
@@ -17,17 +17,14 @@
             </p>
             <p ng-hide="editing"
                class="md-subhead task-row hide-gt-xs"
-               ng-click="editing = true; focus = true;">{{$ctrl.todo.task}}
+               ng-click="editing = true; focus = true; $ctrl.setDelay();">{{$ctrl.todo.task}}
             </p>
             <md-input-container ng-show="editing"
                                 class="editing-input"
                                 md-no-float>
-                <input id="editTodo"
-                       type="text"
+                <input type="text"
                        placeholder="{{$ctrl.todo.task}}"
                        ng-model="update"
-                       ng-blur="editing = false; $ctrl.edit(update); focus = false;"
-                       ng-keyup="($event.which === 13) ? editing = false : editing = true"
                        focus-if="focus"
                        maxlength="140">
             </md-input-container>
@@ -47,7 +44,17 @@
                 <md-icon ng-show="!$ctrl.todo.date"
                          md-font-set="material-icons"
                          ng-click="todo.openDatepicker = true"
-                         class="grey-text">add_circle
+                         class="grey-text"
+                         hide-xs>add_circle
+                    <md-tooltip md-direction="right">
+                        Add Due Date
+                    </md-tooltip>
+                </md-icon>
+                <md-icon ng-show="!$ctrl.todo.date"
+                         md-font-set="material-icons"
+                         ng-click="todo.openDatepickerMobile = true"
+                         class="grey-text"
+                         hide-gt-xs>add_circle
                     <md-tooltip md-direction="right">
                         Add Due Date
                     </md-tooltip>
@@ -55,7 +62,7 @@
             </p>
         </md-list-item-text>
         <div class="button-row hide-xs">
-            <md-button class="md-fab md-mini md-warn datepicker-btn"
+            <md-button class="md-fab md-mini md-primary datepicker-btn"
                        ng-disabled="editing">
                 <md-datepicker ng-model="todoDate"
                                md-hide-icons="triangle"
@@ -77,10 +84,10 @@
             </md-button>
             <md-button class="md-fab md-primary md-mini"
                        ng-show="editing"
-                       ng-click="$ctrl.edit(update); editing = false;">
+                       ng-click="$ctrl.edit(update); editing = false; focus = false;">
                 <md-icon md-font-set="material-icons">check</md-icon>
                 <md-tooltip md-direction="top">
-                    Submit Edit
+                    Confirm Edit
                 </md-tooltip>
             </md-button>
             <md-button class="md-fab md-accent md-mini"
@@ -92,14 +99,54 @@
                 </md-tooltip>
             </md-button>
         </div>
+        <span flex="15" hide-gt-xs></span>
         <div class="button-row-sm hide-gt-xs">
-            <md-button class="md-fab md-accent md-mini"
-                       ng-click="$ctrl.delete()">
-                <md-icon md-font-set="material-icons">delete</md-icon>
+            <md-button class="md-fab md-primary md-mini"
+                       ng-show="$ctrl.delayed"
+                       ng-click="$ctrl.edit(update); editing = false; focus = false; $ctrl.delayed = false;"
+                       hide-gt-xs>
+                <md-icon md-font-set="material-icons">check</md-icon>
                 <md-tooltip md-direction="top">
-                    Delete To-Do
+                    Confirm Edit
                 </md-tooltip>
             </md-button>
+            <md-fab-speed-dial md-direction="left" class="md-fling" ng-hide="editing" ng-cloak>
+                <md-fab-trigger>
+                    <md-button class="md-fab md-mini md-primary">
+                        <md-icon md-font-set="material-icons">more_horiz</md-icon>
+                    </md-button>
+                </md-fab-trigger>
+                <md-fab-actions>
+                    <md-button class="md-fab md-accent md-mini"
+                               ng-disabled="editing"
+                               ng-click="$ctrl.delete()">
+                        <md-icon md-font-set="material-icons">delete</md-icon>
+                        <md-tooltip md-direction="top">
+                            Delete To-Do
+                        </md-tooltip>
+                    </md-button>
+                    <md-button class="md-fab md-primary md-mini"
+                               ng-disabled="editing"
+                               ng-click="editing = true; focus = true; $ctrl.setDelay()">
+                        <md-icon md-font-set="material-icons">edit</md-icon>
+                        <md-tooltip md-direction="top">
+                            Edit To-Do
+                        </md-tooltip>
+                    </md-button>
+                    <md-button class="md-fab md-mini md-primary datepicker-btn"
+                               ng-disabled="editing">
+                        <md-datepicker ng-model="todoDate"
+                                       md-hide-icons="triangle"
+                                       ng-blur="$ctrl.setDate(todoDate)"
+                                       md-is-open="todo.openDatepickerMobile"
+                                       md-min-date="$ctrl.todaysDate">
+                        </md-datepicker>
+                        <md-tooltip md-direction="top">
+                            Add/Edit Date
+                        </md-tooltip>
+                    </md-button>
+                </md-fab-actions>
+            </md-fab-speed-dial>
         </div>
     </div>
     <div flex-gt-sm="15" flex-sm="5"></div>

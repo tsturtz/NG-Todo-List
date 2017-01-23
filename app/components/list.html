@@ -54,7 +54,8 @@
                 <md-divider></md-divider>
                 <div class="button-demo-row">
                     <md-button class="md-fab md-mini md-primary datepicker-btn"
-                               ng-disabled="editDemo">
+                               ng-disabled="editDemo"
+                               hide-xs>
                         <md-datepicker ng-model="needThisForTooltipToWork"
                                        md-hide-icons="triangle">
                         </md-datepicker>
@@ -64,7 +65,8 @@
                     </md-button>
                     <md-button class="md-fab md-primary md-mini"
                                ng-hide="editDemo"
-                               ng-click="editDemo = true">
+                               ng-click="editDemo = true"
+                               hide-xs>
                         <md-icon md-font-set="material-icons">edit</md-icon>
                         <md-tooltip md-direction="top">
                             Edit To-Do
@@ -72,14 +74,16 @@
                     </md-button>
                     <md-button class="md-fab md-primary md-mini"
                                ng-show="editDemo"
-                               ng-click="editDemo = false">
+                               ng-click="editDemo = false"
+                               hide-xs>
                         <md-icon md-font-set="material-icons">check</md-icon>
                         <md-tooltip md-direction="top">
                             Submit Edit
                         </md-tooltip>
                     </md-button>
                     <md-button class="md-fab md-accent md-mini"
-                               ng-disabled="editDemo">
+                               ng-disabled="editDemo"
+                               hide-xs>
                         <md-icon md-font-set="material-icons">delete</md-icon>
                         <md-tooltip md-direction="top">
                             Delete To-Do
@@ -87,7 +91,7 @@
                     </md-button>
                 </div>
                 <p class="md-subhead">
-                    Once you add a task you can edit, add a due date, delete it, or just mark it as completed (it will go to the bottom of your list).
+                    After you add a task you can edit<span hide-gt-xs> by tapping on it</span>, add a due date, delete it, or just mark it as completed (it will go to the bottom of your list).
                 </p>
             </div>
         </md-card>
