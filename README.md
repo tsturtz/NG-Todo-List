@@ -4,7 +4,7 @@ A fully responsive to-do list application with personalized lists, based in Angu
 
 **[Live link](https://tsturtz.github.io/todo-for-you/)**
 
-![To-do For You]()
+![To-do For You](http://taylorsturtz.com/images/TodoForYou-WebMock-sm.jpg)
 
 ## Key Technologies:
 - **AngularJS** v1.5 (component-based)
