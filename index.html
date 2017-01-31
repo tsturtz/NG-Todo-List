@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="todoApp" ng-cloak>
+<head>
+    <!-- "To-do For You" Copyright © 2016-2017 Taylor Sturtz - MIT License (refer to LICENSE.TXT)-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--Set browser colors for mobile and fullscreen for apple-->
+    <meta name="theme-color" content="#F44336">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <title>To-do For You | Taylor Sturtz</title>
+
+    <!--Angular Material style sheet-->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <!--Angular Material font icons-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!--Font Awesome for brand icons-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--Custom style sheet-->
+    <link rel="stylesheet" href="style.css">
+
+    <!--Angular.js-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <!--Angular Material-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <!--Firebase-->
+    <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
+    <!--AngularFire-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angularFire/2.2.0/angularfire.min.js"></script>
+    <!--Input focus on render directive-->
+    <script src="bower_components/ng-focus-if/focusIf.min.js"></script>
+    <!--Moment.js Angular Moment-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/1.0.1/angular-moment.min.js"></script>
+
+    <!--App configuration-->
+    <script src="app/app.js"></script>
+    <!--Root controller-->
+    <script src="app/controllers/rootCtrl.js"></script>
+    <!--Services-->
+    <script src="app/services/todoService.js"></script>
+    <script src="app/services/fbAuthFactory.js"></script>
+    <!--Individual components-->
+    <script src="app/components/components.js"></script>
+</head>
+<body ng-cloak layout="column">
+<div id="sideNavContainer"
+     ng-controller="rootCtrl as root"
+     layout="column"
+     layout-fill>
+    <!--Top toolbar-->
+    <md-toolbar layout="row"
+                md-whiteframe="8"
+                class="md-accent"
+                md-theme="add"
+                md-tall
+                layout-padding
+                style="min-height: 102px;">
+        <span layout="row"
+              flex-gt-xs="15"
+              layout-align="start center">
+            <md-button class="md-icon-button" ng-click="root.openLeftMenu()">
+                <md-icon md-font-set="material-icons">menu</md-icon>
+            </md-button>
+        </span>
+        <!--tdForm component // add form-->
+        <td-form todos="root.todos"
+                 user="root.firebaseUser"
+                 flex-gt-sm="70"
+                 flex-sm="80"
+                 flex-xs>
+        </td-form>
+        <span flex-gt-sm="15"
+              flex-sm="5"
+              flex-xs="5">
+        </span>
+    </md-toolbar>
+    <!--Sidenav-->
+    <md-sidenav md-component-id="left"
+                class="md-sidenav-left"
+                layout="column"
+                layout-align="center center"
+                md-whiteframe="10">
+        <span flex="10"></span>
+        <!--Sidenav logo-->
+        <div>
+            <md-icon md-font-set="material-icons check-logo" md-whiteframe="3">check_circle</md-icon>
+            <span class="md-headline logo-text">&nbsp;To-do For You</span>
+        </div>
+        <span flex="10"></span>
+        <!--Login form and options-->
+        <div id="nav-login"
+             layout="column"
+             layout-align="center center">
+            <span class="small-spacer"></span>
+            <md-input-container ng-hide="root.firebaseUser">
+                <label for="username">Email</label>
+                <input type="text"
+                       id="username"
+                       ng-model="root.email">
+            </md-input-container>
+            <span class="small-spacer"></span>
+            <md-input-container ng-hide="root.firebaseUser">
+                <label for="password">Password</label>
+                <input type="text"
+                       id="password"
+                       ng-model="root.password">
+            </md-input-container>
+            <span class="small-spacer"></span>
+            <div layout="row" ng-hide="root.firebaseUser">
+                <md-button class="md-raised md-accent" ng-click="root.loginUser(root.email, root.password)">
+                    <md-icon md-font-set="material-icons">person</md-icon>
+                    <span class="md-caption">Log In</span>
+                </md-button>
+                <md-button class="md-raised md-accent" ng-click="root.createUser(root.email, root.password)">
+                    <md-icon md-font-set="material-icons">person_add</md-icon>
+                    <span class="md-caption">Sign up</span>
+                </md-button>
+            </div>
+            <div ng-hide="root.firebaseUser">
+                <md-button class="md-raised md-primary" ng-click="root.googleUserLogin()">
+                    <i class="fa fa-google"></i>
+                    <span class="md-caption">Google Log In</span>
+                </md-button>
+            </div>
+        </div>
+        <!--Logged in user profile-->
+        <div ng-show="root.firebaseUser"
+             class="text-center">
+            <div layout-align="center center">
+                <md-icon class="user-logged-in" md-whiteframe="5" md-font-set="material-icons">account_circle</md-icon>
+                <p class="md-title">Logged in as:</p>
+                <p class="md-subhead indigo-lt-text">{{ root.firebaseUser.email }}</p>
+                <span class="small-spacer"></span>
+                <div layout="column">
+                    <md-button class="md-raised md-primary" ng-click="root.signOut()">
+                        <span class="md-caption">Log Out</span>
+                    </md-button>
+                    <md-button class="md-accent" ng-click="root.deleteAcct()">
+                        <md-icon md-font-set="material-icons">close</md-icon>
+                        <span class="md-caption">Delete Account</span>
+                    </md-button>
+                </div>
+            </div>
+        </div>
+        <!--Loading user content spinner-->
+        <md-progress-circular md-mode="indeterminate"
+                              ng-if="root.loginSpinner"
+                              class="md-accent"
+                              md-diameter="30">
+        </md-progress-circular>
+        <span flex></span>
+        <!--Forgot password-->
+        <div class="nav-login-2" layout-align="center center">
+            <div ng-hide="root.firebaseUser">
+                <md-input-container ng-show="showResetPassInput">
+                    <label for="reset-password">Email</label>
+                    <input type="text"
+                           id="reset-password"
+                           ng-model="root.emailForReset">
+                </md-input-container>
+            </div>
+            <div ng-hide="root.firebaseUser" class="text-center">
+                <md-button ng-hide="showResetPassInput"
+                           class="md-primary"
+                           ng-click="showResetPassInput = true">
+                    <span class="md-caption">Forgot Password?</span>
+                </md-button>
+                <md-button ng-show="showResetPassInput"
+                           class="md-accent"
+                           ng-click="root.resetPassword(root.emailForReset); showResetPassInput = false;">
+                    <span class="md-caption">Reset password</span>
+                </md-button>
+            </div>
+        </div>
+        <span flex></span>
+        <!--Close sidenav button-->
+        <div id="nav-close">
+            <md-button class="md-primary"
+                       ng-click="root.openLeftMenu()">
+                <a href="#">Close</a>
+            </md-button>
+        </div>
+        <span flex="5"></span>
+    </md-sidenav>
+    <!--Content area-->
+    <md-content id="content-area"
+                layout="row"
+                layout-align="center start"
+                flex>
+        <div layout="column" flex="100">
+            <!--Loading content spinner-->
+            <div layout="row"
+                 layout-sm="column"
+                 layout-align="center center">
+                <md-progress-circular md-mode="indeterminate"
+                                      ng-if="root.activated"
+                                      class="md-primary"
+                                      md-diameter="50">
+                </md-progress-circular>
+            </div>
+            <!--tdList component // main list content-->
+            <td-list user="root.firebaseUser"
+                     todos="root.todos"
+                     toggle-menu="root.openLeftMenu()"
+                     demo="root.signInDemo()"
+                     ng-cloak>
+            </td-list>
+        </div>
+    </md-content>
+</div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<md-list layout="column">
+    <!--tdListDetails component // list items-->
+    <td-list-details ng-class="{'todo-check': todo.check}"
+                     ng-repeat="todo in $ctrl.todos | orderBy: 'todo-check' : true"
+                     ng-animate="todo"
+                     todo="todo"
+                     on-update="$ctrl.setDateTodo(todo, date)"
+                     on-edit="$ctrl.editTodo(todo, update)"
+                     on-delete="$ctrl.deleteTodo(todo)"
+                     md-no-ink>
+    </td-list-details>
+    <!--md-card with content if no user is logged in or if no list is present-->
+    <div layout="row" layout-align="center space-between">
+        <span flex></span>
+        <md-card class="text-center"
+                 flex-xs="90"
+                 flex-sm="70"
+                 flex-md="50"
+                 flex-gt-md="40"
+                 ng-show="$ctrl.todos.length === 0"
+                 layout-padding ng-cloak>
+            <!--Card content if no user is logged in (welcome info and logo etc.)-->
+            <div ng-if="!$ctrl.user" class="app-title">
+                <md-icon md-font-set="material-icons check-logo" md-whiteframe="5">check_circle</md-icon>
+                <h1 class="md-display-2 logo-text hide-xs">&nbsp;To-do For You</h1>
+                <h1 class="md-display-1 logo-text hide-gt-xs">&nbsp;To-do For You</h1>
+                <p class="md-caption indigo-lt-text">Powered by AngularFire & AngularMaterial</p>
+                <md-divider></md-divider>
+                <span class="small-spacer"></span>
+                <p class="md-subhead">Please log in to create a personal to-do list.</p>
+                <md-button ng-click="$ctrl.menu()"
+                           class="md-accent md-raised login-btn">
+                    <span>log in</span>
+                </md-button>
+                <md-button ng-click="$ctrl.loginDemo()"
+                           class="md-primary login-btn">
+                    <i class="fa fa-laptop"></i>
+                    <span class="md-caption"> Demo Log In</span>
+                </md-button>
+                <md-divider></md-divider>
+                <div flex>
+                    <md-button class="md-primary dev-btn">
+                        <a href="https://github.com/tsturtz">&nbsp;
+                            <i class="fa fa-github"></i>
+                            <span class="md-caption">&nbsp;<span class="hide-xs">Developed by</span> Taylor Sturtz&nbsp;</span>
+                        </a>
+                    </md-button>
+                </div>
+            </div>
+            <!--Card content if no list is present-->
+            <div ng-if="$ctrl.user">
+                <md-icon md-font-set="material-icons" class="add-note" md-whiteframe="5">note_add</md-icon>
+                <p class="md-headline">
+                    Get busy and start adding some to-dos!
+                </p>
+                <md-divider></md-divider>
+                <p class="md-subhead">
+                    After you add a task you can edit<span hide-gt-xs> by tapping on it</span>, add a due date, delete it, or just mark it as completed (it will go to the bottom of your list).
+                </p>
+            </div>
+        </md-card>
+        <span flex></span>
+    </div>
+</md-list>
