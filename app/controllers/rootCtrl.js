@@ -49,7 +49,7 @@ angular.module('todoApp')
                     //Resolve spinner
                     self.loginSpinner = false;
                     //Show success message in a md-toast
-                    self.showToastyToast('Demo email: demo@demo.com & password: pass123');
+                    self.showToastyToast('Logged in with email: demo@demo.com');
                     //Clear form inputs
                     self.email = '';
                     self.password = '';
@@ -110,10 +110,10 @@ angular.module('todoApp')
                     self.email = '';
                     self.password = '';
                 }).catch(function(error) {
-                    self.error = error;
+                    //self.error = error;
                     //console.log(error);
                     self.loginSpinner = false;
-                    self.showToastyToast(self.error.message);
+                    self.showToastyToast('Invalid email or password');
                 });
             }
             catch(err) {
@@ -179,6 +179,7 @@ angular.module('todoApp')
             }
         };
 
+        // CURRENTLY DISABLED //
         //Delete account of currently logged in user (also logs them out)
         self.deleteAcct = function () {
             self.loginSpinner = true;
