@@ -41,9 +41,9 @@ function listCtrl () {
     //Deletes this item and removes it from $firebaseArray (which is synced with local array)
     self.deleteTodo = function (todo) {
         self.todos.$remove(todo).then(function(ref){
-            console.log('Item removed: ', ref);
+            //console.log('Item removed: ', ref);
         }, function(err){
-            console.warn('Error removing item: ', err);
+            //console.warn('Error removing item: ', err);
         });
     };
     //Updates this item's task property and saves it as a string to $firebaseArray (which is synced with local array)
@@ -52,10 +52,10 @@ function listCtrl () {
             todo.task = update;
         }
         self.todos.$save(todo).then(function(ref){
-            console.log('Item edited: ', ref);
-            console.info('Updated list: ', self.todos);
+            //console.log('Item edited: ', ref);
+            //console.info('Updated list: ', self.todos);
         }, function(err){
-            console.warn('Error editing item: ', err);
+            //console.warn('Error editing item: ', err);
         });
     };
     //Updates this item's date property and saves it as a string to $firebaseArray (which is synced with local array)
@@ -63,10 +63,10 @@ function listCtrl () {
         date = date.toString();
         todo.date = date;
         self.todos.$save(todo).then(function(ref){
-            console.log('Item date set: ', ref);
-            console.info('Updated list: ', self.todos);
+            //console.log('Item date set: ', ref);
+            //console.info('Updated list: ', self.todos);
         }, function(err){
-            console.warn('Error setting date: ', err);
+            //console.warn('Error setting date: ', err);
         });
     };
     //Call sidenav toggle function in root controller
@@ -77,13 +77,14 @@ function listCtrl () {
     self.loginDemo = function() {
         self.demo();
         self.toggleMenu();
-    }
+    };
 }
 /****************************************************************************************
  * td-list-details controller // list items
  ****************************************************************************************/
-function detailsCtrl ($timeout) {
+function detailsCtrl ($timeout, $mdDialog, $scope) {
     var self = this;
+    $scope.escape = true;
     //Get todays date for min attribute on datepicker input (can't set a past due date)
     self.todaysDate = new Date();
     //Set a half-second delay to give the ng-hide elements a chance to hide before showing the confirm edit button
@@ -93,9 +94,24 @@ function detailsCtrl ($timeout) {
             self.delayed = true;
         }, 500);
     };
-    //Send parameters up to listCtrl
-    self.delete = function () {
-        self.onDelete({todo: self.todo});
+    //Show confirm dialog to confirm task delete.
+    self.delete = function (e) {
+        self.showConfirm(e);
+    };
+    //Set up the confirm dialog
+    self.showConfirm = function(e) {
+        var confirm = $mdDialog.confirm()
+            .title('Are you sure?')
+            .textContent('Do you really want to delete this task?')
+            .ariaLabel('Confirm delete task')
+            .targetEvent(e)
+            .ok('Yup.')
+            .cancel('Oops, no!');
+        //Show dialog and then proceed to delete if confirmed. Do nothing if unconfirmed.
+        $mdDialog.show(confirm).then(function() {
+            //Send parameters up to listCtrl
+            self.onDelete({todo: self.todo});
+        });
     };
     //Send parameters up to listCtrl
     self.edit = function (update) {
@@ -103,6 +119,17 @@ function detailsCtrl ($timeout) {
             return;
         }
         self.onEdit({todo: self.todo, update: update});
+    };
+    //Detect keyup while editing input, apply the edit if enter key, and set editing and focus to false if enter or escape
+    self.detectKey = function (e) {
+        if (e.which === 13) {
+            self.edit($scope.update);
+            $scope.editing = false;
+            $scope.focus = false;
+        } else if (e.which === 27) {
+            $scope.editing = false;
+            $scope.focus = false;
+        }
     };
     //Send parameters up to listCtrl
     self.setDate = function (date) {
@@ -124,7 +151,7 @@ function formCtrl () {
         //Adds this item to $firebaseArray (which is synced with local array)
         self.todos.$add(todo).then(function(){
             self.todo = {};
-            console.info('Todo added.');
+            //console.info('Todo added.');
         });
     };
 }

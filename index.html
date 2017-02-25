@@ -20,7 +20,7 @@
     <!--Custom style sheet-->
     <link rel="stylesheet" href="style.css">
 
-    <!--Angular.js-->
+    <!--Angular v1.5-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
@@ -32,7 +32,7 @@
     <!--AngularFire-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angularFire/2.2.0/angularfire.min.js"></script>
     <!--Input focus on render directive-->
-    <script src="bower_components/ng-focus-if/focusIf.min.js"></script>
+    <script src="app/services/focusIf.min.js"></script>
     <!--Moment.js Angular Moment-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/1.0.1/angular-moment.min.js"></script>
@@ -106,9 +106,12 @@
             <span class="small-spacer"></span>
             <md-input-container ng-hide="root.firebaseUser">
                 <label for="password">Password</label>
-                <input type="text"
+                <input ng-attr-type="{{showPass ? 'text' : 'password'}}"
                        id="password"
                        ng-model="root.password">
+            </md-input-container>
+            <md-input-container ng-hide="root.firebaseUser">
+                <md-checkbox ng-model="showPass" class="md-primary"></md-checkbox><span class="md-caption">SHOW/HIDE PASSWORD</span>
             </md-input-container>
             <span class="small-spacer"></span>
             <div layout="row" ng-hide="root.firebaseUser">
@@ -140,10 +143,16 @@
                     <md-button class="md-raised md-primary" ng-click="root.signOut()">
                         <span class="md-caption">Log Out</span>
                     </md-button>
-                    <md-button class="md-accent" ng-click="root.deleteAcct()">
-                        <md-icon md-font-set="material-icons">close</md-icon>
-                        <span class="md-caption">Delete Account</span>
-                    </md-button>
+                    <!-- Delete account functionality hidden when demo account is active -->
+                    <span> <!-- Had to group the tooltip for it to work with the disabled button (silly Angular Material) -->
+                        <md-tooltip ng-if="root.demoActive" md-direction="bottom">
+                            You may not delete the demo account.
+                        </md-tooltip>
+                        <md-button ng-disabled="root.demoActive" class="md-accent" ng-click="root.deleteAcct($event)">
+                            <md-icon md-font-set="material-icons">close</md-icon>
+                            <span class="md-caption">Delete Account</span>
+                        </md-button>
+                    </span>
                 </div>
             </div>
         </div>
