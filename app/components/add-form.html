@@ -1,11 +1,13 @@
 <div layout="row">
     <md-input-container class="add-form-input" flex>
-        <label for="add-todo"> Add a task...</label>
+        <label for="add-todo" ng-hide="$ctrl.user"> Log in to start adding tasks...</label>
+        <label for="add-todo" ng-show="$ctrl.user"> Add a task...</label>
         <input id="add-todo"
                type="text"
                ng-model="$ctrl.todo.task"
                ng-keyup="($event.which === 13) && $ctrl.addItem($ctrl.todo)"
-               maxlength="140">
+               maxlength="140"
+               ng-disabled="!$ctrl.user">
     </md-input-container>
     <md-button class="md-fab md-warn add-btn"
                ng-click="$ctrl.addItem($ctrl.todo)"
@@ -15,9 +17,4 @@
         Add a todo
         </md-tooltip>
     </md-button>
-    <md-tooltip class="input-tooltip"
-                ng-if="!$ctrl.user"
-                md-direction="top">
-        Login to add a to-do!
-    </md-tooltip>
 </div>
