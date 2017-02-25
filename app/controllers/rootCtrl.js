@@ -44,8 +44,6 @@ angular.module('todoApp')
             try {
                 auth.$signInWithEmailAndPassword('demo@demo.com', 'pass123').then(function(firebaseUser) {
                     self.message = firebaseUser.uid;
-                    //console.log(firebaseUser);
-                    //console.log(self.message);
                     //Resolve spinner
                     self.loginSpinner = false;
                     //Show success message in a md-toast
@@ -76,24 +74,29 @@ angular.module('todoApp')
             self.message = null;
             self.error = null;
             self.loginSpinner = true;
-            try {
-                auth.$createUserWithEmailAndPassword(self.email, self.password).then(function(firebaseUser) {
-                    self.message = firebaseUser.uid;
-                    self.loginSpinner = false;
-                    self.showToastyToast('User created with email: ' + self.email);
-                    self.email = '';
-                    self.password = '';
-                }).catch(function(error) {
-                    self.error = error;
-                    //console.log(error);
-                    self.loginSpinner = false;
-                    self.showToastyToast(self.error.message);
-                });
-            }
-            catch(err) {
+            if (!self.email) {
                 self.loginSpinner = false;
-                self.showToastyToast('You need to feed me your email and password.');
-                //console.log(err);
+                self.showToastyToast('You need to provide your email and password.');
+            } else {
+                try {
+                    auth.$createUserWithEmailAndPassword(self.email, self.password).then(function(firebaseUser) {
+                        self.message = firebaseUser.uid;
+                        self.loginSpinner = false;
+                        self.showToastyToast('User created with email: ' + self.email);
+                        self.email = '';
+                        self.password = '';
+                    }).catch(function(error) {
+                        self.error = error;
+                        //console.log(error);
+                        self.loginSpinner = false;
+                        self.showToastyToast(self.error.message);
+                    });
+                }
+                catch(err) {
+                    self.loginSpinner = false;
+                    self.showToastyToast('You need to provide your email and password.');
+                    //console.log(err);
+                }
             }
         };
 
@@ -102,24 +105,29 @@ angular.module('todoApp')
             self.message = null;
             self.error = null;
             self.loginSpinner = true;
-            try {
-                auth.$signInWithEmailAndPassword(self.email, self.password).then(function(firebaseUser) {
-                    self.message = firebaseUser.uid;
-                    self.loginSpinner = false;
-                    self.showToastyToast('User logged in with email: ' + self.email);
-                    self.email = '';
-                    self.password = '';
-                }).catch(function(error) {
-                    //self.error = error;
-                    //console.log(error);
-                    self.loginSpinner = false;
-                    self.showToastyToast('Invalid email or password');
-                });
-            }
-            catch(err) {
+            if (!self.email || !self.password) {
                 self.loginSpinner = false;
-                self.showToastyToast('You need to feed me your email and password.');
-                //console.log(err);
+                self.showToastyToast('You need to provide your email and password.');
+            } else {
+                try {
+                    auth.$signInWithEmailAndPassword(self.email, self.password).then(function(firebaseUser) {
+                        self.message = firebaseUser.uid;
+                        self.loginSpinner = false;
+                        self.showToastyToast('User logged in with email: ' + self.email);
+                        self.email = '';
+                        self.password = '';
+                    }).catch(function(error) {
+                        //self.error = error;
+                        //console.log(error);
+                        self.loginSpinner = false;
+                        self.showToastyToast('Invalid email or password');
+                    });
+                }
+                catch(err) {
+                    self.loginSpinner = false;
+                    self.showToastyToast('You need to provide your email and password.');
+                    //console.log(err);
+                }
             }
         };
 
