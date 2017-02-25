@@ -95,7 +95,7 @@
             </md-button>
             <md-button class="md-fab md-accent md-mini"
                        ng-disabled="editing"
-                       ng-click="$ctrl.delete()">
+                       ng-click="$ctrl.delete($event)">
                 <md-icon md-font-set="material-icons">delete</md-icon>
                 <md-tooltip md-direction="top">
                     Delete To-Do
@@ -126,7 +126,7 @@
                 <md-fab-actions>
                     <md-button class="md-fab md-accent md-mini"
                                ng-disabled="editing"
-                               ng-click="$ctrl.delete()">
+                               ng-click="$ctrl.delete($event)">
                         <md-icon md-font-set="material-icons">delete</md-icon>
                         <md-tooltip md-direction="top">
                             Delete To-Do

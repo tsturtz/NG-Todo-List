@@ -82,7 +82,7 @@ function listCtrl () {
 /****************************************************************************************
  * td-list-details controller // list items
  ****************************************************************************************/
-function detailsCtrl ($timeout) {
+function detailsCtrl ($timeout, $mdDialog) {
     var self = this;
     //Get todays date for min attribute on datepicker input (can't set a past due date)
     self.todaysDate = new Date();
@@ -93,9 +93,24 @@ function detailsCtrl ($timeout) {
             self.delayed = true;
         }, 500);
     };
-    //Send parameters up to listCtrl
-    self.delete = function () {
-        self.onDelete({todo: self.todo});
+    //Show confirm dialog to confirm task delete.
+    self.delete = function (e) {
+        self.showConfirm(e);
+    };
+    //Set up the confirm dialog
+    self.showConfirm = function(e) {
+        var confirm = $mdDialog.confirm()
+            .title('Are you sure?')
+            .textContent('Do you really want to delete this task?')
+            .ariaLabel('Confirm delete')
+            .targetEvent(e)
+            .ok('Yup.')
+            .cancel('Oops, no!');
+        //Show dialog and then proceed to delete if confirmed. Do nothing if unconfirmed.
+        $mdDialog.show(confirm).then(function() {
+            //Send parameters up to listCtrl
+            self.onDelete({todo: self.todo});
+        });
     };
     //Send parameters up to listCtrl
     self.edit = function (update) {
