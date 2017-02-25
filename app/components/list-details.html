@@ -23,9 +23,11 @@
                                 class="editing-input"
                                 md-no-float>
                 <input type="text"
-                       placeholder="{{$ctrl.todo.task}}"
+                       ng-value="$ctrl.todo.task"
                        ng-model="update"
                        focus-if="focus"
+                       onfocus="this.value = this.value"
+                       ng-keyup="$ctrl.detectKey($event)"
                        maxlength="140">
             </md-input-container>
             <!--Date display, using Moment.js-->
@@ -66,7 +68,7 @@
         <!--List item options-->
         <div class="button-row hide-xs">
             <md-button class="md-fab md-mini md-primary datepicker-btn"
-                       ng-disabled="editing">
+                       ng-hide="editing">
                 <md-datepicker ng-model="todoDate"
                                md-hide-icons="triangle"
                                ng-blur="$ctrl.setDate(todoDate)"
@@ -94,8 +96,16 @@
                 </md-tooltip>
             </md-button>
             <md-button class="md-fab md-accent md-mini"
+                       ng-show="editing"
+                       ng-click="editing = false; focus = false;">
+                <md-icon md-font-set="material-icons">close</md-icon>
+                <md-tooltip md-direction="top">
+                    Cancel Edit
+                </md-tooltip>
+            </md-button>
+            <md-button class="md-fab md-accent md-mini"
                        ng-disabled="editing"
-                       ng-click="$ctrl.delete()">
+                       ng-click="$ctrl.delete($event)">
                 <md-icon md-font-set="material-icons">delete</md-icon>
                 <md-tooltip md-direction="top">
                     Delete To-Do
@@ -126,7 +136,7 @@
                 <md-fab-actions>
                     <md-button class="md-fab md-accent md-mini"
                                ng-disabled="editing"
-                               ng-click="$ctrl.delete()">
+                               ng-click="$ctrl.delete($event)">
                         <md-icon md-font-set="material-icons">delete</md-icon>
                         <md-tooltip md-direction="top">
                             Delete To-Do
