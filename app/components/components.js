@@ -103,7 +103,7 @@ function detailsCtrl ($timeout, $mdDialog, $scope) {
         var confirm = $mdDialog.confirm()
             .title('Are you sure?')
             .textContent('Do you really want to delete this task?')
-            .ariaLabel('Confirm delete')
+            .ariaLabel('Confirm delete task')
             .targetEvent(e)
             .ok('Yup.')
             .cancel('Oops, no!');

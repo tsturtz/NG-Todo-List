@@ -143,12 +143,16 @@
                     <md-button class="md-raised md-primary" ng-click="root.signOut()">
                         <span class="md-caption">Log Out</span>
                     </md-button>
-                    <!-- // Delete function disabled for now
-                    <md-button class="md-accent" ng-click="root.deleteAcct()">
-                        <md-icon md-font-set="material-icons">close</md-icon>
-                        <span class="md-caption">Delete Account</span>
-                    </md-button>
-                    -->
+                    <!-- Delete account functionality hidden when demo account is active -->
+                    <span> <!-- Had to group the tooltip for it to work with the disabled button (silly Angular Material) -->
+                        <md-tooltip ng-if="root.demoActive" md-direction="bottom">
+                            You may not delete the demo account.
+                        </md-tooltip>
+                        <md-button ng-disabled="root.demoActive" class="md-accent" ng-click="root.deleteAcct($event)">
+                            <md-icon md-font-set="material-icons">close</md-icon>
+                            <span class="md-caption">Delete Account</span>
+                        </md-button>
+                    </span>
                 </div>
             </div>
         </div>

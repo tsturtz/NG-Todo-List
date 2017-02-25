@@ -1,5 +1,5 @@
 angular.module('todoApp')
-    .controller('rootCtrl', function ($mdSidenav, $mdToast, todoService, fbFactory) {
+    .controller('rootCtrl', function ($mdSidenav, $mdToast, todoService, fbFactory, $mdDialog) {
         var self = this;
         //Initialize local array
         self.todos = [];
@@ -20,11 +20,23 @@ angular.module('todoApp')
             self.firebaseUser = firebaseUser;
             //Initiate spinner
             self.activated = true;
+            //Set flag - DEMO account is active
+            //This is to disable the delete account functionality on the DEMO account
+            try {
+                if (firebaseUser.uid === 'ig1UAiNP2Ueew9Ixvg8eHsKvkKe2'){
+                    self.demoActive = true;
+                }
+            } catch (err) {
+                //console.log(err);
+            }
+            //If user is null, no account is logged in
             if (firebaseUser === null) {
                 //Empty local todos array to reveal card content
                 self.todos = [];
                 //Resolve spinner
                 self.activated = false;
+                //Set DEMO account flag to false
+                self.demoActive = false;
             } else {
                 //Bind todos array to currently logged in user
                 self.todos = todoService.getTodos(firebaseUser.uid);
@@ -187,26 +199,40 @@ angular.module('todoApp')
             }
         };
 
-        // CURRENTLY DISABLED //
         //Delete account of currently logged in user (also logs them out)
-        self.deleteAcct = function () {
-            self.loginSpinner = true;
-            try {
-                auth.$deleteUser().then(function() {
+        self.deleteAcct = function (e) {
+            self.showConfirm(e);
+        };
+
+        //Set up the confirm dialog for deleting user's account
+        self.showConfirm = function(e) {
+            var confirm = $mdDialog.confirm()
+                .title('Are you sure?')
+                .textContent('Do you really want to delete your account?')
+                .ariaLabel('Confirm delete account')
+                .targetEvent(e)
+                .ok('Yes. I do.')
+                .cancel('Oops, no!');
+            //Show dialog and then proceed to delete if confirmed. Do nothing if unconfirmed.
+            $mdDialog.show(confirm).then(function() {
+                self.loginSpinner = true;
+                try {
+                    auth.$deleteUser().then(function() {
+                        self.loginSpinner = false;
+                        self.showToastyToast('Account successfully deleted.');
+                    }).catch(function(error) {
+                        self.error = error;
+                        //console.log(error);
+                        self.loginSpinner = false;
+                        self.showToastyToast(self.error.message);
+                    });
+                }
+                catch(err) {
                     self.loginSpinner = false;
-                    self.showToastyToast('Account successfully deleted.');
-                }).catch(function(error) {
-                    self.error = error;
-                    //console.log(error);
-                    self.loginSpinner = false;
-                    self.showToastyToast(self.error.message);
-                });
-            }
-            catch(err) {
-                self.loginSpinner = false;
-                self.showToastyToast('Something went wrong sending the reset password email.');
-                //console.log(err);
-            }
+                    self.showToastyToast('Something went wrong sending the reset password email.');
+                    //console.log(err);
+                }
+            });
         };
 
         /****************************************************************************************
