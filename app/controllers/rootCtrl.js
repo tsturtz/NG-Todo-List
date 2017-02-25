@@ -44,8 +44,8 @@ angular.module('todoApp')
             try {
                 auth.$signInWithEmailAndPassword('demo@demo.com', 'pass123').then(function(firebaseUser) {
                     self.message = firebaseUser.uid;
-                    console.log(firebaseUser);
-                    console.log(self.message);
+                    //console.log(firebaseUser);
+                    //console.log(self.message);
                     //Resolve spinner
                     self.loginSpinner = false;
                     //Show success message in a md-toast
@@ -55,7 +55,7 @@ angular.module('todoApp')
                     self.password = '';
                 }).catch(function(error) {
                     self.error = error;
-                    console.log(error);
+                    //console.log(error);
                     //Resolve spinner
                     self.loginSpinner = false;
                     //Show error message in a md-toast
@@ -67,7 +67,7 @@ angular.module('todoApp')
                 self.loginSpinner = false;
                 //Show error message in a md-toast
                 self.showToastyToast('There was a problem logging in with the demo account.');
-                console.log(err);
+                //console.log(err);
             }
         };
 
@@ -85,7 +85,7 @@ angular.module('todoApp')
                     self.password = '';
                 }).catch(function(error) {
                     self.error = error;
-                    console.log(error);
+                    //console.log(error);
                     self.loginSpinner = false;
                     self.showToastyToast(self.error.message);
                 });
@@ -93,7 +93,7 @@ angular.module('todoApp')
             catch(err) {
                 self.loginSpinner = false;
                 self.showToastyToast('You need to feed me your email and password.');
-                console.log(err);
+                //console.log(err);
             }
         };
 
@@ -111,7 +111,7 @@ angular.module('todoApp')
                     self.password = '';
                 }).catch(function(error) {
                     self.error = error;
-                    console.log(error);
+                    //console.log(error);
                     self.loginSpinner = false;
                     self.showToastyToast(self.error.message);
                 });
@@ -119,7 +119,7 @@ angular.module('todoApp')
             catch(err) {
                 self.loginSpinner = false;
                 self.showToastyToast('You need to feed me your email and password.');
-                console.log(err);
+                //console.log(err);
             }
         };
 
@@ -135,7 +135,7 @@ angular.module('todoApp')
                     self.showToastyToast('You are now logged in through Google.');
                 }).catch(function(error) {
                     self.error = error;
-                    console.log(error);
+                    //console.log(error);
                     self.loginSpinner = false;
                     self.showToastyToast(self.error.message);
                 });
@@ -143,7 +143,7 @@ angular.module('todoApp')
             catch(err) {
                 self.loginSpinner = false;
                 self.showToastyToast('Something went wrong logging in through Google.');
-                console.log(err);
+                //console.log(err);
             }
         };
 
@@ -155,7 +155,7 @@ angular.module('todoApp')
             }).catch(function(error) {
                 self.loginSpinner = false;
                 self.showToastyToast(error);
-            })
+            });
         };
 
         //Reset password - send user an email to reset their password
@@ -167,7 +167,7 @@ angular.module('todoApp')
                     self.showToastyToast('Reset password email has been sent.');
                 }).catch(function(error) {
                     self.error = error;
-                    console.log(error);
+                    //console.log(error);
                     self.loginSpinner = false;
                     self.showToastyToast(self.error.message);
                 });
@@ -175,7 +175,7 @@ angular.module('todoApp')
             catch(err) {
                 self.loginSpinner = false;
                 self.showToastyToast('Something went wrong sending the reset password email.');
-                console.log(err);
+                //console.log(err);
             }
         };
 
@@ -188,7 +188,7 @@ angular.module('todoApp')
                     self.showToastyToast('Account successfully deleted.');
                 }).catch(function(error) {
                     self.error = error;
-                    console.log(error);
+                    //console.log(error);
                     self.loginSpinner = false;
                     self.showToastyToast(self.error.message);
                 });
@@ -196,7 +196,7 @@ angular.module('todoApp')
             catch(err) {
                 self.loginSpinner = false;
                 self.showToastyToast('Something went wrong sending the reset password email.');
-                console.log(err);
+                //console.log(err);
             }
         };
 
@@ -227,7 +227,7 @@ angular.module('todoApp')
                 .action('OK')
                 .highlightAction(true)
                 .highlightClass('md-primary');
-            $mdToast.show(toast)
+            $mdToast.show(toast);
         };
         //Close toast
         self.closeToast = function() {

@@ -41,9 +41,9 @@ function listCtrl () {
     //Deletes this item and removes it from $firebaseArray (which is synced with local array)
     self.deleteTodo = function (todo) {
         self.todos.$remove(todo).then(function(ref){
-            console.log('Item removed: ', ref);
+            //console.log('Item removed: ', ref);
         }, function(err){
-            console.warn('Error removing item: ', err);
+            //console.warn('Error removing item: ', err);
         });
     };
     //Updates this item's task property and saves it as a string to $firebaseArray (which is synced with local array)
@@ -52,10 +52,10 @@ function listCtrl () {
             todo.task = update;
         }
         self.todos.$save(todo).then(function(ref){
-            console.log('Item edited: ', ref);
-            console.info('Updated list: ', self.todos);
+            //console.log('Item edited: ', ref);
+            //console.info('Updated list: ', self.todos);
         }, function(err){
-            console.warn('Error editing item: ', err);
+            //console.warn('Error editing item: ', err);
         });
     };
     //Updates this item's date property and saves it as a string to $firebaseArray (which is synced with local array)
@@ -63,10 +63,10 @@ function listCtrl () {
         date = date.toString();
         todo.date = date;
         self.todos.$save(todo).then(function(ref){
-            console.log('Item date set: ', ref);
-            console.info('Updated list: ', self.todos);
+            //console.log('Item date set: ', ref);
+            //console.info('Updated list: ', self.todos);
         }, function(err){
-            console.warn('Error setting date: ', err);
+            //console.warn('Error setting date: ', err);
         });
     };
     //Call sidenav toggle function in root controller
@@ -77,7 +77,7 @@ function listCtrl () {
     self.loginDemo = function() {
         self.demo();
         self.toggleMenu();
-    }
+    };
 }
 /****************************************************************************************
  * td-list-details controller // list items
@@ -124,7 +124,7 @@ function formCtrl () {
         //Adds this item to $firebaseArray (which is synced with local array)
         self.todos.$add(todo).then(function(){
             self.todo = {};
-            console.info('Todo added.');
+            //console.info('Todo added.');
         });
     };
 }
