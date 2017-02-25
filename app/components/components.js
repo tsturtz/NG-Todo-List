@@ -82,8 +82,9 @@ function listCtrl () {
 /****************************************************************************************
  * td-list-details controller // list items
  ****************************************************************************************/
-function detailsCtrl ($timeout, $mdDialog) {
+function detailsCtrl ($timeout, $mdDialog, $scope) {
     var self = this;
+    $scope.escape = true;
     //Get todays date for min attribute on datepicker input (can't set a past due date)
     self.todaysDate = new Date();
     //Set a half-second delay to give the ng-hide elements a chance to hide before showing the confirm edit button
@@ -118,6 +119,17 @@ function detailsCtrl ($timeout, $mdDialog) {
             return;
         }
         self.onEdit({todo: self.todo, update: update});
+    };
+    //Detect keyup while editing input, apply the edit if enter key, and set editing and focus to false if enter or escape
+    self.detectKey = function (e) {
+        if (e.which === 13) {
+            self.edit($scope.update);
+            $scope.editing = false;
+            $scope.focus = false;
+        } else if (e.which === 27) {
+            $scope.editing = false;
+            $scope.focus = false;
+        }
     };
     //Send parameters up to listCtrl
     self.setDate = function (date) {
